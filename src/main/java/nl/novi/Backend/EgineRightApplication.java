@@ -62,7 +62,9 @@ public class EgineRightApplication implements CommandLineRunner {
 		car.getInspections().add(inspection2);
 		car.getInspections().add(inspection3);
 
-		this.carRepository.save(car);
+
+
+		carRepository.save(car);
 
 	}
 }

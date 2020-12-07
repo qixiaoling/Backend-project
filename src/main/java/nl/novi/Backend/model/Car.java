@@ -18,10 +18,9 @@ public class Car {
 
 
 
-    @OneToMany (fetch = FetchType.EAGER,
-                mappedBy = "car")
-    List<Inspection> inspections = new ArrayList<>();
-
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "car")
+    @JoinColumn
+    List<Inspection> inspections;
 
     public Car(){
 

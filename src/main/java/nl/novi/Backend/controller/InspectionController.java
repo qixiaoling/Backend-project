@@ -1,0 +1,30 @@
+package nl.novi.Backend.controller;
+
+import nl.novi.Backend.model.Inspection;
+import nl.novi.Backend.service.InspectionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/")
+public class InspectionController {
+
+    private InspectionService inspectionService;
+    @Autowired
+    public InspectionController(InspectionService inspectionService){
+        this.inspectionService=inspectionService;
+    }
+    @GetMapping("/inspections")
+    public List<Inspection> getAllInspection(){
+        return inspectionService.getAllInspection();
+        }
+    @PostMapping("/inspections")
+    public List<Inspection> addInspection(@RequestBody Inspection inspection){
+        return inspectionService.addInspection(inspection);
+    }
+
+
+
+}
