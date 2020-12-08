@@ -30,7 +30,6 @@ public class Customer {
     }
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn
     private Car car;
 
     public Customer(){};

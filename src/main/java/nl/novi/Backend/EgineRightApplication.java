@@ -11,11 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-
-
-import java.util.Date;
 
 import static nl.novi.Backend.model.Gender.FEMALE;
 
@@ -50,21 +46,22 @@ public class EgineRightApplication implements CommandLineRunner {
 		car.setCustomer(customer);
 
 		customerRepository.save(customer);
-		SimpleDateFormat dt = new SimpleDateFormat("dd/mm/yyyy");
-		Inspection inspection1 = new Inspection(dt.parse("03/11/2018"),
-			"64-PF-PT", false, true, 45.00);
-		Inspection inspection2 = new Inspection(dt.parse("01/12/2019"),
-				"64-PF-PT", true, true, 45.00);
-		Inspection inspection3 = new Inspection(dt.parse("30/10/2020"),
-				"64-PF-PT", false, true, 45.00);
+		carRepository.save(car);
 
-		car.getInspections().add(inspection1);
+
+
+		Inspection inspection1 = new Inspection("64-PF-PT", false, true, 45.00);
+		Inspection inspection2 = new Inspection("64-PF-PT", true, true, 45.00);
+		Inspection inspection3 = new Inspection("64-PF-PT", false, true, 45.00);
+
+		/*car.getInspections().add(inspection1);
 		car.getInspections().add(inspection2);
 		car.getInspections().add(inspection3);
+		carRepository.save(car);*/
 
 
 
-		carRepository.save(car);
+
 
 	}
 }

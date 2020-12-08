@@ -15,8 +15,6 @@ public class Inspection {
 @GeneratedValue(strategy = GenerationType.AUTO)
     private Long inspectionNumber;
     @Column
-    private Date inspectionDate;
-    @Column
     private String numberPlate;
     @Column
     private Boolean inspectionResult;
@@ -33,9 +31,9 @@ public class Inspection {
 
     }
 
-    public Inspection(Date inspectionDate, String numberPlate, Boolean inspectionResult,
+    public Inspection( String numberPlate, Boolean inspectionResult,
                       Boolean inspectionComplete, Double inspectionFee) {
-        this.inspectionDate = inspectionDate;
+
         this.numberPlate = numberPlate;
         this.inspectionResult = inspectionResult;
         this.inspectionComplete = inspectionComplete;
@@ -56,14 +54,6 @@ public class Inspection {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    public Date getInspectionDate() {
-        return inspectionDate;
-    }
-
-    public void setInspectionDate(Date inspectionDate) {
-        this.inspectionDate = inspectionDate;
     }
 
     public String getNumberPlate() {
