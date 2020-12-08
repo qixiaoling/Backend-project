@@ -49,10 +49,13 @@ public class EgineRightApplication implements CommandLineRunner {
 		carRepository.save(car);
 
 
-
-		Inspection inspection1 = new Inspection("64-PF-PT", false, true, 45.00);
-		Inspection inspection2 = new Inspection("64-PF-PT", true, true, 45.00);
-		Inspection inspection3 = new Inspection("64-PF-PT", false, true, 45.00);
+		SimpleDateFormat dt = new SimpleDateFormat("dd/mm/yyyy");
+		Inspection inspection1 = new Inspection(dt.parse("30/10/2018"), "64-PF-PT", false, true, 45.00);
+		Inspection inspection2 = new Inspection(dt.parse("6/11/2019"),"64-PF-PT", true, true, 45.00);
+		Inspection inspection3 = new Inspection(dt.parse("08/12/2020"),"64-PF-PT", false, true, 45.00);
+		inspectionRepository.save(inspection1);
+		inspectionRepository.save(inspection2);
+		inspectionRepository.save(inspection3);
 
 		/*car.getInspections().add(inspection1);
 		car.getInspections().add(inspection2);
