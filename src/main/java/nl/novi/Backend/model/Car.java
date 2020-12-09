@@ -19,7 +19,7 @@ public class Car {
 
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "car")
-    List<Inspection> inspections;
+    private List<Inspection> inspections;
 
     public Car(){
 

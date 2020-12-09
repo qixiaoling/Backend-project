@@ -1,15 +1,16 @@
 package nl.novi.Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long customerId;
     @Column
     private String firstName;
     @Column
@@ -19,39 +20,40 @@ public class Customer {
     private Gender gender;
     @Column
     private String Email;
-
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
+    @Column
+    private String numberPlate;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn
     private Car car;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Invoice invoice;
+
+
+
 
     public Customer(){};
 
     public Customer(@JsonProperty("firstName") String firstName,
                     @JsonProperty("lastName") String lastName,
                     @JsonProperty("gender") Gender gender,
-                    @JsonProperty("Email") String EmaiL){
+                    @JsonProperty("Email") String EmaiL,
+                    @JsonProperty("numberPlate") String numberPlate){
 
         this.firstName=firstName;
         this.lastName=lastName;
         this.gender=gender;
         this.Email=Email;
+        this.numberPlate=numberPlate;
+
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirstName() {
@@ -86,5 +88,27 @@ public class Customer {
         Email = email;
     }
 
+    public String getNumberPlate() {
+        return numberPlate;
+    }
 
+    public void setNumberPlate(String numberPlate) {
+        this.numberPlate = numberPlate;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
 }

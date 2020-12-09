@@ -4,9 +4,11 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -25,23 +27,31 @@ public class Inspection {
     @Column
     private Double inspectionFee;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     private Car car;
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<InspectionReport> inspectionsReport;
+    @OneToOne
+    private Invoice invoice;
 
 
     public Inspection(){
 
     }
 
-    public Inspection( Date inspectionDate, String numberPlate, Boolean inspectionResult,
-                      Boolean inspectionComplete, Double inspectionFee) {
-        this.inspectionDate= inspectionDate;
+    public Inspection(Long inspectionNumber, Date inspectionDate, String numberPlate, Boolean inspectionResult,
+                      Boolean inspectionComplete, Double inspectionFee, Car car,
+                      List<InspectionReport> inspectionsReport, Invoice invoice) {
+        this.inspectionNumber = inspectionNumber;
+        this.inspectionDate = inspectionDate;
         this.numberPlate = numberPlate;
         this.inspectionResult = inspectionResult;
         this.inspectionComplete = inspectionComplete;
         this.inspectionFee = inspectionFee;
+        this.car = car;
+        this.inspectionsReport = inspectionsReport;
+        this.invoice=invoice;
     }
-
 
     public Date getInspectionDate() {
         return inspectionDate;
@@ -97,5 +107,21 @@ public class Inspection {
 
     public void setInspectionFee(Double inspectionFee) {
         this.inspectionFee = inspectionFee;
+    }
+
+    public List<InspectionReport> getInspectionsReport() {
+        return inspectionsReport;
+    }
+
+    public void setInspectionsReport(List<InspectionReport> inspectionsReport) {
+        this.inspectionsReport = inspectionsReport;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

@@ -16,13 +16,13 @@ import java.text.SimpleDateFormat;
 import static nl.novi.Backend.model.Gender.FEMALE;
 
 @SpringBootApplication
-public class EgineRightApplication implements CommandLineRunner {
+public class EgineRightApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EgineRightApplication.class, args);
 	}
 
-	@Autowired
+	/*@Autowired
 	private CustomerRepository customerRepository;
 	@Autowired
 	private CarRepository carRepository;
@@ -66,5 +66,5 @@ public class EgineRightApplication implements CommandLineRunner {
 
 
 
-	}
+
 }

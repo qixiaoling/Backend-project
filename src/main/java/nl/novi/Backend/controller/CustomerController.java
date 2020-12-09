@@ -21,11 +21,11 @@ public class CustomerController {
 
 
     @GetMapping("/customers")
-    public List<Customer> getAllCustomer(){
+    public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
     @PostMapping("/customers")
-    public List<Customer> addCustomer(@RequestBody Customer customer){
+    public List<Customer> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }
 
