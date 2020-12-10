@@ -18,16 +18,16 @@ public class InspectionReportService {
         this.inspectionReportRepository=inspectionReportRepository;
     }
 
-    /*public List<InspectionReport> getAllInspectionReports(){
+    public List<InspectionReport> getAllInspectionReports(){
         List<InspectionReport> inspectionReports = new ArrayList<>();
-        inspectionReportRepository.findAll().addAll(inspectionReports);
+        inspectionReportRepository.findAll().forEach(inspectionReports::add);
         return inspectionReports;
 
-    }*/
+    }
 
     public List<InspectionReport> addInspectionReports(InspectionReport inspectionReport){
         List<InspectionReport> inspectionReports = new ArrayList<>();
         inspectionReportRepository.save(inspectionReport);
-        return inspectionReports;
+    return inspectionReports;
     }
 }

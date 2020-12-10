@@ -1,6 +1,9 @@
 package nl.novi.Backend.repo;
 
+import nl.novi.Backend.model.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface InvoiceRepository extends JpaRepository {
+@Repository
+public interface InvoiceRepository extends JpaRepository <Invoice, Long>{
 }

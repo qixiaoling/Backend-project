@@ -12,9 +12,9 @@ import java.util.List;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long executedItem;
+    private Long item;
     @Column
-    private String executedDescription;
+    private String itemDescription;
     @Column
     private Double pricePerUnit;
     @Column
@@ -28,29 +28,29 @@ public class Inventory {
 
     }
 
-    public Inventory(Long executedItem, String executedDescription, Double pricePerUnit, String manufactor, int availableUnit, List<InspectionReport> inspectionsReport) {
-        this.executedItem = executedItem;
-        this.executedDescription = executedDescription;
+    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit, List<InspectionReport> inspectionsReport) {
+        this.item = item;
+        this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
         this.manufactor = manufactor;
         this.availableUnit = availableUnit;
         this.inspectionsReport = inspectionsReport;
     }
 
-    public Long getExecutedItem() {
-        return executedItem;
+    public Long getItem() {
+        return item;
     }
 
-    public void setExecutedItem(Long executedItem) {
-        this.executedItem = executedItem;
+    public void setItem(Long item) {
+        this.item = item;
     }
 
-    public String getExecutedDescription() {
-        return executedDescription;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
-    public void setExecutedDescription(String executedDescription) {
-        this.executedDescription = executedDescription;
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
     }
 
     public Double getPricePerUnit() {

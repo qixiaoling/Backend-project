@@ -20,11 +20,11 @@ public class InspectionReportController {
         this.inspectionReportService= inspectionReportService;
     }
 
-    /*@GetMapping("/inspectionReports")
+    @GetMapping("/inspectionReports")
     public List<InspectionReport> getAllInspectionReports(){
         List<InspectionReport> inspectionReports = new ArrayList<>();
         return inspectionReportService.getAllInspectionReports();
-    }*/
+    }
 
     @PostMapping("/inspectionReports")
     public List<InspectionReport> addInspectionReports(@RequestBody InspectionReport inspectionReport){

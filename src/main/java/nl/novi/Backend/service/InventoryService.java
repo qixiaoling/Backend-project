@@ -13,9 +13,12 @@ import java.util.List;
 public class InventoryService {
     private InventoryRepository inventoryRepository;
     @Autowired
-    public InventoryService(InventoryRepository inventoryRepository){
-        this.inventoryRepository=inventoryRepository;
+    public InventoryService(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
+
+    @Autowired
+
     public List<Inventory> getAllInventories(){
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.findAll().addAll(inventories);
