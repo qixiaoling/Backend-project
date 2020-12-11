@@ -19,7 +19,7 @@ public class InvoiceService {
     }
     public List<Invoice> getAllInvoices(){
         List<Invoice> invoices = new ArrayList<>();
-        invoiceRepository.findAll().addAll(invoices);
+        invoiceRepository.findAll().forEach(invoices::add);
         return invoices;
     }
     public List<Invoice> addInvoices(Invoice invoice){

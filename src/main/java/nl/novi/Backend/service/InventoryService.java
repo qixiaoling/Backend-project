@@ -21,7 +21,7 @@ public class InventoryService {
 
     public List<Inventory> getAllInventories(){
         List<Inventory> inventories = new ArrayList<>();
-        inventoryRepository.findAll().addAll(inventories);
+        inventoryRepository.findAll().forEach(inventories::add);
         return inventories;
     }
     public List<Inventory> addInventories(Inventory inventory){
