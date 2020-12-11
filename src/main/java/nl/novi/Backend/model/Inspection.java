@@ -19,8 +19,6 @@ public class Inspection {
     @Column
     private Date inspectionDate;
     @Column
-    private String numberPlate;
-    @Column
     private Boolean inspectionResult;
     @Column
     private Boolean inspectionComplete;
@@ -33,25 +31,6 @@ public class Inspection {
     private List<InspectionReport> inspectionsReport;
     @OneToOne
     private Invoice invoice;
-
-
-    public Inspection(){
-
-    }
-
-    public Inspection(Long inspectionNumber, Date inspectionDate, String numberPlate, Boolean inspectionResult,
-                      Boolean inspectionComplete, Double inspectionFee, Car car,
-                      List<InspectionReport> inspectionsReport, Invoice invoice) {
-        this.inspectionNumber = inspectionNumber;
-        this.inspectionDate = inspectionDate;
-        this.numberPlate = numberPlate;
-        this.inspectionResult = inspectionResult;
-        this.inspectionComplete = inspectionComplete;
-        this.inspectionFee = inspectionFee;
-        this.car = car;
-        this.inspectionsReport = inspectionsReport;
-        this.invoice=invoice;
-    }
 
     public Date getInspectionDate() {
         return inspectionDate;
@@ -75,14 +54,6 @@ public class Inspection {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    public String getNumberPlate() {
-        return numberPlate;
-    }
-
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
     }
 
     public Boolean getInspectionResult() {
