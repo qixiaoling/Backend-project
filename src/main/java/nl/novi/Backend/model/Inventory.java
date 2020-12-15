@@ -84,4 +84,6 @@ public class Inventory {
     public void setInspectionList(List<Inspection> inspectionList) {
         this.inspectionList = inspectionList;
     }
+
+
 }

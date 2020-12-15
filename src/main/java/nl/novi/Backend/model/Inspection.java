@@ -23,8 +23,17 @@ public class Inspection {
     private Boolean inspectionComplete;
     @Column
     private Double inspectionFee;
+    @Column
+    private Boolean agreeToRepair;
+    @Column
+    private Date repairDate;
+    @Column
+    private Boolean repairComplete;
+    @Column
+    private int quantities;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Car car;
 
     @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -100,4 +109,37 @@ public class Inspection {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
+    public Boolean getAgreeToRepair() {
+        return agreeToRepair;
+    }
+
+    public void setAgreeToRepair(Boolean agreeToRepair) {
+        this.agreeToRepair = agreeToRepair;
+    }
+
+    public Date getRepairDate() {
+        return repairDate;
+    }
+
+    public void setRepairDate(Date repairDate) {
+        this.repairDate = repairDate;
+    }
+
+    public Boolean getRepairComplete() {
+        return repairComplete;
+    }
+
+    public void setRepairComplete(Boolean repairComplete) {
+        this.repairComplete = repairComplete;
+    }
+
+    public int getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(int quantities) {
+        this.quantities = quantities;
+    }
+
 }
