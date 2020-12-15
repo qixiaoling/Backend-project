@@ -20,7 +20,7 @@ public class Invoice {
     private Boolean invoiceSent;
     @Column
     private Boolean invoicePaid;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "invoice")
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "invoice")
     private Inspection inspection;
