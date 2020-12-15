@@ -6,8 +6,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import javax.persistence.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 @Entity
@@ -27,8 +26,14 @@ public class Inspection {
 
     @ManyToOne (fetch = FetchType.LAZY)
     private Car car;
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<InspectionReport> inspectionsReport;
+
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            joinColumns = { @JoinColumn },
+            inverseJoinColumns = {@JoinColumn}
+    )
+    private List<Inventory> inventoryList = new ArrayList<>();
+
     @OneToOne
     private Invoice invoice;
 
@@ -80,12 +85,12 @@ public class Inspection {
         this.inspectionFee = inspectionFee;
     }
 
-    public List<InspectionReport> getInspectionsReport() {
-        return inspectionsReport;
+    public List<Inventory> getInventoryList() {
+        return inventoryList;
     }
 
-    public void setInspectionsReport(List<InspectionReport> inspectionsReport) {
-        this.inspectionsReport = inspectionsReport;
+    public void setInventoryList(List<Inventory> inventoryList) {
+        this.inventoryList = inventoryList;
     }
 
     public Invoice getInvoice() {

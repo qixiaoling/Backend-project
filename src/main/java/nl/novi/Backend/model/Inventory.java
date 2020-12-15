@@ -21,20 +21,20 @@ public class Inventory {
     private String manufactor;
     @Column
     private int availableUnit;
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inventory")
-    private List<InspectionReport> inspectionsReport;
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inventoryList")
+    private List<Inspection> inspectionList = new ArrayList<>();
 
     public Inventory(){
 
     }
 
-    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit, List<InspectionReport> inspectionsReport) {
+    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
         this.item = item;
         this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
         this.manufactor = manufactor;
         this.availableUnit = availableUnit;
-        this.inspectionsReport = inspectionsReport;
+
     }
 
     public Long getItem() {
@@ -77,11 +77,11 @@ public class Inventory {
         this.availableUnit = availableUnit;
     }
 
-    public List<InspectionReport> getInspectionsReport() {
-        return inspectionsReport;
+    public List<Inspection> getInspectionList() {
+        return inspectionList;
     }
 
-    public void setInspectionsReport(List<InspectionReport> inspectionsReport) {
-        this.inspectionsReport = inspectionsReport;
+    public void setInspectionList(List<Inspection> inspectionList) {
+        this.inspectionList = inspectionList;
     }
 }
