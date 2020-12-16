@@ -11,13 +11,8 @@ import java.util.List;
 
 @Service
 public class InventoryService {
+    @Autowired
     private InventoryRepository inventoryRepository;
-    @Autowired
-    public InventoryService(InventoryRepository inventoryRepository) {
-        this.inventoryRepository = inventoryRepository;
-    }
-
-    @Autowired
 
     public List<Inventory> getAllInventories(){
         List<Inventory> inventories = new ArrayList<>();
@@ -28,6 +23,10 @@ public class InventoryService {
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.save(inventory);
         return inventories;
+    }
+
+    public Inventory findInventoryById(Long itemId){
+        return inventoryRepository.findByItemId(itemId);
     }
 
 }
