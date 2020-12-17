@@ -40,7 +40,9 @@ public class InspectionController {
     public ResponseEntity<?> addInspectionWithItems(@RequestBody Inspection inspection) {
         return inspectionService.addInspectionWithItems(inspection);
     }
-    /*public ResponseEntity<?> addItemsToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
+
+    /*@PostMapping("/inspections/{inspectionNumber}")
+    public ResponseEntity<?> addItemsToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
                                                   @RequestBody List<Inventory> inventoryList){
         return inspectionService.addItemsToInspection(inspectionNumber, inventoryList);
     }*/

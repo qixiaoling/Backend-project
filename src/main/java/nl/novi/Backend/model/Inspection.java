@@ -48,6 +48,7 @@ public class Inspection {
     private Invoice invoice;
 
 
+
     public Date getInspectionDate() {
         return inspectionDate;
     }
