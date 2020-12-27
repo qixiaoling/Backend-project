@@ -6,13 +6,14 @@ import javax.persistence.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long item;
+    private Long itemId;
     @Column
     private String itemDescription;
     @Column
@@ -28,21 +29,13 @@ public class Inventory {
 
     }
 
-    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
-        this.item = item;
-        this.itemDescription = itemDescription;
-        this.pricePerUnit = pricePerUnit;
-        this.manufactor = manufactor;
-        this.availableUnit = availableUnit;
 
+    public Long getItemId() {
+        return itemId;
     }
 
-    public Long getItem() {
-        return item;
-    }
-
-    public void setItem(Long item) {
-        this.item = item;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemDescription() {

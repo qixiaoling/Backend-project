@@ -3,14 +3,17 @@ package nl.novi.Backend;
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.model.Inspection;
+import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.CustomerRepository;
 import nl.novi.Backend.repo.InspectionRepository;
+import nl.novi.Backend.repo.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.text.SimpleDateFormat;
+
 
 
 import static nl.novi.Backend.model.Gender.FEMALE;
@@ -61,7 +64,25 @@ public class EgineRightApplication {
 		car.getInspections().add(inspection2);
 		car.getInspections().add(inspection3);
 		carRepository.save(car);*/
+/*@Autowired
+	private InspectionRepository inspectionRepository;
+@Autowired
+	private InventoryRepository inventoryRepository;
 
+	public void run(String... args) throws Exception{
+		Inspection inspection = new Inspection(true, false);
+		Inventory inventory1 = new Inventory("Headlamp");
+		Inventory inventory2 = new Inventory("break");
+
+		inspection.getInventoryList().add(inventory1);
+		inspection.getInventoryList().add(inventory2);
+
+		inventory1.getInspectionList().add(inspection);
+		inventory2.getInspectionList().add(inspection);
+
+		this.inspectionRepository.save(inspection);
+}
+*/
 
 
 
