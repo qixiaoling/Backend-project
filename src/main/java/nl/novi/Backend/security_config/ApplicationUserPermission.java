@@ -1,4 +1,4 @@
-package nl.novi.Backend.security;
+package nl.novi.Backend.security_config;
 
 public enum ApplicationUserPermission {
     CUSTOMER_READ("customer:read"),

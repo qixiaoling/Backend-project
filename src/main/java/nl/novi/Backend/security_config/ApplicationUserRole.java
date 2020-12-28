@@ -1,4 +1,4 @@
-package nl.novi.Backend.security;
+package nl.novi.Backend.security_config;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

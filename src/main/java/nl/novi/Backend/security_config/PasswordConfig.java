@@ -1,4 +1,4 @@
-package nl.novi.Backend.security;
+package nl.novi.Backend.security_config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
