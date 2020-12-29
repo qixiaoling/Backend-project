@@ -11,13 +11,11 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "serial")
     private Long role_id;
     @Column
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole roleName;
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
-    @Column
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
     private List<AppUser> users;
 
     public Role(ApplicationUserRole roleName) {

@@ -34,6 +34,20 @@ public class AppUser {
 
     }
 
+    public AppUser(String userName,
+                   String password,
+                   Boolean isAccountNonExpired,
+                   Boolean isAccountNonLocked,
+                   Boolean isCredentialsNonExpired,
+                   Boolean isEnabled) {
+        this.userName = userName;
+        this.password = password;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
     public String getUserName() {
         return userName;
     }
