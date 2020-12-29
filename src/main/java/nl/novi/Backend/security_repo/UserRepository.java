@@ -1,13 +1,13 @@
 package nl.novi.Backend.security_repo;
 
-import nl.novi.Backend.security_model.User;
+import nl.novi.Backend.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
-public interface UserRepository extends JpaRepository {
+public interface UserRepository extends JpaRepository<AppUser, Long> {
 
-    Optional<User> findByUserName (String userName);
+    Optional<AppUser> findByUserName (String userName);
 
 }

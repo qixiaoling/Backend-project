@@ -1,19 +1,24 @@
-package nl.novi.Backend.security_model;
+package nl.novi.Backend.model;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import nl.novi.Backend.security_config.ApplicationUserRole;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "serial")
     private Long role_id;
+    @Column
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole roleName;
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
+    @Column
+    private List<AppUser> users;
 
     public Role(ApplicationUserRole roleName) {
         this.roleName = roleName;
@@ -36,6 +41,14 @@ public class Role {
 
     public void setRoleName(ApplicationUserRole roleName) {
         this.roleName = roleName;
+    }
+
+    public List<AppUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<AppUser> users) {
+        this.users = users;
     }
 }
 

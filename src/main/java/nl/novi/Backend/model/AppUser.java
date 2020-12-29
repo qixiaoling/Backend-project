@@ -1,26 +1,37 @@
-package nl.novi.Backend.security_model;
+package nl.novi.Backend.model;
 
-import nl.novi.Backend.security_config.ApplicationSecurityConfig;
-import nl.novi.Backend.security_config.ApplicationUserRole;
 
 import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table
-public class User {
+public class AppUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long User_id;
+    @Column
     private String userName;
+    @Column
     private String password;
+    @Column
     private Boolean isAccountNonExpired;
+    @Column
     private Boolean isAccountNonLocked;
+    @Column
     private Boolean isCredentialsNonExpired;
+    @Column
     private Boolean isEnabled;
-    @Enumerated(EnumType.STRING)
-    private ApplicationUserRole role;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Role role;
 
-    public User() {
+    public AppUser() {
+
     }
 
     public String getUserName() {
@@ -47,12 +58,19 @@ public class User {
         this.isEnabled = isEnabled;
     }
 
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
 
-    public ApplicationUserRole getRole() {
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(ApplicationUserRole role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
