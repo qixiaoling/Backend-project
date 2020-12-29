@@ -26,10 +26,10 @@ UPDATE app_user SET role_role_id=5 WHERE user_id=5;
 
 
 
-INSERT INTO car(number_plate, make, model ) VALUES('64-TP-TF', 'BMW', '1Serie');
+/*INSERT INTO car(number_plate, make, model ) VALUES('64-TP-TF', 'BMW', '1Serie');
 
 INSERT INTO inspection(inspection_number, agree_to_repair, inspection_complete, inspection_date, inspection_fee, inspection_result, quantities, repair_complete, repair_date, car_number_plate, invoice_customer_id, invoice_inspection_number)
 VALUES(1, true, true, '2020-12-11', 45, false, 2, true, '2020-12-22', null, null, null );
 
-UPDATE inspection SET car_number_plate='64-TP-TF' WHERE inspection_number=1;
+UPDATE inspection SET car_number_plate='64-TP-TF' WHERE inspection_number=1;*/
 
