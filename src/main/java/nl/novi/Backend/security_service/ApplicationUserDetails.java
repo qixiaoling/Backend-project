@@ -7,6 +7,7 @@ import nl.novi.Backend.security_config.ApplicationUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 import java.util.Set;
@@ -23,10 +24,12 @@ public class ApplicationUserDetails implements UserDetails {
     private Boolean isEnabled;
     @Autowired
     ApplicationUserRole applicationUserRole;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public ApplicationUserDetails(AppUser appuser) {
         this.username = appuser.getUserName();
-        this.password = appuser.getPassword();
+        this.password = passwordEncoder.encode(appuser.getPassword());
         this.grandedAuthorities = appuser.getRole().getRoleName().getGrantedAuthorities();
         this.isAccountNonExpired=appuser.getAccountNonExpired();
         this.isAccountNonLocked = appuser.getAccountNonLocked();

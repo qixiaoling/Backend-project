@@ -22,7 +22,7 @@ public class CustomerController {
 //hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
 
     @GetMapping("/customers")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER_BAC', 'ROLE_USER_FRO','ROLE_TRE', 'ROLE_TEC')")
+    @PreAuthorize("hasAuthority('customer:read')")
     public List<Customer> getAllCustomers(){
 
         return customerService.getAllCustomers();

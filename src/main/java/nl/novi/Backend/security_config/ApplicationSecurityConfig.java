@@ -4,6 +4,8 @@ import nl.novi.Backend.security_service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,42 +44,21 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
 
+
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(applicationUserService);
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
-    /*
-    @Override
     @Bean
-    protected UserDetailsService userDetailsService() {
-
-        UserDetails elsaUser = User.builder()
-                .username("elsa")
-                .password(passwordEncoder.encode("password"))
-                //.roles(ApplicationUserRole.USER_FRO.name())
-                .authorities(ApplicationUserRole.USER_FRO.getGrantedAuthorities())
-                .build();
-
-        UserDetails annaUser = User.builder()
-                .username("anna")
-                .password(passwordEncoder.encode("password"))
-                //.roles(ApplicationUserRole.USER_BAC.name())
-                .authorities(ApplicationUserRole.USER_BAC.getGrantedAuthorities())
-                .build();
-
-        UserDetails lindaUser = User.builder()
-                .username("linda")
-                .password(passwordEncoder.encode("password"))
-                //.roles(ApplicationUserRole.ADMIN.name())
-                .authorities(ApplicationUserRole.ADMIN.getGrantedAuthorities())
-                .build();
-
-        return new InMemoryUserDetailsManager(annaUser, elsaUser, lindaUser);
+    public DaoAuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(applicationUserService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
+    }
 
 
-
-    }*/
 }
