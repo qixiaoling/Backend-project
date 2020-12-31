@@ -15,8 +15,7 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole roleName;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
-    private List<AppUser> users;
+
 
     public Role(ApplicationUserRole roleName) {
         this.roleName = roleName;
@@ -41,13 +40,7 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<AppUser> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<AppUser> users) {
-        this.users = users;
-    }
 }
 
 

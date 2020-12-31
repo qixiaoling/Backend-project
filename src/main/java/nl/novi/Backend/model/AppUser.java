@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table
@@ -19,33 +20,32 @@ public class AppUser {
     private String userName;
     @Column
     private String password;
-    @Column
-    private Boolean isAccountNonExpired;
-    @Column
-    private Boolean isAccountNonLocked;
-    @Column
-    private Boolean isCredentialsNonExpired;
-    @Column
-    private Boolean isEnabled;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Role role;
+
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            joinColumns = { @JoinColumn },
+            inverseJoinColumns = {@JoinColumn}
+    )
+    private Set<Role> roles;
 
     public AppUser() {
 
     }
 
-    public AppUser(String userName,
-                   String password,
-                   Boolean isAccountNonExpired,
-                   Boolean isAccountNonLocked,
-                   Boolean isCredentialsNonExpired,
-                   Boolean isEnabled) {
+
+    public AppUser(Long user_id, String userName, String password, Set<Role> roles) {
+        User_id = user_id;
         this.userName = userName;
         this.password = password;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
+        this.roles = roles;
+    }
+
+    public Long getUser_id() {
+        return User_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        User_id = user_id;
     }
 
     public String getUserName() {
@@ -64,51 +64,11 @@ public class AppUser {
         this.password = password;
     }
 
-    public Boolean isEnabled() {
-        return isEnabled;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setIsEnabled(Boolean active) {
-        this.isEnabled = isEnabled;
-    }
-
-    public Boolean getEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        isEnabled = enabled;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Boolean getAccountNonExpired() {
-        return isAccountNonExpired;
-    }
-
-    public void setAccountNonExpired(Boolean accountNonExpired) {
-        isAccountNonExpired = accountNonExpired;
-    }
-
-    public Boolean getAccountNonLocked() {
-        return isAccountNonLocked;
-    }
-
-    public void setAccountNonLocked(Boolean accountNonLocked) {
-        isAccountNonLocked = accountNonLocked;
-    }
-
-    public Boolean getCredentialsNonExpired() {
-        return isCredentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
-        isCredentialsNonExpired = credentialsNonExpired;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

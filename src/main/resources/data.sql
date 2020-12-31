@@ -4,22 +4,23 @@ INSERT INTO role(role_id, role_name) VALUES (3, 'USER_TRE');
 INSERT INTO role(role_id, role_name) VALUES (4, 'USER_TEC');
 INSERT INTO role(role_id, role_name) VALUES (5, 'ADMIN');
 
-INSERT INTO app_user(user_id, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, password, user_name, role_role_id)
-VALUES(1, true, true, true, true, 'password', 'Elsa', null);
-INSERT INTO app_user(user_id, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, password, user_name, role_role_id)
-VALUES(2, true, true, true, true, 'password', 'Anna', null);
-INSERT INTO app_user(user_id, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, password, user_name, role_role_id)
-VALUES(3, true, true, true, true, 'password', 'Hans', null);
-INSERT INTO app_user(user_id, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, password, user_name, role_role_id)
-VALUES(4, true, true, true, true, 'password', 'Kristoff', null);
-INSERT INTO app_user(user_id, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled, password, user_name, role_role_id)
-VALUES(5, true, true, true, true, 'password', 'Olaf', null);
+INSERT INTO app_user(user_id, password, user_name)
+VALUES(1, 'password', 'Elsa');
+INSERT INTO app_user(user_id, password, user_name)
+VALUES(2, 'password', 'Anna');
+INSERT INTO app_user(user_id, password, user_name)
+VALUES(3, 'password', 'Hans');
+INSERT INTO app_user(user_id, password, user_name)
+VALUES(4, 'password', 'Kristoff');
+INSERT INTO app_user(user_id, password, user_name)
+VALUES(5,'password', 'Olaf');
 
-UPDATE app_user SET role_role_id=2 WHERE user_id=1;
-UPDATE app_user SET role_role_id=1 WHERE user_id=2;
-UPDATE app_user SET role_role_id=3 WHERE user_id=3;
-UPDATE app_user SET role_role_id=4 WHERE user_id=4;
-UPDATE app_user SET role_role_id=5 WHERE user_id=5;
+UPDATE app_user_roles SET app_user_user_id=1 WHERE roles_role_id=2;
+UPDATE app_user_roles SET app_user_user_id=2 WHERE roles_role_id=1;
+UPDATE app_user_roles SET app_user_user_id=3 WHERE roles_role_id=3;
+UPDATE app_user_roles SET app_user_user_id=4 WHERE roles_role_id=4;
+UPDATE app_user_roles SET app_user_user_id=5 WHERE roles_role_id=5;
+
 
 
 
