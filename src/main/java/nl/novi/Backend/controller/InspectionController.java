@@ -15,6 +15,7 @@ public class InspectionController {
     private InspectionService inspectionService;
     @Autowired
     public InspectionController(InspectionService inspectionService){
+
         this.inspectionService=inspectionService;
     }
     @GetMapping("/inspections")

@@ -33,6 +33,7 @@ public class InventoryService {
     }
 
     public Inventory findInventoryById(Long itemId){
+
         return inventoryRepository.findByItemId(itemId);
     }
 

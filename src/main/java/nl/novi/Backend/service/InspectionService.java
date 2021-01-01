@@ -22,6 +22,7 @@ public class InspectionService {
 
     private InspectionRepository inspectionRepository;
     private CarRepository carRepository;
+    @Autowired
     private InventoryService inventoryService;
 
     @Autowired
@@ -66,7 +67,7 @@ public class InspectionService {
         newInspection.setInspectionNumber(inspection.getInspectionNumber());
         newInspection.getInventoryList().addAll(
                 inspection.getInventoryList().stream().map(v->{
-                    Inventory vv = inventoryService.findInventoryById(v.getItemId());
+                    Inventory vv=inventoryService.findInventoryById(v.getItemId());
                     vv.getInspectionList().add(newInspection);
                     return vv;
                 }).collect(Collectors.toList()));
