@@ -12,7 +12,7 @@ import java.util.List;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long item;
+    private Long itemId;
     @Column
     private String itemDescription;
     @Column
@@ -29,7 +29,7 @@ public class Inventory {
     }
 
     public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
-        this.item = item;
+        this.itemId = itemId;
         this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
         this.manufactor = manufactor;
@@ -37,12 +37,12 @@ public class Inventory {
 
     }
 
-    public Long getItem() {
-        return item;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setItem(Long item) {
-        this.item = item;
+    public void setItem(Long itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemDescription() {
