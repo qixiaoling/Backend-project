@@ -20,6 +20,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private PasswordEncoder passwordEncoder;
@@ -38,7 +39,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/customers","/cars", "/invoices", "/inspections/**", "/inventories").permitAll()
+                .antMatchers("/cars", "/invoices", "/inspections/**", "/inventories").permitAll()
                 .antMatchers("/securityManagement/**").permitAll()
                 .anyRequest()
                 .authenticated()
