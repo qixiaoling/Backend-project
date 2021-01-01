@@ -22,13 +22,11 @@ public class CustomerController {
 //hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
 
     @GetMapping("/customers")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<Customer> getAllCustomers(){
 
         return customerService.getAllCustomers();
     }
     @PostMapping("/customers")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<Customer> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }

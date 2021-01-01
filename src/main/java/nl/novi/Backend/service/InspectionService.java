@@ -2,9 +2,12 @@ package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Inspection;
+import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.InspectionRepository;
+import nl.novi.Backend.repo.InventoryRepository;
+import nl.novi.Backend.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,11 +15,14 @@ import java.util.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class InspectionService {
 
     private InspectionRepository inspectionRepository;
     private CarRepository carRepository;
+    private InventoryRepository inventoryRepository;
 
     @Autowired
     public void setInspectionRepository(InspectionRepository inspectionRepository){
@@ -52,6 +58,20 @@ public class InspectionService {
 
         return ResponseEntity.badRequest()
                 .body("Error: car does not exist.");
+    }
+
+
+    public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
+        Inspection newInspection = new Inspection();
+        newInspection.setInspectionNumber(inspection.getInspectionNumber());
+        newInspection.getInventoryList().addAll(
+                inspection.getInventoryList().stream().map(v->{
+                    Inventory vv = inventoryRepository.findByItem(v.getItem());
+                    vv.getInspectionList().add(newInspection);
+                    return vv;
+                }).collect(Collectors.toList()));
+        inspectionRepository.save(newInspection);
+        return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
     }
 
 }

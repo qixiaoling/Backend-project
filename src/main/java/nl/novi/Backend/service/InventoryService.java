@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class InventoryService {
+    @Autowired
     private InventoryRepository inventoryRepository;
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {

@@ -33,6 +33,10 @@ public class InspectionController {
         return inspectionService.addNewInspectionToCar(numberPlate, inspection);
 
     }
+    @PostMapping("/inspections/inventories")
+    public ResponseEntity<?> addInspectionWithItems(@RequestBody Inspection inspection) {
+        return inspectionService.addInspectionWithItems(inspection);
+    }
 
 
 

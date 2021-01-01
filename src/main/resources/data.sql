@@ -1,8 +1,8 @@
-INSERT INTO role(role_id, role_name) VALUES (1, 'USER_BAC');
-INSERT INTO role(role_id, role_name) VALUES (2, 'USER_FRO');
-INSERT INTO role(role_id, role_name) VALUES (3, 'USER_TRE');
-INSERT INTO role(role_id, role_name) VALUES (4, 'USER_TEC');
-INSERT INTO role(role_id, role_name) VALUES (5, 'ADMIN');
+INSERT INTO role(role_id, role_name) VALUES (1, 'ROLE_USER_BAC');
+INSERT INTO role(role_id, role_name) VALUES (2, 'ROLE_USER_FRO');
+INSERT INTO role(role_id, role_name) VALUES (3, 'ROLE_USER_TRE');
+INSERT INTO role(role_id, role_name) VALUES (4, 'ROLE_USER_TEC');
+INSERT INTO role(role_id, role_name) VALUES (5, 'ROLE_ADMIN');
 
 INSERT INTO app_user(user_id, password, user_name)
 VALUES(1, 'password', 'Elsa');
@@ -15,12 +15,8 @@ VALUES(4, 'password', 'Kristoff');
 INSERT INTO app_user(user_id, password, user_name)
 VALUES(5,'password', 'Olaf');
 
-UPDATE app_user_roles SET app_user_user_id=1 WHERE roles_role_id=2;
-UPDATE app_user_roles SET app_user_user_id=2 WHERE roles_role_id=1;
-UPDATE app_user_roles SET app_user_user_id=3 WHERE roles_role_id=3;
-UPDATE app_user_roles SET app_user_user_id=4 WHERE roles_role_id=4;
-UPDATE app_user_roles SET app_user_user_id=5 WHERE roles_role_id=5;
 
+UPDATE app_user_roles SET app_users_user_id=5 WHERE roles_role_id = 5;
 
 
 

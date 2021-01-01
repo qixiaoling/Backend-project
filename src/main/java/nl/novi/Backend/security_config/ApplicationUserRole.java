@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum ApplicationUserRole {
-    USER_FRO,
-    USER_BAC,
-    USER_TEC,
-    USER_TRE,
-    ADMIN
+    ROLE_USER_FRO,
+    ROLE_USER_BAC,
+    ROLE_USER_TEC,
+    ROLE_USER_TRE,
+    ROLE_ADMIN
 
 }
