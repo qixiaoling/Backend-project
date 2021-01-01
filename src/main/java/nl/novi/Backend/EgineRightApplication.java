@@ -1,5 +1,6 @@
 package nl.novi.Backend;
 
+import nl.novi.Backend.model.AppUser;
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.model.Inspection;
@@ -22,7 +23,7 @@ import static nl.novi.Backend.model.Gender.FEMALE;
 @EnableJpaRepositories
 public class EgineRightApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		SpringApplication.run(EgineRightApplication.class, args);
 	}
 
@@ -65,10 +66,6 @@ public class EgineRightApplication {
 		car.getInspections().add(inspection2);
 		car.getInspections().add(inspection3);
 		carRepository.save(car);*/
-
-
-
-
 
 
 }

@@ -21,6 +21,8 @@ public class AppUser_Role_Service {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private RoleService roleService;
 
     public AppUser_Role_Service(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -32,7 +34,7 @@ public class AppUser_Role_Service {
         newAppUser.setUser_id(appUser.getUser_id());
         newAppUser.getRoles().addAll(
                 appUser.getRoles().stream().map(r -> {
-                    Role rr = roleRepository.findByRoleName(r.getRoleName());
+                    Role rr = roleService.findRoleByRoleName(r.getRoleName());
                     rr.getAppUsers().add(newAppUser);
                     return rr;
                 }).collect(Collectors.toList()));
@@ -45,6 +47,12 @@ public class AppUser_Role_Service {
             userRepository.findAll().forEach(appUsers::add);
             return appUsers;
         }
+
+    public List<AppUser> addAppUsers(AppUser appUser) {
+        List<AppUser> appUsers = new ArrayList<>();
+        userRepository.save(appUser);
+        return appUsers;
+    }
 
 
 

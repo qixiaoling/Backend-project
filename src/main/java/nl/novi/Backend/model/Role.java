@@ -19,15 +19,6 @@ public class Role {
     @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roles")
     private Set<AppUser> appUsers;
 
-    public Role(Long role_id, ApplicationUserRole roleName) {
-        this.role_id = role_id;
-        this.roleName = roleName;
-    }
-
-    public Role(ApplicationUserRole roleName) {
-        this.roleName = roleName;
-    }
-
     public Role() {
     }
 

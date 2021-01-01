@@ -1,3 +1,5 @@
+
+
 INSERT INTO role(role_id, role_name) VALUES (1, 'ROLE_USER_BAC');
 INSERT INTO role(role_id, role_name) VALUES (2, 'ROLE_USER_FRO');
 INSERT INTO role(role_id, role_name) VALUES (3, 'ROLE_USER_TRE');
@@ -16,7 +18,8 @@ INSERT INTO app_user(user_id, password, user_name)
 VALUES(5,'password', 'Olaf');
 
 
-UPDATE app_user_roles SET app_users_user_id=5 WHERE roles_role_id = 5;
+
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(1, 2);
 
 
 

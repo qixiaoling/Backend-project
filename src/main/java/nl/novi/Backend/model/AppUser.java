@@ -32,12 +32,10 @@ public class AppUser {
 
     }
 
-
-    public AppUser(Long user_id, String userName, String password, Set<Role> roles) {
+    public AppUser(Long user_id, String userName, String password) {
         User_id = user_id;
         this.userName = userName;
         this.password = password;
-        this.roles = roles;
     }
 
     public Long getUser_id() {
