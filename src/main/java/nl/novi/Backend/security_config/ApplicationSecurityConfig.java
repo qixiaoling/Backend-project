@@ -20,33 +20,45 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private PasswordEncoder passwordEncoder;
+   // private PasswordEncoder passwordEncoder;
     @Autowired
     private ApplicationUserService applicationUserService;
 
-    @Autowired
+   /* @Autowired
     public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
                                      ApplicationUserService applicationUserService){
         this.passwordEncoder = passwordEncoder;
         this.applicationUserService = applicationUserService;
-    }
+    }*/
 
-    @Override
+
+   @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/cars", "/invoices", "/inspections/**", "/inventories").permitAll()
-                .antMatchers("/securityManagement/**").permitAll()
+                .antMatchers("/test/hello").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin();
 
+    }
 
+    /*@Override
+    @Bean
+    protected  UserDetailsService userDetailsService(){
+        UserDetails tomUser = User.builder()
+                .username("tom")
+                .password(passwordEncoder.encode("password"))
+                .roles(ApplicationUserRole.USER_FRO.name())
+                .build();
+
+        return new InMemoryUserDetailsManager(
+                tomUser
+        );
     }
 
     @Override
@@ -60,8 +72,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(applicationUserService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
+    }*/
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(applicationUserService).passwordEncoder(password());
     }
 
+    @Bean
+    PasswordEncoder password(){
+        return new BCryptPasswordEncoder();
+    }
 
 
 }

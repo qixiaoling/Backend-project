@@ -22,10 +22,7 @@ import java.util.stream.Collectors;
 
         private final Long id;
         private final String username;
-
-        @JsonIgnore
         private final String password;
-
         private final Collection<? extends GrantedAuthority> authorities;
 
         public UserDetailsImpl(Long id, String username, String password,

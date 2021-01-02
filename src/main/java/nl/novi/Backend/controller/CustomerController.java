@@ -22,7 +22,6 @@ public class CustomerController {
 //hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
 
     @GetMapping("/customers")
-    @PreAuthorize("hasRole('ROLE_USER_FRO')")
     public List<Customer> getAllCustomers(){
 
         return customerService.getAllCustomers();
