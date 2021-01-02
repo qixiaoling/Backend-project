@@ -7,6 +7,7 @@ import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.CustomerRepository;
 import nl.novi.Backend.repo.InspectionRepository;
+import nl.novi.Backend.security_config.ApplicationUserRole;
 import nl.novi.Backend.security_repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ import static nl.novi.Backend.model.Gender.FEMALE;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class EgineRightApplication {
+public class EgineRightApplication{
 
 	public static void main(String[] args){
 		SpringApplication.run(EgineRightApplication.class, args);
@@ -32,11 +33,13 @@ public class EgineRightApplication {
 	@Autowired
 	private CarRepository carRepository;
 	@Autowired
-	private InspectionRepository inspectionRepository;
+	private InspectionRepository inspectionRepository;*/
 
-	@Override
-	public void run(String... args) throws Exception{
-		Customer customer = new Customer();
+
+
+
+
+		/*Customer customer = new Customer();
 		customer.setFirstName("Xiaoling");
 		customer.setLastName("Qi");
 		customer.setEmail("x.qi@novi-education.nl");

@@ -1,9 +1,11 @@
 package nl.novi.Backend.security_config;
 
+import nl.novi.Backend.security_repo.UserRepository;
 import nl.novi.Backend.security_service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
@@ -22,16 +25,19 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   // private PasswordEncoder passwordEncoder;
-    @Autowired
-    private ApplicationUserService applicationUserService;
+   private PasswordEncoder passwordEncoder;
+   @Autowired
+   private PasswordConfig passwordConfig;
 
-   /* @Autowired
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder,
-                                     ApplicationUserService applicationUserService){
-        this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
-    }*/
+   @Bean
+   public PasswordEncoder passwordEncoder(){
+       return new BCryptPasswordEncoder();
+   }
+
+   @Bean
+   public UserDetailsService userDetailsService(){
+       return new ApplicationUserService();
+   }
 
 
    @Override
@@ -39,50 +45,20 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/test/hello").hasRole("ADMIN")
+                .antMatchers("/customers", "/inventories","/cars", "/inspections/**").permitAll()
+                .antMatchers("/test/hello").hasRole(ApplicationUserRole.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .httpBasic();
 
     }
 
-    /*@Override
-    @Bean
-    protected  UserDetailsService userDetailsService(){
-        UserDetails tomUser = User.builder()
-                .username("tom")
-                .password(passwordEncoder.encode("password"))
-                .roles(ApplicationUserRole.USER_FRO.name())
-                .build();
 
-        return new InMemoryUserDetailsManager(
-                tomUser
-        );
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(userDetailsService());
     }
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(applicationUserService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
-    }*/
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(applicationUserService).passwordEncoder(password());
-    }
-
-    @Bean
-    PasswordEncoder password(){
-        return new BCryptPasswordEncoder();
-    }
-
 
 }

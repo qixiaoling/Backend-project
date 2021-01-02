@@ -10,34 +10,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 import java.util.Optional;
 
-@Service("userDetailsSerivce")
+@Service
 public class ApplicationUserService implements UserDetailsService {
-    /*@Autowired
+
+    @Autowired
     UserRepository userRepository;
 
-
-
-    public ApplicationUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-   @Override
-    public UserDetailsImpl loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser appUser = userRepository.findAppUserByUserName(userName)
-                .orElseThrow(()->new UsernameNotFoundException("User is not found."));
-        return UserDetailsImpl.build(appUser);
-
-        }*/
-
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String userName) throws UsernameNotFoundException {
+        AppUser userDB = userRepository.findAppUserByUserName(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("User is not found."));
+        return new UserDetailsImpl(userDB);
 
-        List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN");
-        return new User("mary", new BCryptPasswordEncoder().encode("123"), auths);
     }
+
 }

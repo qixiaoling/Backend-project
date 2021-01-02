@@ -3,68 +3,58 @@ package nl.novi.Backend.security_service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nl.novi.Backend.model.AppUser;
+import nl.novi.Backend.model.Role;
+import nl.novi.Backend.security_config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
     public class UserDetailsImpl implements UserDetails {
-
+        private AppUser appUser;
         @Autowired
-        PasswordEncoder passwordEncoder;
-
-        private final Long id;
-        private final String username;
-        private final String password;
-        private final Collection<? extends GrantedAuthority> authorities;
-
-        public UserDetailsImpl(Long id, String username, String password,
-                               Collection<? extends GrantedAuthority> authorities) {
-            this.id = id;
-            this.username = username;
-            this.password = password;
-            this.authorities = authorities;
+        PasswordConfig passwordConfig;
+        public UserDetailsImpl(AppUser appUser) {
+            this.appUser = appUser;
         }
-
-        public static UserDetailsImpl build(AppUser appUser) {
-            List<GrantedAuthority> authorities = appUser.getRoles().stream()
-                    .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
-                    .collect(Collectors.toList());
-            BCryptPasswordEncoder pas = new BCryptPasswordEncoder();
-            String EPassword = pas.encode(appUser.getPassword());
-
-            return new UserDetailsImpl(
-                    appUser.getUser_id(),
-                    appUser.getUserName(),
-                    EPassword,
-                    authorities);
-        }
-
-        public Long getId() {
-            return id;
-        }
-
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
+            List<GrantedAuthority> authorities = appUser.getRoles().stream()
+                    .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
+                    .collect(Collectors.toList());
+
             return authorities;
         }
+/* @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+                Set<Role> roles = appUser.getRoles();
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                for (Role role:roles){
+                    authorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));}
+                return authorities;
+            }*/
+
+
 
         @Override
         public String getPassword() {
-            return password;
+
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+            String result = encoder.encode(appUser.getPassword());
+
+            return result;
         }
 
         @Override
         public String getUsername() {
-            return username;
+            return appUser.getUserName();
         }
 
         @Override

@@ -21,7 +21,7 @@ public class AppUser {
     @Column
     private String password;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             joinColumns = { @JoinColumn },
             inverseJoinColumns = {@JoinColumn}
