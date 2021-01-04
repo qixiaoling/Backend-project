@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 
     public class UserDetailsImpl implements UserDetails {
         private AppUser appUser;
-        @Autowired
-        PasswordConfig passwordConfig;
+       
         public UserDetailsImpl(AppUser appUser) {
             this.appUser = appUser;
         }
@@ -32,15 +31,6 @@ import java.util.stream.Collectors;
 
             return authorities;
         }
-/* @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-                Set<Role> roles = appUser.getRoles();
-                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                for (Role role:roles){
-                    authorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));}
-                return authorities;
-            }*/
-
 
 
         @Override
