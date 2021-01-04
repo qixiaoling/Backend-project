@@ -19,8 +19,15 @@ VALUES(5,'password', 'Olaf');
 
 
 
-INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(1, 5);
 INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(1, 2);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(2, 1);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(3, 3);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(4, 4);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 5);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 1);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 2);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 3);
+INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 4);
 
 
 

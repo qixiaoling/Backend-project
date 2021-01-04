@@ -18,11 +18,13 @@ public class InventoryController {
         this.inventoryService=inventoryService;
     }
     @GetMapping("/inventories")
+    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
     public List<Inventory> getAllInventories(){
         return inventoryService.getAllInventories();
     }
 
     @PostMapping("/inventories")
+    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
     public List<Inventory> addInventories(@RequestBody Inventory inventory){
         return inventoryService.addInventories(inventory);
     }
