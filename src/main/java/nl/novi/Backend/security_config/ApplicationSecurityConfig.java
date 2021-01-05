@@ -1,5 +1,6 @@
 package nl.novi.Backend.security_config;
 
+import nl.novi.Backend.security_jwt.JwtTokenVerifier;
 import nl.novi.Backend.security_jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import nl.novi.Backend.security_repo.UserRepository;
 import nl.novi.Backend.security_service.ApplicationUserService;
@@ -51,6 +52,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+                .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/securityManagement").permitAll()
                 .anyRequest()
