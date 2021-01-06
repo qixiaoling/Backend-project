@@ -6,6 +6,7 @@ import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.InspectionRepository;
+import nl.novi.Backend.repo.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class InspectionService {
     }
 
 
+
     public List<Inspection> getAllInspection(){
         List<Inspection> inspections = new ArrayList<>();
         inspectionRepository.findAll().forEach(inspections::add);
@@ -46,6 +48,25 @@ public class InspectionService {
         return inspections;
     }
 
+    public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
+        Inspection newInspection = new Inspection();
+        newInspection.setInspectionNumber(inspection.getInspectionNumber());
+        newInspection.getInventoryList().addAll(
+                inspection.getInventoryList().stream().map(v->{
+                    Inventory vv=inventoryService.findInventoryById(v.getItemId());
+                    vv.getInspectionList().add(newInspection);
+                    return vv;
+                }).collect(Collectors.toList()));
+        inspectionRepository.save(newInspection);
+        return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
+    }
+    /*public ResponseEntity<?> addItemsToInspection(Long inspectionNumber, List<Inventory> inventoryList) {
+        Inspection inspectionFromDB = inspectionRepository.findByInspectionNumber(inspectionNumber);
+        inspectionFromDB.setInventoryList(inventoryList);
+        inspectionRepository.save(inspectionFromDB);
+    return ResponseEntity.ok().body(new MessageResponse("New items are added onto this inspection"));
+    }*/
+
     public ResponseEntity<?> addNewInspectionToCar(String numberPlate, Inspection inspection) {
 
         Optional<Car> carFromDb = carRepository.findByNumberPlate(numberPlate);
@@ -54,7 +75,6 @@ public class InspectionService {
             inspectionRepository.save(inspection);
             return ResponseEntity.ok().body(new MessageResponse("Inspection Report added."));
         }
-
         return ResponseEntity.badRequest()
                 .body("Error: car does not exist.");
     }

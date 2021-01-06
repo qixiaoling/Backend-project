@@ -1,8 +1,10 @@
 package nl.novi.Backend.controller;
 
 import nl.novi.Backend.model.Inspection;
+import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.service.InspectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class InspectionController {
+
     private InspectionService inspectionService;
     @Autowired
     public InspectionController(InspectionService inspectionService){

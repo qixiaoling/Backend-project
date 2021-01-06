@@ -1,5 +1,6 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
@@ -45,6 +46,8 @@ public class Inspection {
 
     @OneToOne
     private Invoice invoice;
+
+
 
     public Date getInspectionDate() {
         return inspectionDate;

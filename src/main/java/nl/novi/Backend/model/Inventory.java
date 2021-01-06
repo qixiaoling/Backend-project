@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table
@@ -28,7 +29,14 @@ public class Inventory {
 
     }
 
+    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
+        this.item = item;
+        this.itemDescription = itemDescription;
+        this.pricePerUnit = pricePerUnit;
+        this.manufactor = manufactor;
+        this.availableUnit = availableUnit;
 
+    }
 
     public Long getItemId() {
         return itemId;
