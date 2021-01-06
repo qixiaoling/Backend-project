@@ -79,17 +79,7 @@ public class InspectionService {
                 .body("Error: car does not exist.");
     }
 
-    public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
-        Inspection newInspection = new Inspection();
-        newInspection.setInspectionNumber(inspection.getInspectionNumber());
-        newInspection.getInventoryList().addAll(
-                inspection.getInventoryList().stream().map(v->{
-                    Inventory vv=inventoryService.findInventoryById(v.getItemId());
-                    vv.getInspectionList().add(newInspection);
-                    return vv;
-                }).collect(Collectors.toList()));
-        inspectionRepository.save(newInspection);
-        return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
-    }
+
+
 
 }
