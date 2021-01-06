@@ -48,15 +48,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
-                .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
+                //.sessionManagement()
+                    //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.and()
+                //.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+               // .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/securityManagement").permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .httpBasic();
 
 
     }

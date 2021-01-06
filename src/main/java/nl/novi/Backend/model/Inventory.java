@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table
@@ -28,13 +29,20 @@ public class Inventory {
 
     }
 
+    public Inventory(Long itemId, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
+        this.itemId = itemId;
+        this.itemDescription = itemDescription;
+        this.pricePerUnit = pricePerUnit;
+        this.manufactor = manufactor;
+        this.availableUnit = availableUnit;
 
+    }
 
     public Long getItemId() {
         return itemId;
     }
 
-    public void setItem(Long itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -77,6 +85,4 @@ public class Inventory {
     public void setInspectionList(List<Inspection> inspectionList) {
         this.inspectionList = inspectionList;
     }
-
-
 }
