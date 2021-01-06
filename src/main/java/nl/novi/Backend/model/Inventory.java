@@ -29,8 +29,8 @@ public class Inventory {
 
     }
 
-    public Inventory(Long item, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
-        this.item = item;
+    public Inventory(Long itemId, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
+        this.itemId = itemId;
         this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
         this.manufactor = manufactor;

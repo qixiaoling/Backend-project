@@ -26,6 +26,12 @@ public class InventoryService {
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.save(inventory);
         return inventories;
+
+    }
+
+    public Inventory findInventoryById(Long itemId){
+
+        return inventoryRepository.findByItemId(itemId);
     }
 
     public Inventory findInventoryById(Long itemId){
