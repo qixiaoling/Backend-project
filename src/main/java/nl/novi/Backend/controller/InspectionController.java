@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class InspectionController {
-
     private InspectionService inspectionService;
     @Autowired
     public InspectionController(InspectionService inspectionService){
@@ -20,7 +19,7 @@ public class InspectionController {
     @GetMapping("/inspections")
     public List<Inspection> getAllInspection(){
         return inspectionService.getAllInspection();
-        }
+    }
     @PostMapping("/inspections")
     public List<Inspection> addInspection(@RequestBody Inspection inspection){
         return inspectionService.addInspection(inspection);
@@ -37,7 +36,6 @@ public class InspectionController {
     public ResponseEntity<?> addInspectionWithItems(@RequestBody Inspection inspection) {
         return inspectionService.addInspectionWithItems(inspection);
     }
-
 
 
 
