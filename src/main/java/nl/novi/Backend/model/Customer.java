@@ -3,6 +3,7 @@ package nl.novi.Backend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.JoinColumn;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,8 @@ public class Customer {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private Car car;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Invoice invoice;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Invoice> invoiceList = new ArrayList<>();
 
 
 
@@ -104,11 +105,11 @@ public class Customer {
         this.car = car;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setInvoiceList(List<Invoice> invoiceList) {
+        this.invoiceList = invoiceList;
     }
 }

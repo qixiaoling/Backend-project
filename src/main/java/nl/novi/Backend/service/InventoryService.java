@@ -8,18 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
+
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
-
-    @Autowired
-
     public List<Inventory> getAllInventories(){
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.findAll().forEach(inventories::add);
@@ -36,5 +33,10 @@ public class InventoryService {
 
         return inventoryRepository.findByItemId(itemId);
     }
+
+    public Inventory findInventoryById(Long itemId){
+        return inventoryRepository.findByItemId(itemId);
+    }
+
 
 }
