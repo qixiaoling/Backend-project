@@ -23,6 +23,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_USER_FRO', 'ROLE_ADMIN')")
     public List<Customer> getAllCustomers(){
 
         return customerService.getAllCustomers();
