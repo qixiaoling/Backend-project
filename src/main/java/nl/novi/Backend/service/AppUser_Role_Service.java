@@ -1,16 +1,14 @@
-package nl.novi.Backend.security_service;
+package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.AppUser;
-import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.model.Role;
 import nl.novi.Backend.payload.response.MessageResponse;
-import nl.novi.Backend.security_repo.RoleRepository;
-import nl.novi.Backend.security_repo.UserRepository;
+import nl.novi.Backend.repo.RoleRepository;
+import nl.novi.Backend.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
