@@ -1,18 +1,15 @@
-package nl.novi.Backend.security_service;
+package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.AppUser;
-import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.model.Role;
 import nl.novi.Backend.payload.response.MessageResponse;
-import nl.novi.Backend.security_repo.RoleRepository;
-import nl.novi.Backend.security_repo.UserRepository;
+import nl.novi.Backend.repo.RoleRepository;
+import nl.novi.Backend.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,17 +27,25 @@ public class AppUser_Role_Service {
     }
 
     public ResponseEntity<?> addAppUserWithRoles (AppUser appUser) {
-        AppUser newAppUser = new AppUser();
-        newAppUser.setUser_id(appUser.getUser_id());
-        newAppUser.getRoles().addAll(
-                appUser.getRoles().stream().map(r -> {
-                    Role rr = roleService.findRoleByRoleName(r.getRoleName());
-                    rr.getAppUsers().add(newAppUser);
-                    return rr;
-                }).collect(Collectors.toList()));
-        userRepository.save(newAppUser);
-        return ResponseEntity.ok().body(new MessageResponse("Roles are added to this AppUser"));
+
+
+        Optional<AppUser> foundUser = userRepository.findById(appUser.getUser_id());
+
+        if (foundUser.isPresent()) {
+            Set<Role> newRoles = new HashSet<>();
+            for (Role role : appUser.getRoles()) {
+                Role aRole = roleService.findRoleByRoleName(role.getRoleName());
+                newRoles.add(aRole);
+            }
+            AppUser theUser = foundUser.get();
+            theUser.setRoles(newRoles);
+            userRepository.save(theUser);
+            return ResponseEntity.ok().body(new MessageResponse("Roles are added to this AppUser"));
+        }
+        return ResponseEntity.badRequest().body("The user cannot be found!");
     }
+
+
 
         public List<AppUser> getAllAppUsers(){
             List<AppUser> appUsers = new ArrayList<>();

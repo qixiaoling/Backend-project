@@ -1,4 +1,4 @@
-package nl.novi.Backend.security_service;
+package nl.novi.Backend.security_config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

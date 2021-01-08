@@ -1,26 +1,8 @@
 package nl.novi.Backend;
 
-import nl.novi.Backend.model.AppUser;
-import nl.novi.Backend.model.Car;
-import nl.novi.Backend.model.Customer;
-import nl.novi.Backend.model.Inspection;
-import nl.novi.Backend.model.Inventory;
-import nl.novi.Backend.repo.CarRepository;
-import nl.novi.Backend.repo.CustomerRepository;
-import nl.novi.Backend.repo.InspectionRepository;
-import nl.novi.Backend.security_config.ApplicationUserRole;
-import nl.novi.Backend.security_repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import java.text.SimpleDateFormat;
-
-
-
-import static nl.novi.Backend.model.Gender.FEMALE;
 
 @SpringBootApplication
 @EnableJpaRepositories

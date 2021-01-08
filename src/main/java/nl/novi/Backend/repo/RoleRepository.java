@@ -1,4 +1,4 @@
-package nl.novi.Backend.security_repo;
+package nl.novi.Backend.repo;
 
 import nl.novi.Backend.model.AppUser;
 import nl.novi.Backend.model.Role;
