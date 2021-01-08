@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerController {
 
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService){
@@ -34,17 +34,17 @@ public class CustomerController {
     public List<Customer> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }
-    @GetMapping("/customers/{id}")
+    @GetMapping("/customers/{customerId}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
     public Customer getCustomerById(@PathVariable Long customerId){
         return customerService.getCustomerById(customerId);
     }
-    @PutMapping("/customers/{id}")
+    @PutMapping("/customers/{customerId}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
     public Customer updateCustomerById(@PathVariable Long customerId, Customer customer){
         return customerService.updateCustomerById(customerId, customer);
     }
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/customers/{customerId}")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
     public ResponseEntity<?> deleteCustomerById(@PathVariable Long customerId){
         return customerService.deleteCustomerById(customerId);
