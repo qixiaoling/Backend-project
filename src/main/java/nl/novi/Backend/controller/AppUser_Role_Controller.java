@@ -25,7 +25,7 @@ public class AppUser_Role_Controller {
         return appUser_role_service.getAllAppUsers();
     }
     @PostMapping("/appusers")
-    public List<AppUser> addAppUsers (@RequestBody AppUser appUser){
+    public AppUser addAppUsers (@RequestBody AppUser appUser){
         return appUser_role_service.addAppUsers(appUser);
     }
 }

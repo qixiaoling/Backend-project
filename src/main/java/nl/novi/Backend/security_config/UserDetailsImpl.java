@@ -36,10 +36,11 @@ import java.util.stream.Collectors;
         @Override
         public String getPassword() {
 
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+            /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
             String result = encoder.encode(appUser.getPassword());
 
-            return result;
+            return result;*/
+            return appUser.getPassword();
         }
 
         @Override
