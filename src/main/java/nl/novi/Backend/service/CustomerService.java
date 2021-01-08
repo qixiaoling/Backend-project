@@ -4,6 +4,7 @@ package nl.novi.Backend.service;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,6 +48,15 @@ public class CustomerService {
             return aCustomer;
         }
         return null;
+    }
+
+    public ResponseEntity<?> deleteCustomerById(Long customerId){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            customerRepository.deleteCustomerByCustomerId(customerId);
+            return ResponseEntity.ok().body("The customer is deleted successfully.");
+        }
+        return ResponseEntity.badRequest().body("Please check the customer id again.");
     }
 
 

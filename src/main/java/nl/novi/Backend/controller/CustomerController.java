@@ -3,6 +3,7 @@ package nl.novi.Backend.controller;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,11 @@ public class CustomerController {
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
     public Customer updateCustomerById(@PathVariable Long customerId, Customer customer){
         return customerService.updateCustomerById(customerId, customer);
+    }
+    @DeleteMapping("/customers/{id}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
+    public ResponseEntity<?> deleteCustomerById(@PathVariable Long customerId){
+        return customerService.deleteCustomerById(customerId);
     }
 
 
