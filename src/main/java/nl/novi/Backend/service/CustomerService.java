@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -30,6 +31,24 @@ public class CustomerService {
         customerRepository.save(customer);
         return customers;
     }
+
+    public Customer getCustomerById(Long customerId){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            return possibleCustomer.get();
+        }
+        return null;
+    }
+
+    public Customer updateCustomerById(Long customerId, Customer customer){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            Customer aCustomer = possibleCustomer.get();
+            return aCustomer;
+        }
+        return null;
+    }
+
 
 
 }

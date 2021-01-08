@@ -33,6 +33,16 @@ public class CustomerController {
     public List<Customer> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }
+    @GetMapping("/customers/{id}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
+    public Customer getCustomerById(@PathVariable Long customerId){
+        return customerService.getCustomerById(customerId);
+    }
+    @PutMapping("/customers/{id}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
+    public Customer updateCustomerById(@PathVariable Long customerId, Customer customer){
+        return customerService.updateCustomerById(customerId, customer);
+    }
 
 
 }
