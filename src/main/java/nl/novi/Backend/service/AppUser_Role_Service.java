@@ -56,14 +56,17 @@ public class AppUser_Role_Service {
             return appUsers;
         }
 
-    public AppUser addAppUsers(AppUser appUser) {
-        AppUser freshUser = new AppUser();
+    public ResponseEntity<?> addAppUsers(AppUser appUser) {
+        if(Boolean.TRUE.equals(userRepository.existsByUserName(appUser.getUserName()))){
+            return ResponseEntity.badRequest().body("The username is already exists.");
+        }
 
+        AppUser freshUser = new AppUser();
         freshUser.setUserName(appUser.getUserName());
         freshUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
 
         userRepository.save(freshUser);
-        return freshUser;
+        return ResponseEntity.ok().body("The new user is now added");
     }
 
 
