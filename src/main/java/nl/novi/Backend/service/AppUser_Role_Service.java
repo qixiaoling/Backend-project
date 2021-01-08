@@ -7,6 +7,7 @@ import nl.novi.Backend.repo.RoleRepository;
 import nl.novi.Backend.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,6 +21,8 @@ public class AppUser_Role_Service {
     private RoleRepository roleRepository;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AppUser_Role_Service(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -53,10 +56,17 @@ public class AppUser_Role_Service {
             return appUsers;
         }
 
-    public List<AppUser> addAppUsers(AppUser appUser) {
-        List<AppUser> appUsers = new ArrayList<>();
-        userRepository.save(appUser);
-        return appUsers;
+    public ResponseEntity<?> addAppUsers(AppUser appUser) {
+        if(Boolean.TRUE.equals(userRepository.existsByUserName(appUser.getUserName()))){
+            return ResponseEntity.badRequest().body("The username is already exists.");
+        }
+
+        AppUser freshUser = new AppUser();
+        freshUser.setUserName(appUser.getUserName());
+        freshUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+
+        userRepository.save(freshUser);
+        return ResponseEntity.ok().body("The new user is now added");
     }
 
 
