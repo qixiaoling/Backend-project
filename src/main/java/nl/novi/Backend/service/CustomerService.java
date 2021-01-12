@@ -54,7 +54,7 @@ public class CustomerService {
     public ResponseEntity<?> deleteCustomerById(Long customerId){
         Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
         if(possibleCustomer.isPresent()){
-            customerRepository.deleteByCustomerId(customerId);
+            customerRepository.deleteById(customerId);
             return ResponseEntity.ok().body("The customer is deleted successfully.");
         }
         return ResponseEntity.badRequest().body("Please check the customer id again.");

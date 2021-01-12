@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    @Override
+
      Optional<Customer> findById(Long customerId);
-    ResponseEntity<?> deleteByCustomerId(Long customerId);
 }
