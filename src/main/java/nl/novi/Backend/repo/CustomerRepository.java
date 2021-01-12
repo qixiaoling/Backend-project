@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Override
      Optional<Customer> findById(Long customerId);
-    ResponseEntity<?> deleteCustomerByCustomerId(Long customerId);
+    ResponseEntity<?> deleteByCustomerId(Long customerId);
 }

@@ -7,7 +7,7 @@ INSERT INTO role(role_id, role_name) VALUES (3, 'USER_TRE');
 INSERT INTO role(role_id, role_name) VALUES (4, 'USER_TEC');
 INSERT INTO role(role_id, role_name) VALUES (5, 'ADMIN');
 
-INSERT INTO app_user(user_id, password, user_name)
+/*INSERT INTO app_user(user_id, password, user_name)
 VALUES(1, crypt('password', gen_salt('bf')), 'Elsa');
 INSERT INTO app_user(user_id, password, user_name)
 VALUES(2, crypt('password', gen_salt('bf')), 'Anna');
@@ -29,7 +29,7 @@ INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 1);
 INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 2);
 INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 3);
 INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 4);
-
+*/
 
 
 

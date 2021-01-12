@@ -34,19 +34,19 @@ public class CustomerController {
     public List<Customer> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }
-    @GetMapping("/customers/{customerId}")
+    @GetMapping("/customers/{customerid}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
-    public Customer getCustomerById(@PathVariable Long customerId){
+    public Customer getCustomerById(@PathVariable("customerid") Long customerId){
         return customerService.getCustomerById(customerId);
     }
-    @PutMapping("/customers/{customerId}")
+    @PutMapping("/customers/{customerid}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
-    public Customer updateCustomerById(@PathVariable Long customerId, Customer customer){
+    public Customer updateCustomerById(@PathVariable("customerid") Long customerId, Customer customer){
         return customerService.updateCustomerById(customerId, customer);
     }
-    @DeleteMapping("/customers/{customerId}")
+    @DeleteMapping("/customers/{customerid}")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
-    public ResponseEntity<?> deleteCustomerById(@PathVariable Long customerId){
+    public ResponseEntity<?> deleteCustomerById(@PathVariable("customerid") Long customerId){
         return customerService.deleteCustomerById(customerId);
     }
 
