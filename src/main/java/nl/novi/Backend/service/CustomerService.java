@@ -4,10 +4,13 @@ package nl.novi.Backend.service;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -30,6 +33,33 @@ public class CustomerService {
         customerRepository.save(customer);
         return customers;
     }
+
+    public Customer getCustomerById(Long customerId){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            return possibleCustomer.get();
+        }
+        return null;
+    }
+
+    public Customer updateCustomerById(Long customerId, Customer customer){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            Customer aCustomer = possibleCustomer.get();
+            return aCustomer;
+        }
+        return null;
+    }
+
+    public ResponseEntity<?> deleteCustomerById(Long customerId){
+        Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
+        if(possibleCustomer.isPresent()){
+            customerRepository.deleteById(customerId);
+            return ResponseEntity.ok().body("The customer is deleted successfully.");
+        }
+        return ResponseEntity.badRequest().body("Please check the customer id again.");
+    }
+
 
 
 }
