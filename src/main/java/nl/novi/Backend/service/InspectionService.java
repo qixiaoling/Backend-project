@@ -6,13 +6,12 @@ import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.InspectionRepository;
-import nl.novi.Backend.repo.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,15 +36,17 @@ public class InspectionService {
 
 
     public List<Inspection> getAllInspection(){
-        List<Inspection> inspections = new ArrayList<>();
-        inspectionRepository.findAll().forEach(inspections::add);
-        return inspections;
+         return inspectionRepository.findAll();
+
     }
 
-    public List<Inspection> addInspection(Inspection inspection){
-        List<Inspection> inspections = new ArrayList<>();
-        inspectionRepository.save(inspection);
-        return inspections;
+    public Inspection getInspectionById(Long inspectionNumber){
+        Optional <Inspection> possibleInspeciton = inspectionRepository.findByInspectionNumber(inspectionNumber);
+                if(possibleInspeciton.isPresent()){
+                    return possibleInspeciton.get();
+                }
+                return null;
+
     }
 
     public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
@@ -71,6 +72,35 @@ public class InspectionService {
         }
         return ResponseEntity.badRequest()
                 .body("Error: car does not exist.");
+    }
+
+    public Inspection updateInspectionById(Long inspectionNumber, Inspection aNewInspection){
+        Inspection possibleInspection = getInspectionById(inspectionNumber);
+
+            possibleInspection.setInventoryList(aNewInspection.getInventoryList());
+            possibleInspection.setAgreeToRepair(aNewInspection.getAgreeToRepair());
+            possibleInspection.setInspectionComplete(aNewInspection.getInspectionComplete());
+            possibleInspection.setInspectionDate(aNewInspection.getInspectionDate());
+            possibleInspection.setInspectionFee(aNewInspection.getInspectionFee());
+            possibleInspection.setInspectionResult(aNewInspection.getInspectionResult());
+            possibleInspection.setQuantities(aNewInspection.getQuantities());
+            possibleInspection.setRepairComplete(aNewInspection.getRepairComplete());
+            possibleInspection.setInventoryList(aNewInspection.getInventoryList());
+            possibleInspection.setInvoice(aNewInspection.getInvoice());
+            possibleInspection.setRepairDate(aNewInspection.getRepairDate());
+            inspectionRepository.save(possibleInspection);
+        return possibleInspection;
+    }
+
+    public ResponseEntity<?> deleteInspectionById(Long inspectionNumber){
+       Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+       if(possibleInspection.isPresent()){
+           inspectionRepository.deleteById(inspectionNumber);
+           return ResponseEntity.ok().body("The inspection is deleted sucessfully.");
+       }
+       return  ResponseEntity.badRequest().body("Error, please check the inspection number again.");
+
+
     }
 
 

@@ -66,7 +66,7 @@ public class CarService {
             carRepository.deleteById(numberPlate);
             return ResponseEntity.ok().body("The car is deleted successfully.");
         }
-        return ResponseEntity.badRequest().body("Please check the number plate again.");
+        return ResponseEntity.badRequest().body("Error, please check the number plate again.");
     }
 
 }
