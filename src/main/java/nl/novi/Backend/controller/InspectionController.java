@@ -1,6 +1,7 @@
 package nl.novi.Backend.controller;
 
 import nl.novi.Backend.model.Inspection;
+import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.service.InspectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,14 +40,14 @@ public class InspectionController {
         return inspectionService.addNewInspectionToCar(numberPlate, inspection);
 
     }
-    @PostMapping("/inspections/inventories")
+    /*@PostMapping("/inspections/inventories")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> addInspectionWithItems(@RequestBody Inspection inspection) {
         return inspectionService.addInspectionWithItems(inspection);
-    }
+    }*/
     @PutMapping("/inspections/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public Inspection updateInspectionById(@PathVariable("inspectionNumber") Long inspectionNumber,
+    public ResponseEntity<?> updateInspectionById(@PathVariable("inspectionNumber") Long inspectionNumber,
                                            @RequestBody Inspection aNewInspection){
         return inspectionService.updateInspectionById(inspectionNumber, aNewInspection);
     }
@@ -54,6 +55,13 @@ public class InspectionController {
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> deleteInspectionById(@PathVariable("inspectionNumber") Long inspectionNumber){
         return inspectionService.deleteInspectionById(inspectionNumber);
+    }
+
+    @PostMapping("/inspections/inventories/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> addInventoryToInspection(@PathVariable("inspectionNumber") Long inspectionNumber,
+                                                      @RequestBody List<Inventory> inventoryList){
+        return inspectionService.addInventoryToInspection(inspectionNumber,inventoryList);
     }
 
 

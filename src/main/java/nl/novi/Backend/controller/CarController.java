@@ -38,7 +38,7 @@ public class CarController {
     }
     @PutMapping("/cars/{numberPlate}")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
-    public Car updateCarById(@PathVariable("numberPlate") String numberPlate, @RequestBody Car aNewCar){
+    public ResponseEntity<?> updateCarById(@PathVariable("numberPlate") String numberPlate, @RequestBody Car aNewCar){
         return carService.updateCarById(numberPlate, aNewCar);
     }
     @DeleteMapping("/cars/{numberPlate}")

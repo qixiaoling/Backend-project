@@ -9,24 +9,29 @@ import nl.novi.Backend.repo.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class InspectionService {
-
-    private InspectionRepository inspectionRepository;
-    private CarRepository carRepository;
+    @Autowired
+    private final InspectionRepository inspectionRepository;
     @Autowired
     private InventoryService inventoryService;
-
     @Autowired
-    public void setInspectionRepository(InspectionRepository inspectionRepository){
-        this.inspectionRepository=inspectionRepository;
+    private CarRepository carRepository;
+
+    public InspectionService(InspectionRepository inspectionRepository, CarRepository carRepository) {
+        this.inspectionRepository = inspectionRepository;
+        this.carRepository = carRepository;
     }
+
 
     @Autowired
     public void setCarRepository(CarRepository carRepository) {
@@ -48,8 +53,25 @@ public class InspectionService {
                 return null;
 
     }
+    //add a list to one object, in a ManyToMany relationship, both side already exist in database.
+    public ResponseEntity<?> addInventoryToInspection(Long inspectionNumber, List<Inventory> inventoryList){
+        Optional <Inspection> foundInspection = inspectionRepository.findById(inspectionNumber);
+        if (foundInspection.isPresent()){
+            List<Inventory> newInventoryList = new ArrayList<>();
+            for(Inventory v:inventoryList){
+                Inventory vv = inventoryService.findInventoryById(v.getItemId());
+                newInventoryList.add(vv);
+            }
+            Inspection theInspection = foundInspection.get();
+            theInspection.setInventoryList(newInventoryList);
+            inspectionRepository.save(theInspection);
+            return ResponseEntity.ok().body("Inventory is now saved to the selected inspection.");
+        }
+        return ResponseEntity.badRequest().body("The inspection cannot be found.");
 
-    public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
+    }
+    //add a list to one object, in a ManyToMany relationship, the list is exists in the database, but the one object is brand new.
+   /* public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
         Inspection newInspection = new Inspection();
         newInspection.setInspectionNumber(inspection.getInspectionNumber());
         newInspection.getInventoryList().addAll(
@@ -60,8 +82,8 @@ public class InspectionService {
                 }).collect(Collectors.toList()));
         inspectionRepository.save(newInspection);
         return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
-    }
-
+    }*/
+   //add one object to one object, in a ManyToMany relationship, both side already exist in database.
     public ResponseEntity<?> addNewInspectionToCar(String numberPlate, Inspection inspection) {
 
         Optional<Car> carFromDb = carRepository.findByNumberPlate(numberPlate);
@@ -74,22 +96,24 @@ public class InspectionService {
                 .body("Error: car does not exist.");
     }
 
-    public Inspection updateInspectionById(Long inspectionNumber, Inspection aNewInspection){
-        Inspection possibleInspection = getInspectionById(inspectionNumber);
-
-            possibleInspection.setInventoryList(aNewInspection.getInventoryList());
-            possibleInspection.setAgreeToRepair(aNewInspection.getAgreeToRepair());
-            possibleInspection.setInspectionComplete(aNewInspection.getInspectionComplete());
-            possibleInspection.setInspectionDate(aNewInspection.getInspectionDate());
-            possibleInspection.setInspectionFee(aNewInspection.getInspectionFee());
-            possibleInspection.setInspectionResult(aNewInspection.getInspectionResult());
-            possibleInspection.setQuantities(aNewInspection.getQuantities());
-            possibleInspection.setRepairComplete(aNewInspection.getRepairComplete());
-            possibleInspection.setInventoryList(aNewInspection.getInventoryList());
-            possibleInspection.setInvoice(aNewInspection.getInvoice());
-            possibleInspection.setRepairDate(aNewInspection.getRepairDate());
-            inspectionRepository.save(possibleInspection);
-        return possibleInspection;
+    public ResponseEntity<?> updateInspectionById(Long inspectionNumber, Inspection aNewInspection) {
+        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()) {
+            possibleInspection.get().setInventoryList(aNewInspection.getInventoryList());
+            possibleInspection.get().setAgreeToRepair(aNewInspection.getAgreeToRepair());
+            possibleInspection.get().setInspectionComplete(aNewInspection.getInspectionComplete());
+            possibleInspection.get().setInspectionDate(aNewInspection.getInspectionDate());
+            possibleInspection.get().setInspectionFee(aNewInspection.getInspectionFee());
+            possibleInspection.get().setInspectionResult(aNewInspection.getInspectionResult());
+            possibleInspection.get().setQuantities(aNewInspection.getQuantities());
+            possibleInspection.get().setRepairComplete(aNewInspection.getRepairComplete());
+            possibleInspection.get().setInventoryList(aNewInspection.getInventoryList());
+            possibleInspection.get().setInvoice(aNewInspection.getInvoice());
+            possibleInspection.get().setRepairDate(aNewInspection.getRepairDate());
+            inspectionRepository.save(possibleInspection.get());
+            return ResponseEntity.ok().body("The customer is deleted successfully.");
+        }
+        return ResponseEntity.badRequest().body("Please check the customer id again.");
     }
 
     public ResponseEntity<?> deleteInspectionById(Long inspectionNumber){

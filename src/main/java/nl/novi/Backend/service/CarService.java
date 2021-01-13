@@ -50,14 +50,17 @@ public class CarService {
         return null;
     }
 
-    public Car updateCarById(String numberPlate, Car aNewCar){
-        Car possibleCar = getCarById(numberPlate);
-         possibleCar.setInspections(aNewCar.getInspections());
-         possibleCar.setModel(aNewCar.getModel());
-         possibleCar.setMake(aNewCar.getMake());
-         possibleCar.setNumberPlate(aNewCar.getNumberPlate());
-         carRepository.save(possibleCar);
-         return possibleCar;
+    public ResponseEntity<?> updateCarById(String numberPlate, Car aNewCar){
+        Optional <Car> possibleCar = carRepository.findById(numberPlate);
+        if(possibleCar.isPresent()) {
+            possibleCar.get().setInspections(aNewCar.getInspections());
+            possibleCar.get().setModel(aNewCar.getModel());
+            possibleCar.get().setMake(aNewCar.getMake());
+            possibleCar.get().setNumberPlate(aNewCar.getNumberPlate());
+            carRepository.save(possibleCar.get());
+            return ResponseEntity.ok().body("The car is successfully updated.");
+        }
+        return ResponseEntity.badRequest().body("Error, please check again.");
     }
 
     public ResponseEntity<?> deleteCarById(String numberPlate){
