@@ -42,3 +42,6 @@ VALUES(1, true, true, '2020-12-11', 45, false, 2, true, '2020-12-22', null, null
 
 UPDATE inspection SET car_number_plate='64-TP-TF' WHERE inspection_number=1;*/
 
+/*insert into invoice(customer_id, inspection_number, invoice_paid, invoice_sent, tax_rate, total_fee, total_pre_tax, customer_customer_id)
+values(1, 2, false, true, 21, 150, 195, null)*/
+

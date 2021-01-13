@@ -22,12 +22,13 @@ public class InvoiceController {
         this.invoiceService=invoiceService;
     }
 
-    @PostMapping("/invoices")
+    @GetMapping("/invoices")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public List<Invoice> getAllInvoices(){
         return invoiceService.getAllInvoices();
     }
-    @GetMapping("/invoices")
+
+    @PostMapping("/invoices")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public List<Invoice> addInvoices(Invoice invoice){
        return invoiceService.addInvoices(invoice);

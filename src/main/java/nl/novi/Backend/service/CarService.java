@@ -2,7 +2,9 @@ package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Customer;
+import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.CarRepository;
+import nl.novi.Backend.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,14 @@ import java.util.Optional;
 
 @Service
 public class CarService {
-
-    private CarRepository carRepository;
-
-
     @Autowired
-    public CarService(CarRepository carRepository){
-        this.carRepository=carRepository;
+    private CarRepository carRepository;
+    @Autowired
+    private CustomerService customerService;
+
+    public CarService(CarRepository carRepository, CustomerService customerService) {
+        this.carRepository = carRepository;
+        this.customerService = customerService;
     }
 
     public List<Car> getAllCar(){
@@ -28,10 +31,16 @@ public class CarService {
         return cars;
     }
 
-    public List<Car> addCars(Car car){
-        List<Car> cars = new ArrayList<>();
-        carRepository.save(car);
-        return cars;
+    public ResponseEntity<?> addCarToCustomer(Long customerId, Car car){
+        Customer newCustomer = customerService.getCustomerById(customerId);
+        if(!(newCustomer ==null)){
+            car.setCustomer(newCustomer);
+            carRepository.save(car);
+            return ResponseEntity.ok().body(new MessageResponse("This car is now added."));
+        }
+        return ResponseEntity.badRequest().body("The customer does not exist.");
+
+
     }
     public Car getCarById(String numberPlate ){
         Optional<Car> possibleCar = carRepository.findById(numberPlate);
@@ -41,16 +50,17 @@ public class CarService {
         return null;
     }
 
-    public Car updateCarById(String numberPlate, Car car){
-        Optional<Car> possibleCar = carRepository.findById(numberPlate);
-        if(possibleCar.isPresent()){
-            Car aCar = possibleCar.get();
-            return aCar;
-        }
-        return null;
+    public Car updateCarById(String numberPlate, Car aNewCar){
+        Car possibleCar = getCarById(numberPlate);
+         possibleCar.setInspections(aNewCar.getInspections());
+         possibleCar.setModel(aNewCar.getModel());
+         possibleCar.setMake(aNewCar.getMake());
+         possibleCar.setNumberPlate(aNewCar.getNumberPlate());
+         carRepository.save(possibleCar);
+         return possibleCar;
     }
 
-    public ResponseEntity<?> deleteCustomerById(String numberPlate){
+    public ResponseEntity<?> deleteCarById(String numberPlate){
         Optional<Car> possibleCar = carRepository.findById(numberPlate);
         if(possibleCar.isPresent()){
             carRepository.deleteById(numberPlate);

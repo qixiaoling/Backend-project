@@ -60,12 +60,6 @@ public class InspectionService {
         inspectionRepository.save(newInspection);
         return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
     }
-    /*public ResponseEntity<?> addItemsToInspection(Long inspectionNumber, List<Inventory> inventoryList) {
-        Inspection inspectionFromDB = inspectionRepository.findByInspectionNumber(inspectionNumber);
-        inspectionFromDB.setInventoryList(inventoryList);
-        inspectionRepository.save(inspectionFromDB);
-    return ResponseEntity.ok().body(new MessageResponse("New items are added onto this inspection"));
-    }*/
 
     public ResponseEntity<?> addNewInspectionToCar(String numberPlate, Inspection inspection) {
 

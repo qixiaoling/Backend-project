@@ -12,4 +12,5 @@ public interface CarRepository extends JpaRepository<Car, String> {
     //Boolean existsByNumberPlate(String numberPlate);
     Optional<Car> findByNumberPlate(String numberPlate);
 
+
 }

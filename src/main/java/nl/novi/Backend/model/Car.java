@@ -13,7 +13,7 @@ public class Car {
     private String make;
     @Column
     private String model;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "car")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
 
 
