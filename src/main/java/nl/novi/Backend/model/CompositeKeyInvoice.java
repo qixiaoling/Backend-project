@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 @Embeddable
-@EqualsAndHashCode
 public class CompositeKeyInvoice  implements Serializable {
     @Column
     private Long customerId;

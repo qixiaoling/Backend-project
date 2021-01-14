@@ -1,5 +1,6 @@
 package nl.novi.Backend.service;
 
+import nl.novi.Backend.model.CompositeKeyInvoice;
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.payload.response.MessageResponse;
@@ -35,7 +36,7 @@ public class InvoiceService {
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
         Invoice inv = new Invoice();
-        inv.setInvoicePK(invoice.getInvoicePK());
+        inv.setInvoicePK(new CompositeKeyInvoice(invoice.getInvoicePK().getCustomerId(), invoice.getInvoicePK().getInspectionNumber()));
         inv.setInvoicePaid(invoice.getInvoicePaid());
         inv.setInvoiceSent(invoice.getInvoiceSent());
         inv.setTaxRate(invoice.getTaxRate());

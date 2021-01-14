@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@IdClass(CompositeKeyInvoice.class)
 public class Invoice {
     @EmbeddedId
     private CompositeKeyInvoice invoicePK;
