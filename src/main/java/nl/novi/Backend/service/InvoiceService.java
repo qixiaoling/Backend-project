@@ -32,13 +32,29 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
     public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
-        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if(possibleInspection.isPresent()){
+        Invoice inv = new Invoice();
+        inv.setInvoicePK(invoice.getInvoicePK());
+        inv.setInvoicePaid(invoice.getInvoicePaid());
+        inv.setInvoiceSent(invoice.getInvoiceSent());
+        inv.setTaxRate(invoice.getTaxRate());
+        inv.setTotalFee(invoice.getTotalFee());
+        inv.setTotalPreTax(invoice.getTotalPreTax());
+        inv.setInspection(possibleInspection.get());
+        invoiceRepository.save(inv);
+        return ResponseEntity.ok().body( new MessageResponse("The invoice is now added."));
+        }
+        return ResponseEntity.badRequest().body("Error, inspection does not exsits.");
+
+
+        /*Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
             invoice.setInspection(possibleInspection.get());
             invoiceRepository.save(invoice);
             return ResponseEntity.ok().body(new MessageResponse("Invoice is now added to this inspection."));
         }
-        return ResponseEntity.badRequest().body(" The inspection cannot be found.");
+        return ResponseEntity.badRequest().body(" The inspection cannot be found.");*/
 
     }
 

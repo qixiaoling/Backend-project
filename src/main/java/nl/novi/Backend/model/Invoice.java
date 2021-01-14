@@ -6,10 +6,8 @@ import javax.persistence.*;
 @Table
 @IdClass(CompositeKeyInvoice.class)
 public class Invoice {
-    @Id
-    private Long customerId;
-    @Id
-    private Long inspectionNumber;
+    @EmbeddedId
+    private CompositeKeyInvoice invoicePK;
     @Column
     private Double totalPreTax;
     @Column
@@ -27,7 +25,28 @@ public class Invoice {
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Inspection inspection;
 
+    public Invoice() {
+    }
 
+    public Invoice(CompositeKeyInvoice invoicePK, Double totalPreTax, int taxRate, Double totalFee,
+                   Boolean invoiceSent, Boolean invoicePaid, Customer customer, Inspection inspection) {
+        this.invoicePK = invoicePK;
+        this.totalPreTax = totalPreTax;
+        this.taxRate = taxRate;
+        this.totalFee = totalFee;
+        this.invoiceSent = invoiceSent;
+        this.invoicePaid = invoicePaid;
+        this.customer = customer;
+        this.inspection = inspection;
+    }
+
+    public CompositeKeyInvoice getInvoicePK() {
+        return invoicePK;
+    }
+
+    public void setInvoicePK(CompositeKeyInvoice invoicePK) {
+        this.invoicePK = invoicePK;
+    }
 
     public Double getTotalPreTax() {
         return totalPreTax;
@@ -84,5 +103,4 @@ public class Invoice {
     public void setInspection(Inspection inspection) {
         this.inspection = inspection;
     }
-
 }
