@@ -22,7 +22,7 @@ public class Invoice {
     private Boolean invoicePaid;
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
-    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "invoice")
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Inspection inspection;
 
     public Long getCustomerId() {

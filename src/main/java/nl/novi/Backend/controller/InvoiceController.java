@@ -3,11 +3,10 @@ package nl.novi.Backend.controller;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.mongo.ReactiveStreamsMongoClientDependsOnBeanFactoryPostProcessor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +27,11 @@ public class InvoiceController {
         return invoiceService.getAllInvoices();
     }
 
-    @PostMapping("/invoices")
+    @PostMapping("/invoices/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public List<Invoice> addInvoices(Invoice invoice){
-       return invoiceService.addInvoices(invoice);
+    public ResponseEntity<?> addInvoicesToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
+                                                     @RequestBody Invoice invoice){
+
+        return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
     }
 }
