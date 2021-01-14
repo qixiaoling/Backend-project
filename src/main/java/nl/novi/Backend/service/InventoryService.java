@@ -27,7 +27,10 @@ public class InventoryService {
     public List<Inventory> getAllInventories(){
         return inventoryRepository.findAll();
     }
-
+    public Inventory addInventory(Inventory inventory){
+        inventoryRepository.save(inventory);
+        return inventory;
+    }
 
     public Inventory findInventoryById(Long itemId) {
         Optional<Inventory> possibleInventory = inventoryRepository.findByItemId(itemId);
@@ -36,7 +39,7 @@ public class InventoryService {
         }
         return null;
     }
-    public ResponseEntity<?> updateInventory(Long itemId, Inventory inventory){
+    public ResponseEntity<?> updateInventoryById(Long itemId, Inventory inventory){
         Optional <Inventory> possibleInventory = inventoryRepository.findById(itemId);
         if(possibleInventory.isPresent()){
             possibleInventory.get().setItemDescription(inventory.getItemDescription());
@@ -47,6 +50,15 @@ public class InventoryService {
             return ResponseEntity.ok().body("The inventory is successfully updated.");
         }
         return ResponseEntity.badRequest().body("Error, please check again.");
+    }
+    
+    public ResponseEntity<?> deleteInventoryById(Long itemId){
+        Optional <Inventory> possibleInventory = inventoryRepository.findById(itemId);
+        if(possibleInventory.isPresent()){
+            inventoryRepository.deleteById(itemId);
+            return ResponseEntity.ok().body("The inventory is deleted sucessfully.");
+        }
+        return  ResponseEntity.badRequest().body("Error, please check the item ID again.");
     }
 
 

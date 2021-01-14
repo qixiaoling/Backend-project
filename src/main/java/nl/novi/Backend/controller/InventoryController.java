@@ -18,6 +18,12 @@ public class InventoryController {
     public InventoryController(InventoryService inventoryService){
         this.inventoryService=inventoryService;
     }
+    @PostMapping("/inventories")
+    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
+    public Inventory addInventory(Inventory inventory){
+        return inventoryService.addInventory(inventory);
+    }
+
     @GetMapping("/inventories")
     @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
     public List<Inventory> getAllInventories(){
@@ -35,7 +41,11 @@ public class InventoryController {
     @PutMapping("/inventories/{itemId}")
     @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
     public ResponseEntity<?> updateInventoryById(@PathVariable("itemId") Long itemId, @RequestBody Inventory inventory){
-        return inventoryService.updateInventory(itemId, inventory);
+        return inventoryService.updateInventoryById(itemId, inventory);
     }
-
+    @DeleteMapping("/inventories/{itemId}")
+    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
+    public ResponseEntity<?> deleteInventoryById(@PathVariable("itemId") Long itemId){
+        return inventoryService.deleteInventoryById(itemId);
+    }
 }
