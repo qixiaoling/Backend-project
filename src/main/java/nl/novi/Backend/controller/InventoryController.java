@@ -20,7 +20,7 @@ public class InventoryController {
     }
     @PostMapping("/inventories")
     @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
-    public List <Inventory> addInventory(Inventory inventory){
+    public List <Inventory> addInventory(@RequestBody Inventory inventory){
         return inventoryService.addInventory(inventory);
     }
 

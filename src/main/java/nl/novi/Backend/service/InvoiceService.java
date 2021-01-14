@@ -26,7 +26,9 @@ public class InvoiceService {
     public InvoiceService(InvoiceRepository invoiceRepository){
         this.invoiceRepository=invoiceRepository;
     }
+
     public List<Invoice> getAllInvoices(){
+
         return invoiceRepository.findAll();
     }
     public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){

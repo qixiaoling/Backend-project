@@ -20,26 +20,14 @@ public class Invoice {
     private Boolean invoiceSent;
     @Column
     private Boolean invoicePaid;
+
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
+
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Inspection inspection;
 
-    public Long getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Long getInspectionNumber() {
-        return inspectionNumber;
-    }
-
-    public void setInspectionNumber(Long inspectionNumber) {
-        this.inspectionNumber = inspectionNumber;
-    }
 
     public Double getTotalPreTax() {
         return totalPreTax;
