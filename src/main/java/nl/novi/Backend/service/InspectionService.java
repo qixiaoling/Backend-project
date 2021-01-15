@@ -111,7 +111,7 @@ public class InspectionService {
             possibleInspection.get().setInvoice(aNewInspection.getInvoice());
             possibleInspection.get().setRepairDate(aNewInspection.getRepairDate());
             inspectionRepository.save(possibleInspection.get());
-            return ResponseEntity.ok().body("The customer is deleted successfully.");
+            return ResponseEntity.ok().body("The customer is updated successfully.");
         }
         return ResponseEntity.badRequest().body("Please check the customer id again.");
     }

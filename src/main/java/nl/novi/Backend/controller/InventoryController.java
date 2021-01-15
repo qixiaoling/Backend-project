@@ -31,9 +31,9 @@ public class InventoryController {
     }
 
 
-    @PostMapping("/inventories/{inspectionNumber}")
+    @GetMapping("/inventories/{itemId}")
     @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
-    public Inventory findInventoryById(Long itemId){
+    public Inventory findInventoryById(@PathVariable("itemId") Long itemId){
 
         return inventoryService.findInventoryById(itemId);
     }

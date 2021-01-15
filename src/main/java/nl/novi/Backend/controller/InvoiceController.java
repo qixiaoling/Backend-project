@@ -1,5 +1,6 @@
 package nl.novi.Backend.controller;
 
+import nl.novi.Backend.model.CompositeKeyInvoice;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class InvoiceController {
                                                      @RequestBody Invoice invoice){
 
         return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
+    }
+    @GetMapping("/invoices/{customerId, inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    public Invoice getInvoiceById(@PathVariable("customerId") CompositeKeyInvoice invoicePK, ){
+        return invoiceService.getInvoiceById(invoicePK);
     }
 }

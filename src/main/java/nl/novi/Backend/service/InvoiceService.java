@@ -58,6 +58,13 @@ public class InvoiceService {
         return ResponseEntity.badRequest().body(" The inspection cannot be found.");*/
 
     }
+    public Invoice getInvoiceById(CompositeKeyInvoice invoicePK){
+        Optional <Invoice> possibleInvoice = invoiceRepository.findById(invoicePK);
+        if(possibleInvoice.isPresent()){
+            return possibleInvoice.get();
+        }
+        return null;
+    }
 
 
     }
