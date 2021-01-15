@@ -10,7 +10,7 @@ public class Invoice {
     @Column
     private Double totalPreTax;
     @Column
-    private int taxRate;
+    private Integer taxRate;
     @Column
     private Double totalFee;
     @Column
@@ -55,7 +55,7 @@ public class Invoice {
         this.totalPreTax = totalPreTax;
     }
 
-    public int getTaxRate() {
+    public Integer getTaxRate() {
         return taxRate;
     }
 
