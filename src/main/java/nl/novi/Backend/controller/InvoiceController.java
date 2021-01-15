@@ -35,9 +35,9 @@ public class InvoiceController {
 
         return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
     }
-    @GetMapping("/invoices/{customerId, inspectionNumber}")
+    @GetMapping("/invoices/{customerId/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public Invoice getInvoiceById(@PathVariable("customerId") CompositeKeyInvoice invoicePK, ){
-        return invoiceService.getInvoiceById(invoicePK);
+    public Invoice getInvoiceById( @PathVariable ("customerId") Long customerId, @PathVariable("inspectionNumber") Long inspectionNumber ){
+        return invoiceService.getInvoiceById(customerId, inspectionNumber);
     }
 }
