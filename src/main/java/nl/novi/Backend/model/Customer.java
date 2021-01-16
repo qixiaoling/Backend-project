@@ -21,10 +21,8 @@ public class Customer {
     private Gender gender;
     @Column
     private String Email;
-    @Column
-    private String numberPlate;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private Car car;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private List<Invoice> invoiceList = new ArrayList<>();
@@ -37,14 +35,14 @@ public class Customer {
     public Customer(@JsonProperty("firstName") String firstName,
                     @JsonProperty("lastName") String lastName,
                     @JsonProperty("gender") Gender gender,
-                    @JsonProperty("Email") String EmaiL,
-                    @JsonProperty("numberPlate") String numberPlate){
+                    @JsonProperty("Email") String EmaiL)
+                    {
 
         this.firstName=firstName;
         this.lastName=lastName;
         this.gender=gender;
         this.Email=Email;
-        this.numberPlate=numberPlate;
+
 
 
     }
@@ -89,13 +87,6 @@ public class Customer {
         Email = email;
     }
 
-    public String getNumberPlate() {
-        return numberPlate;
-    }
-
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
-    }
 
     public Car getCar() {
         return car;

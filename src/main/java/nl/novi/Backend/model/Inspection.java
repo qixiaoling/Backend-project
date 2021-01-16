@@ -44,7 +44,7 @@ public class Inspection {
     )
     private List<Inventory> inventoryList = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inspection")
     private Invoice invoice;
 
 

@@ -4,41 +4,47 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@IdClass(CompositeKeyInvoice.class)
 public class Invoice {
-    @Id
-    private Long customerId;
-    @Id
-    private Long inspectionNumber;
+    @EmbeddedId
+    private CompositeKeyInvoice invoicePK;
     @Column
     private Double totalPreTax;
     @Column
-    private int taxRate;
+    private Integer taxRate;
     @Column
     private Double totalFee;
     @Column
     private Boolean invoiceSent;
     @Column
     private Boolean invoicePaid;
+
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Customer customer;
-    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "invoice")
+
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Inspection inspection;
 
-    public Long getCustomerId() {
-        return customerId;
+    public Invoice() {
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public Invoice(CompositeKeyInvoice invoicePK, Double totalPreTax, int taxRate, Double totalFee,
+                   Boolean invoiceSent, Boolean invoicePaid, Customer customer, Inspection inspection) {
+        this.invoicePK = invoicePK;
+        this.totalPreTax = totalPreTax;
+        this.taxRate = taxRate;
+        this.totalFee = totalFee;
+        this.invoiceSent = invoiceSent;
+        this.invoicePaid = invoicePaid;
+        this.customer = customer;
+        this.inspection = inspection;
     }
 
-    public Long getInspectionNumber() {
-        return inspectionNumber;
+    public CompositeKeyInvoice getInvoicePK() {
+        return invoicePK;
     }
 
-    public void setInspectionNumber(Long inspectionNumber) {
-        this.inspectionNumber = inspectionNumber;
+    public void setInvoicePK(CompositeKeyInvoice invoicePK) {
+        this.invoicePK = invoicePK;
     }
 
     public Double getTotalPreTax() {
@@ -49,7 +55,7 @@ public class Invoice {
         this.totalPreTax = totalPreTax;
     }
 
-    public int getTaxRate() {
+    public Integer getTaxRate() {
         return taxRate;
     }
 
@@ -96,5 +102,4 @@ public class Invoice {
     public void setInspection(Inspection inspection) {
         this.inspection = inspection;
     }
-
 }

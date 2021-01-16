@@ -4,18 +4,16 @@ import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.service.InspectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/")
 public class InspectionController {
 
-    private InspectionService inspectionService;
+    private final InspectionService inspectionService;
     @Autowired
     public InspectionController(InspectionService inspectionService){
 
@@ -26,24 +24,44 @@ public class InspectionController {
     public List<Inspection> getAllInspection(){
         return inspectionService.getAllInspection();
     }
-    @PostMapping("/inspections")
+
+    @GetMapping("/inspections/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public List<Inspection> addInspection(@RequestBody Inspection inspection){
-        return inspectionService.addInspection(inspection);
+    public Inspection getInspectionById(@PathVariable ("inspectionNumber") Long inspectionNumber){
+        return inspectionService.getInspectionById(inspectionNumber);
     }
+
 
     @PostMapping("/inspections/{numberPlate}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public ResponseEntity<?> addNewInspectionToCar(@PathVariable String numberPlate,
+    public ResponseEntity<?> addNewInspectionToCar(@PathVariable ("numberPlate") String numberPlate,
                                                    @RequestBody Inspection inspection)  {
 
         return inspectionService.addNewInspectionToCar(numberPlate, inspection);
 
     }
-    @PostMapping("/inspections/inventories")
+    /*@PostMapping("/inspections/inventories")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> addInspectionWithItems(@RequestBody Inspection inspection) {
         return inspectionService.addInspectionWithItems(inspection);
+    }*/
+    @PutMapping("/inspections/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> updateInspectionById(@PathVariable("inspectionNumber") Long inspectionNumber,
+                                           @RequestBody Inspection aNewInspection){
+        return inspectionService.updateInspectionById(inspectionNumber, aNewInspection);
+    }
+    @DeleteMapping("/inspections/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> deleteInspectionById(@PathVariable("inspectionNumber") Long inspectionNumber){
+        return inspectionService.deleteInspectionById(inspectionNumber);
+    }
+
+    @PostMapping("/inspections/inventories/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> addInventoryToInspection(@PathVariable("inspectionNumber") Long inspectionNumber,
+                                                      @RequestBody List<Inventory> inventoryList){
+        return inspectionService.addInventoryToInspection(inspectionNumber,inventoryList);
     }
 
 

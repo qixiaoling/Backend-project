@@ -42,13 +42,17 @@ public class CustomerService {
         return null;
     }
 
-    public Customer updateCustomerById(Long customerId, Customer customer){
+    public ResponseEntity<?> updateCustomerById(Long customerId, Customer customer){
         Optional<Customer> possibleCustomer = customerRepository.findById(customerId);
         if(possibleCustomer.isPresent()){
-            Customer aCustomer = possibleCustomer.get();
-            return aCustomer;
+            possibleCustomer.get().setFirstName(customer.getFirstName());
+            possibleCustomer.get().setLastName(customer.getLastName());
+            possibleCustomer.get().setGender(customer.getGender());
+            possibleCustomer.get().setEmail(customer.getEmail());
+            return ResponseEntity.ok().body("The inventory is successfully updated.");
+
         }
-        return null;
+        return ResponseEntity.badRequest().body("Error, please check again.");
     }
 
     public ResponseEntity<?> deleteCustomerById(Long customerId){

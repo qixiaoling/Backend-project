@@ -37,8 +37,12 @@ INSERT INTO app_user_roles(app_users_user_id, roles_role_id) VALUES(5, 4);
 
 /*INSERT INTO car(number_plate, make, model ) VALUES('64-TP-TF', 'BMW', '1Serie');
 
-INSERT INTO inspection(inspection_number, agree_to_repair, inspection_complete, inspection_date, inspection_fee, inspection_result, quantities, repair_complete, repair_date, car_number_plate, invoice_customer_id, invoice_inspection_number)
-VALUES(1, true, true, '2020-12-11', 45, false, 2, true, '2020-12-22', null, null, null );
+INSERT INTO inspection(inspection_number, agree_to_repair)
+VALUES(2, true);
 
-UPDATE inspection SET car_number_plate='64-TP-TF' WHERE inspection_number=1;*/
+UPDATE inspection SET car_number_plate='64-TP-TF' WHERE inspection_number=1;
+
+insert into invoice(customer_id, inspection_number, invoice_paid, invoice_sent, tax_rate, total_fee, total_pre_tax, inspection_inspection_number)
+values(1, 2, false, true, 21, 150, 195, 2)*/
+
 

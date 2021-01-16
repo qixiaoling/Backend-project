@@ -1,35 +1,54 @@
 package nl.novi.Backend.controller;
 
+
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/")
 public class InvoiceController {
-    private InvoiceService invoiceService;
+    private final InvoiceService invoiceService;
 
     @Autowired
     public InvoiceController(InvoiceService invoiceService){
         this.invoiceService=invoiceService;
     }
 
-    @PostMapping("/invoices")
+    @GetMapping("/invoices")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public List<Invoice> getAllInvoices(){
         return invoiceService.getAllInvoices();
     }
-    @GetMapping("/invoices")
+
+    @PostMapping("/invoices/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public List<Invoice> addInvoices(Invoice invoice){
-       return invoiceService.addInvoices(invoice);
+    public ResponseEntity<?> addInvoicesToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
+                                                     @RequestBody Invoice invoice){
+
+        return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
+    }
+    @GetMapping("/invoices/{customerId}/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    public Invoice getInvoiceById( @PathVariable ("customerId") Long customerId,
+                                   @PathVariable("inspectionNumber") Long inspectionNumber ){
+        return invoiceService.getInvoiceById(customerId, inspectionNumber);
+    }
+    @PutMapping("/invoices/{customerId}/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    public ResponseEntity<?> updateInvoiceById(@PathVariable ("customerId") Long customerId,
+                                               @PathVariable("inspectionNumber") Long inspectionNumber,
+                                               @RequestBody Invoice invoice){
+        return invoiceService.updateInvoiceById(customerId, inspectionNumber, invoice);
+    }
+    @DeleteMapping("/invoices/{customerId}/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    public ResponseEntity<?> deleteInvoiceById(@PathVariable ("customerId") Long customerId,
+                                               @PathVariable("inspectionNumber") Long inspectionNumber ){
+        return invoiceService.deleteInvoiceById(customerId, inspectionNumber);
     }
 }
