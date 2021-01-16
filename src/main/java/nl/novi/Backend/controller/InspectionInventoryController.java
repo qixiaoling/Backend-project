@@ -1,5 +1,6 @@
 package nl.novi.Backend.controller;
 
+import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.InspectionInventory;
 import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.service.InspectionInventoryService;
@@ -10,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.templateresolver.FileTemplateResolver;
 
-import java.util.List;
 @RestController("/")
 public class InspectionInventoryController {
 
@@ -41,6 +40,12 @@ public class InspectionInventoryController {
                                                                   @PathVariable("itemId") Long itemId,
                                                                   @RequestBody InspectionInventory inspectionInventory) {
         return inspectionInventoryService.addInventoryToInspection(inspectionNumber, itemId, inspectionInventory );
+    }
+
+    @PostMapping("/addinventories")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> addInventory(@RequestBody Inspection inspection, @RequestBody Inventory inventory){
+        return inspectionInventoryService.addInventory(inspection, inventory);
     }
 
 

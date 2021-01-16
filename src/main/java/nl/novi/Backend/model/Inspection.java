@@ -146,11 +146,5 @@ public class Inspection {
         this.invoice = invoice;
     }
 
-    public void addInventory(Inventory inventory){
-        InspectionInventory inspectionInventory = new InspectionInventory(this, inventory);
-        inventoryNewList.add(inspectionInventory);
-        inventory.getInspectionNewList().add(inspectionInventory);
-
-    }
 
 }

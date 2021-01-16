@@ -1,6 +1,5 @@
 package nl.novi.Backend.service;
 
-import net.bytebuddy.asm.Advice;
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.InspectionInventory;
 import nl.novi.Backend.model.Inventory;
@@ -63,5 +62,13 @@ public class InspectionInventoryService {
         inspectionInventoryRepository.save(secondOne);
         return ResponseEntity.ok().body(new MessageResponse("Inventory is now added to the inspection."));
     }
+
+    public ResponseEntity<?> addInventory(Inspection inspection, Inventory inventory){
+        InspectionInventory inspectionInventory = new InspectionInventory(inspection, inventory);
+        inspection.getInventoryNewList().add(inspectionInventory);
+        inventory.getInspectionNewList().add(inspectionInventory);
+        return ResponseEntity.ok().body("This inventory is now added into this inspection.");
+    }
+
 
 }

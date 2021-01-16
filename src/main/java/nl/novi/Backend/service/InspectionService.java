@@ -100,7 +100,6 @@ public class InspectionService {
     public ResponseEntity<?> updateInspectionById(Long inspectionNumber, Inspection aNewInspection) {
         Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if (possibleInspection.isPresent()) {
-            possibleInspection.get().setInspectionInventoryList(aNewInspection.getInspectionInventoryList());
             possibleInspection.get().setAgreeToRepair(aNewInspection.getAgreeToRepair());
             possibleInspection.get().setInspectionComplete(aNewInspection.getInspectionComplete());
             possibleInspection.get().setInspectionDate(aNewInspection.getInspectionDate());
