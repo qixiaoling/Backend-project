@@ -32,7 +32,7 @@ public class Inspection {
     private Car car;
 
     @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "inspection")
-    private List<InspectionInventory> inspectionInventoryList = new ArrayList<>();
+    private List<InspectionInventory> inventoryNewList = new ArrayList<>();
 
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inspection")
     private Invoice invoice;
@@ -42,7 +42,7 @@ public class Inspection {
 
     public Inspection(Date inspectionDate, Boolean inspectionResult, Boolean inspectionComplete,
                       Double inspectionFee, Boolean agreeToRepair, Date repairDate, Boolean repairComplete, Car car,
-                      List<InspectionInventory> inspectionInventoryList, Invoice invoice) {
+                      List<InspectionInventory> inventoryNewList, Invoice invoice) {
         this.inspectionDate = inspectionDate;
         this.inspectionResult = inspectionResult;
         this.inspectionComplete = inspectionComplete;
@@ -51,7 +51,7 @@ public class Inspection {
         this.repairDate = repairDate;
         this.repairComplete = repairComplete;
         this.car = car;
-        this.inspectionInventoryList = inspectionInventoryList;
+        this.inventoryNewList = inventoryNewList;
         this.invoice = invoice;
     }
 
@@ -127,12 +127,12 @@ public class Inspection {
         this.car = car;
     }
 
-    public List<InspectionInventory> getInspectionInventoryList() {
-        return inspectionInventoryList;
+    public List<InspectionInventory> getInventoryNewList() {
+        return inventoryNewList;
     }
 
-    public void setInspectionInventoryList(List<InspectionInventory> inspectionInventoryList) {
-        this.inspectionInventoryList = inspectionInventoryList;
+    public void setInventoryNewList(List<InspectionInventory> inventoryNewList) {
+        this.inventoryNewList = inventoryNewList;
     }
 
     public Invoice getInvoice() {

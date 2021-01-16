@@ -33,10 +33,19 @@ public class Inventory {
     private int availableUnit;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "inventory", orphanRemoval = true)
-    private List<InspectionInventory> inspectionInventoryList = new ArrayList<>();
+    private List<InspectionInventory> inspectionNewList = new ArrayList<>();
 
     public Inventory(){
 
+    }
+
+    public Inventory(String itemDescription, Double pricePerUnit, String manufactor, int availableUnit,
+                     List<InspectionInventory> inspectionNewList) {
+        this.itemDescription = itemDescription;
+        this.pricePerUnit = pricePerUnit;
+        this.manufactor = manufactor;
+        this.availableUnit = availableUnit;
+        this.inspectionNewList = inspectionNewList;
     }
 
     public Inventory(String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
@@ -87,11 +96,11 @@ public class Inventory {
         this.availableUnit = availableUnit;
     }
 
-    public List<InspectionInventory> getInspectionInventoryList() {
-        return inspectionInventoryList;
+    public List<InspectionInventory> getInspectionNewList() {
+        return inspectionNewList;
     }
 
-    public void setInspectionInventoryList(List<InspectionInventory> inspectionInventoryList) {
-        this.inspectionInventoryList = inspectionInventoryList;
+    public void setInspectionNewList(List<InspectionInventory> inspectionNewList) {
+        this.inspectionNewList = inspectionNewList;
     }
 }
