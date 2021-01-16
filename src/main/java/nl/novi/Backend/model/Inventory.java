@@ -48,14 +48,6 @@ public class Inventory {
         this.inspectionNewList = inspectionNewList;
     }
 
-    public Inventory(String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
-        this.itemDescription = itemDescription;
-        this.pricePerUnit = pricePerUnit;
-        this.manufactor = manufactor;
-        this.availableUnit = availableUnit;
-
-    }
-
     public Long getItemId() {
         return itemId;
     }
@@ -103,4 +95,6 @@ public class Inventory {
     public void setInspectionNewList(List<InspectionInventory> inspectionNewList) {
         this.inspectionNewList = inspectionNewList;
     }
+
+
 }

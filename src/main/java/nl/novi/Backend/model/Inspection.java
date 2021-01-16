@@ -1,12 +1,15 @@
 package nl.novi.Backend.model;
 
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.*;
 import java.util.List;
 
 @Entity
 @Table
+@EqualsAndHashCode
 public class Inspection {
 @Id
 @GeneratedValue
@@ -142,4 +145,12 @@ public class Inspection {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
+    public void addInventory(Inventory inventory){
+        InspectionInventory inspectionInventory = new InspectionInventory(this, inventory);
+        inventoryNewList.add(inspectionInventory);
+        inventory.getInspectionNewList().add(inspectionInventory);
+
+    }
+
 }
