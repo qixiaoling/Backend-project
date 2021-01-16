@@ -22,31 +22,7 @@ public class InspectionInventoryController {
         this.inspectionInventoryService = inspectionInventoryService;
     }
 
-    @PostMapping("/inspectionsinventories/addtoinspections/{inspectionNumber}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public InspectionInventory addInspectionInventoryToInspection(@PathVariable("inspectionNumber") Long inspectionNumber,
-                                                      @RequestBody InspectionInventory inspectionInventory) {
-        return inspectionInventoryService.addInspectionInventoryToInspection(inspectionNumber, inspectionInventory );
-    }
-    @PostMapping("/inspectionsinventories/addtoinventories/{itemid}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public InspectionInventory addInspectionInventoryToInventory(@PathVariable("itemid") Long itemId,
-                                                                  @RequestBody InspectionInventory inspectionInventory) {
-        return inspectionInventoryService.addInspectionInventoryToInventory(itemId, inspectionInventory );
-    }
-    @PostMapping("/inspectionsinventories/{inspectionNumber}/{itemId}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public ResponseEntity<?> addInventoryToInspection(@PathVariable("inspectionNumber") Long inspectionNumber,
-                                                                  @PathVariable("itemId") Long itemId,
-                                                                  @RequestBody InspectionInventory inspectionInventory) {
-        return inspectionInventoryService.addInventoryToInspection(inspectionNumber, itemId, inspectionInventory );
-    }
 
-    @PostMapping("/addinventories")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public ResponseEntity<?> addInventory(@RequestBody Inspection inspection, @RequestBody Inventory inventory){
-        return inspectionInventoryService.addInventory(inspection, inventory);
-    }
     @PostMapping("/addinginventories/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> addingInventory(@PathVariable("inspectionNumber") Long inspectionNumber,
