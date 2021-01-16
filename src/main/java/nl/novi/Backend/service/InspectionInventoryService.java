@@ -2,6 +2,7 @@ package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.InspectionInventory;
+import nl.novi.Backend.model.InspectionInventoryId;
 import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.InspectionInventoryRepository;
@@ -48,6 +49,17 @@ public class InspectionInventoryService {
         return ResponseEntity.ok().body("This inventory is now added into this inspection.");
     }
         return ResponseEntity.badRequest().body("Error, please check inspection number again.");
+    }
+
+    public InspectionInventory addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){
+        Optional <InspectionInventory> possibleInspectionInventory =
+                inspectionInventoryRepository.findById(new InspectionInventoryId(inspectionNumber, itemId));
+        if(possibleInspectionInventory.isPresent()){
+            possibleInspectionInventory.get().setInventoryQuantities(inspectionInventory.getInventoryQuantities());
+            inspectionInventoryRepository.save(possibleInspectionInventory.get());
+            return possibleInspectionInventory.get();
+        }
+        return null;
     }
 
 

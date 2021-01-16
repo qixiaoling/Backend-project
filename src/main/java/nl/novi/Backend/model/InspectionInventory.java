@@ -11,7 +11,7 @@ public class InspectionInventory {
     @EmbeddedId
     private InspectionInventoryId id;
     @Column
-    private Integer InventoryQuantities;
+    private Integer inventoryQuantities;
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("inspectionid")
     private Inspection inspection;
@@ -37,11 +37,11 @@ public class InspectionInventory {
     }
 
     public Integer getInventoryQuantities() {
-        return InventoryQuantities;
+        return inventoryQuantities;
     }
 
     public void setInventoryQuantities(Integer inventoryQuantities) {
-        InventoryQuantities = inventoryQuantities;
+        this.inventoryQuantities = inventoryQuantities;
     }
 
     public Inspection getInspection() {
