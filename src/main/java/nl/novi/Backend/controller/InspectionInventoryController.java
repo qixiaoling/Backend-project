@@ -47,6 +47,12 @@ public class InspectionInventoryController {
     public ResponseEntity<?> addInventory(@RequestBody Inspection inspection, @RequestBody Inventory inventory){
         return inspectionInventoryService.addInventory(inspection, inventory);
     }
+    @PostMapping("/addinginventories/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> addingInventory(@PathVariable("inspectionNumber") Long inspectionNumber,
+                                             @RequestBody Inventory inventory){
+        return inspectionInventoryService.addingInventory(inspectionNumber, inventory);
+    }
 
 
 }

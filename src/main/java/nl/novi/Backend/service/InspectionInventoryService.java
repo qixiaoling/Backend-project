@@ -69,6 +69,18 @@ public class InspectionInventoryService {
         inventory.getInspectionNewList().add(inspectionInventory);
         return ResponseEntity.ok().body("This inventory is now added into this inspection.");
     }
+    public ResponseEntity<?> addingInventory(Long inspectionNumber, Inventory inventory){
+        Optional <Inspection> inspection = inspectionRepository.findById(inspectionNumber);
+        if(inspection.isPresent()){
+        InspectionInventory inspectionInventory = new InspectionInventory(inspection.get(), inventory);
+        inspection.get().getInventoryNewList().add(inspectionInventory);
+        inventory.getInspectionNewList().add(inspectionInventory);
+        inspectionRepository.save(inspection.get());
+        inventoryRepository.save(inventory);
+        return ResponseEntity.ok().body("This inventory is now added into this inspection.");
+    }
+        return ResponseEntity.badRequest().body("Error, please check inspection number again.");
+    }
 
 
 }
