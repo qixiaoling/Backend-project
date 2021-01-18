@@ -21,7 +21,7 @@ public class Inspection {
     @Column
     private Boolean inspectionComplete;
     @Column
-    private Double inspectionFee;
+    private Double inspectionFee = 45.00;
     @Column
     private Boolean agreeToRepair;
     @Column

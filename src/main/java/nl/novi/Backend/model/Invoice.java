@@ -11,7 +11,7 @@ public class Invoice {
     @Column
     private Double totalPreTax;
     @Column
-    private Integer taxRate;
+    private Double taxRate = 0.2;
     @Column
     private Double totalFee;
     @Column
@@ -28,7 +28,7 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(Double totalPreTax, Integer taxRate, Double totalFee,
+    public Invoice(Double totalPreTax, Double taxRate, Double totalFee,
                    Boolean invoiceSent, Boolean invoicePaid) {
         this.totalPreTax = totalPreTax;
         this.taxRate = taxRate;
@@ -45,7 +45,7 @@ public class Invoice {
         this.invoiceId = invoiceId;
     }
 
-    public void setTaxRate(Integer taxRate) {
+    public void setTaxRate(Double taxRate) {
         this.taxRate = taxRate;
     }
 
@@ -57,12 +57,8 @@ public class Invoice {
         this.totalPreTax = totalPreTax;
     }
 
-    public Integer getTaxRate() {
+    public Double getTaxRate() {
         return taxRate;
-    }
-
-    public void setTaxRate(int taxRate) {
-        this.taxRate = taxRate;
     }
 
     public Double getTotalFee() {
