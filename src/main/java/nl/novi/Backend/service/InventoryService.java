@@ -24,9 +24,15 @@ public class InventoryService {
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
+
+
     public List<Inventory> getAllInventories(){
+
         return inventoryRepository.findAll();
     }
+
+
+
     public List<Inventory> addInventory(Inventory inventory){
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.save(inventory);

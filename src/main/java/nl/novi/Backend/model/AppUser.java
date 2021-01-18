@@ -15,6 +15,7 @@ import java.util.Set;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (columnDefinition = "serial")
     private Long User_id;
     @Column
     private String userName;

@@ -1,6 +1,10 @@
 package nl.novi.Backend.model;
 
+import lombok.EqualsAndHashCode;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -10,11 +14,16 @@ import java.util.Optional;
 
 @Entity
 @Table
+@NaturalIdCache
+@EqualsAndHashCode
+@org.hibernate.annotations.Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE
+)
 public class Inventory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long itemId;
-    @Column
+    @NaturalId
     private String itemDescription;
     @Column
     private Double pricePerUnit;
@@ -22,20 +31,21 @@ public class Inventory {
     private String manufactor;
     @Column
     private int availableUnit;
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inventoryList")
-    private List<Inspection> inspectionList = new ArrayList<>();
+
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "inventory", orphanRemoval = true)
+    private List<InspectionInventory> inspectionNewList = new ArrayList<>();
 
     public Inventory(){
 
     }
 
-    public Inventory(Long itemId, String itemDescription, Double pricePerUnit, String manufactor, int availableUnit) {
-        this.itemId = itemId;
+    public Inventory(String itemDescription, Double pricePerUnit, String manufactor, int availableUnit,
+                     List<InspectionInventory> inspectionNewList) {
         this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
         this.manufactor = manufactor;
         this.availableUnit = availableUnit;
-
+        this.inspectionNewList = inspectionNewList;
     }
 
     public Long getItemId() {
@@ -78,11 +88,13 @@ public class Inventory {
         this.availableUnit = availableUnit;
     }
 
-    public List<Inspection> getInspectionList() {
-        return inspectionList;
+    public List<InspectionInventory> getInspectionNewList() {
+        return inspectionNewList;
     }
 
-    public void setInspectionList(List<Inspection> inspectionList) {
-        this.inspectionList = inspectionList;
+    public void setInspectionNewList(List<InspectionInventory> inspectionNewList) {
+        this.inspectionNewList = inspectionNewList;
     }
+
+
 }

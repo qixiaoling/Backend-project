@@ -39,22 +39,23 @@ public class InspectionService {
     }
 
 
+    public List<Inspection> getAllInspection() {
+        return inspectionRepository.findAll();
 
-    public List<Inspection> getAllInspection(){
-         return inspectionRepository.findAll();
+    }
+
+    public Inspection getInspectionById(Long inspectionNumber) {
+        Optional<Inspection> possibleInspeciton = inspectionRepository.findByInspectionNumber(inspectionNumber);
+        if (possibleInspeciton.isPresent()) {
+            return possibleInspeciton.get();
+        }
+        return null;
 
     }
 
-    public Inspection getInspectionById(Long inspectionNumber){
-        Optional <Inspection> possibleInspeciton = inspectionRepository.findByInspectionNumber(inspectionNumber);
-                if(possibleInspeciton.isPresent()){
-                    return possibleInspeciton.get();
-                }
-                return null;
 
-    }
     //add a list to one object, in a ManyToMany relationship, both side already exist in database.
-    public ResponseEntity<?> addInventoryToInspection(Long inspectionNumber, List<Inventory> inventoryList){
+    /*public ResponseEntity<?> addInventoryToInspection(Long inspectionNumber, List<Inventory> inventoryList){
         Optional <Inspection> foundInspection = inspectionRepository.findById(inspectionNumber);
         if (foundInspection.isPresent()){
             List<Inventory> newInventoryList = new ArrayList<>();
@@ -69,7 +70,7 @@ public class InspectionService {
         }
         return ResponseEntity.badRequest().body("The inspection cannot be found.");
 
-    }
+    }*/
     //add a list to one object, in a ManyToMany relationship, the list is exists in the database, but the one object is brand new.
    /* public ResponseEntity<?> addInspectionWithItems(Inspection inspection){
         Inspection newInspection = new Inspection();
@@ -78,16 +79,17 @@ public class InspectionService {
                 inspection.getInventoryList().stream().map(v->{
                     Inventory vv=inventoryService.findInventoryById(v.getItemId());
                     vv.getInspectionList().add(newInspection);
-                    return vv;
+                    return
+                    vv;
                 }).collect(Collectors.toList()));
         inspectionRepository.save(newInspection);
         return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));
     }*/
-   //add one object to one object, in a ManyToMany relationship, both side already exist in database.
+    //add one object to one object, in a ManyToMany relationship, both side already exist in database.
     public ResponseEntity<?> addNewInspectionToCar(String numberPlate, Inspection inspection) {
 
         Optional<Car> carFromDb = carRepository.findByNumberPlate(numberPlate);
-        if(carFromDb.isPresent()) {
+        if (carFromDb.isPresent()) {
             inspection.setCar(carFromDb.get());
             inspectionRepository.save(inspection);
             return ResponseEntity.ok().body(new MessageResponse("Inspection Report added."));
@@ -99,15 +101,12 @@ public class InspectionService {
     public ResponseEntity<?> updateInspectionById(Long inspectionNumber, Inspection aNewInspection) {
         Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if (possibleInspection.isPresent()) {
-            possibleInspection.get().setInventoryList(aNewInspection.getInventoryList());
             possibleInspection.get().setAgreeToRepair(aNewInspection.getAgreeToRepair());
             possibleInspection.get().setInspectionComplete(aNewInspection.getInspectionComplete());
             possibleInspection.get().setInspectionDate(aNewInspection.getInspectionDate());
             possibleInspection.get().setInspectionFee(aNewInspection.getInspectionFee());
             possibleInspection.get().setInspectionResult(aNewInspection.getInspectionResult());
-            possibleInspection.get().setQuantities(aNewInspection.getQuantities());
             possibleInspection.get().setRepairComplete(aNewInspection.getRepairComplete());
-            possibleInspection.get().setInventoryList(aNewInspection.getInventoryList());
             possibleInspection.get().setInvoice(aNewInspection.getInvoice());
             possibleInspection.get().setRepairDate(aNewInspection.getRepairDate());
             inspectionRepository.save(possibleInspection.get());
@@ -116,18 +115,19 @@ public class InspectionService {
         return ResponseEntity.badRequest().body("Please check the customer id again.");
     }
 
-    public ResponseEntity<?> deleteInspectionById(Long inspectionNumber){
-       Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
-       if(possibleInspection.isPresent()){
-           inspectionRepository.deleteById(inspectionNumber);
-           return ResponseEntity.ok().body("The inspection is deleted sucessfully.");
-       }
-       return  ResponseEntity.badRequest().body("Error, please check the inspection number again.");
+    public ResponseEntity<?> deleteInspectionById(Long inspectionNumber) {
+        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()) {
+            inspectionRepository.deleteById(inspectionNumber);
+            return ResponseEntity.ok().body("The inspection is deleted sucessfully.");
+        }
+        return ResponseEntity.badRequest().body("Error, please check the inspection number again.");
 
 
     }
-
-
-
-
 }
+
+
+
+
+

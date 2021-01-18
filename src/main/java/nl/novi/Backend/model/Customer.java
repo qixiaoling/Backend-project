@@ -11,6 +11,7 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (columnDefinition = "serial")
     private Long customerId;
     @Column
     private String firstName;
@@ -24,8 +25,8 @@ public class Customer {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private Car car;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Invoice> invoiceList = new ArrayList<>();
+    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    //private List<Invoice> invoiceList = new ArrayList<>();
 
 
 
@@ -96,11 +97,5 @@ public class Customer {
         this.car = car;
     }
 
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
 
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
 }

@@ -1,20 +1,18 @@
 package nl.novi.Backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
 @Entity
 @Table
+@EqualsAndHashCode
 public class Inspection {
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue
     private Long inspectionNumber;
     @Column
     private Date inspectionDate;
@@ -30,31 +28,34 @@ public class Inspection {
     private Date repairDate;
     @Column
     private Boolean repairComplete;
-    @Column
-    private int quantities;
+
 
 
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Car car;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            joinColumns = { @JoinColumn },
-            inverseJoinColumns = {@JoinColumn}
-    )
-    private List<Inventory> inventoryList = new ArrayList<>();
+    @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "inspection")
+    private List<InspectionInventory> inventoryNewList = new ArrayList<>();
 
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inspection")
     private Invoice invoice;
 
-
-
-    public Date getInspectionDate() {
-        return inspectionDate;
+    public Inspection() {
     }
 
-    public void setInspectionDate(Date inspectionDate) {
+    public Inspection(Date inspectionDate, Boolean inspectionResult, Boolean inspectionComplete,
+                      Double inspectionFee, Boolean agreeToRepair, Date repairDate, Boolean repairComplete, Car car,
+                      List<InspectionInventory> inventoryNewList, Invoice invoice) {
         this.inspectionDate = inspectionDate;
+        this.inspectionResult = inspectionResult;
+        this.inspectionComplete = inspectionComplete;
+        this.inspectionFee = inspectionFee;
+        this.agreeToRepair = agreeToRepair;
+        this.repairDate = repairDate;
+        this.repairComplete = repairComplete;
+        this.car = car;
+        this.inventoryNewList = inventoryNewList;
+        this.invoice = invoice;
     }
 
     public Long getInspectionNumber() {
@@ -65,12 +66,12 @@ public class Inspection {
         this.inspectionNumber = inspectionNumber;
     }
 
-    public Car getCar() {
-        return car;
+    public Date getInspectionDate() {
+        return inspectionDate;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setInspectionDate(Date inspectionDate) {
+        this.inspectionDate = inspectionDate;
     }
 
     public Boolean getInspectionResult() {
@@ -97,22 +98,6 @@ public class Inspection {
         this.inspectionFee = inspectionFee;
     }
 
-    public List<Inventory> getInventoryList() {
-        return inventoryList;
-    }
-
-    public void setInventoryList(List<Inventory> inventoryList) {
-        this.inventoryList = inventoryList;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
-
     public Boolean getAgreeToRepair() {
         return agreeToRepair;
     }
@@ -137,12 +122,29 @@ public class Inspection {
         this.repairComplete = repairComplete;
     }
 
-    public int getQuantities() {
-        return quantities;
+    public Car getCar() {
+        return car;
     }
 
-    public void setQuantities(int quantities) {
-        this.quantities = quantities;
+    public void setCar(Car car) {
+        this.car = car;
     }
+
+    public List<InspectionInventory> getInventoryNewList() {
+        return inventoryNewList;
+    }
+
+    public void setInventoryNewList(List<InspectionInventory> inventoryNewList) {
+        this.inventoryNewList = inventoryNewList;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
 
 }

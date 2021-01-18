@@ -57,13 +57,6 @@ public class InspectionController {
         return inspectionService.deleteInspectionById(inspectionNumber);
     }
 
-    @PostMapping("/inspections/inventories/{inspectionNumber}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public ResponseEntity<?> addInventoryToInspection(@PathVariable("inspectionNumber") Long inspectionNumber,
-                                                      @RequestBody List<Inventory> inventoryList){
-        return inspectionService.addInventoryToInspection(inspectionNumber,inventoryList);
-    }
-
 
 
 
