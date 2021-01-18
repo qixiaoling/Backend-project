@@ -32,7 +32,7 @@ public class InspectionInventoryController {
                                            @RequestBody InspectionInventory inspectionInventory){
         return inspectionInventoryService.addQuantity(inspectionNumber, itemId, inspectionInventory);
     }
-    @DeleteMapping("/addinginventories/{inspectionNumber}/{itemId}")
+    @DeleteMapping("/addinginventories/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> removeInventory(@PathVariable("inspectionNumber") Long inspectionNumber,
                                              @RequestBody Inventory inventory){

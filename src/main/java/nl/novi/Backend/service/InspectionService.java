@@ -79,7 +79,8 @@ public class InspectionService {
                 inspection.getInventoryList().stream().map(v->{
                     Inventory vv=inventoryService.findInventoryById(v.getItemId());
                     vv.getInspectionList().add(newInspection);
-                    return vv;
+                    return
+                    vv;
                 }).collect(Collectors.toList()));
         inspectionRepository.save(newInspection);
         return ResponseEntity.ok().body(new MessageResponse("Items are added into this Inspection."));

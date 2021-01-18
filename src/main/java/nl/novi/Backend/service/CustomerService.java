@@ -49,7 +49,7 @@ public class CustomerService {
             possibleCustomer.get().setLastName(customer.getLastName());
             possibleCustomer.get().setGender(customer.getGender());
             possibleCustomer.get().setEmail(customer.getEmail());
-            return ResponseEntity.ok().body("The inventory is successfully updated.");
+            return ResponseEntity.ok().body("The customer is successfully updated.");
 
         }
         return ResponseEntity.badRequest().body("Error, please check again.");

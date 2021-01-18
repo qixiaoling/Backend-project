@@ -32,23 +32,21 @@ public class InvoiceController {
 
         return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
     }
-    @GetMapping("/invoices/{customerId}/{inspectionNumber}")
+    @GetMapping("/invoices/{invoiceId}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public Invoice getInvoiceById( @PathVariable ("customerId") Long customerId,
-                                   @PathVariable("inspectionNumber") Long inspectionNumber ){
-        return invoiceService.getInvoiceById(customerId, inspectionNumber);
+    public Invoice getInvoiceById( @PathVariable ("invoiceId") Long invoiceId){
+
+        return invoiceService.getInvoiceById(invoiceId);
     }
-    @PutMapping("/invoices/{customerId}/{inspectionNumber}")
+    @PutMapping("/invoices/{invoiceId}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public ResponseEntity<?> updateInvoiceById(@PathVariable ("customerId") Long customerId,
-                                               @PathVariable("inspectionNumber") Long inspectionNumber,
-                                               @RequestBody Invoice invoice){
-        return invoiceService.updateInvoiceById(customerId, inspectionNumber, invoice);
+    public ResponseEntity<?> updateInvoiceById(@PathVariable ("invoiceId") Long invoiceId,
+                                               @RequestBody Invoice aNewInvoice){
+        return invoiceService.updateInvoiceById(invoiceId, aNewInvoice);
     }
-    @DeleteMapping("/invoices/{customerId}/{inspectionNumber}")
+    @DeleteMapping("/invoices/{invoiceId}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public ResponseEntity<?> deleteInvoiceById(@PathVariable ("customerId") Long customerId,
-                                               @PathVariable("inspectionNumber") Long inspectionNumber ){
-        return invoiceService.deleteInvoiceById(customerId, inspectionNumber);
+    public ResponseEntity<?> deleteInvoiceById(@PathVariable ("invoiceId") Long invoiceId){
+        return invoiceService.deleteInvoiceById(invoiceId);
     }
 }
