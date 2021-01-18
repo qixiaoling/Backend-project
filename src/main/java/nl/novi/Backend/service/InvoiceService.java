@@ -17,7 +17,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @Service
 public class InvoiceService {
-    @Autowired
+
     private InvoiceRepository invoiceRepository;
     @Autowired
     private InspectionRepository inspectionRepository;
@@ -30,6 +30,32 @@ public class InvoiceService {
 
         return invoiceRepository.findAll();
     }
+
+    public Invoice createInvoice(Long inspectionNumber) {
+        Double Sum = 0.0;
+        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()) {
+            if (possibleInspection.get().getAgreeToRepair().equals(Boolean.TRUE)) {
+                Invoice aNewInvoice = new Invoice();
+                for (int i = 0; i < possibleInspection.get().getInventoryNewList().size(); i++) {
+                    Sum = possibleInspection.get().getInventoryNewList().get(i).getInventory().getPricePerUnit()
+                            * possibleInspection.get().getInventoryNewList().get(i).getInventoryQuantities();
+                }
+                double totalPreTax = Sum + possibleInspection.get().getInspectionFee();
+                double totalFee = ((possibleInspection.get().getInvoice().getTaxRate() + 1) * totalPreTax);
+                aNewInvoice.setTotalFee(totalFee);
+                aNewInvoice.setTotalPreTax(totalPreTax);
+                return aNewInvoice;
+            }
+            Invoice differentInvoice = new Invoice();
+            differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
+            return differentInvoice;
+
+        }
+        return null;
+    }
+
+
     public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
