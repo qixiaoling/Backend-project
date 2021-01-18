@@ -11,7 +11,6 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (columnDefinition = "serial")
     private Long customerId;
     @Column
     private String firstName;
