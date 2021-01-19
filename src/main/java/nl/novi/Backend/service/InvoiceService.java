@@ -50,6 +50,7 @@ public class InvoiceService {
                 aNewInvoice.setTotalPreTax(totalPreTax);
                 invoiceRepository.save(aNewInvoice);
                 return aNewInvoice;
+
             }
             Invoice differentInvoice = new Invoice();
             differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
@@ -73,7 +74,7 @@ public class InvoiceService {
     public ResponseEntity<?> getInvoiceByInspectionNumber(Long inspectionNumber){
         Invoice aInvoice = createInvoice(inspectionNumber);
         if(!(aInvoice.equals(null))){
-            return ResponseEntity.ok().body(new MessageResponse("it is ok."));
+            return ResponseEntity.ok().body(new MessageResponse("Invoice is now created."));
         }
         return ResponseEntity.badRequest().body("please check the inspection number.");
     }
