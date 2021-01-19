@@ -1,5 +1,6 @@
 package nl.novi.Backend.service;
 
+import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.payload.response.MessageResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +77,8 @@ public class InvoiceService {
         }
         return ResponseEntity.badRequest().body("please check the inspection number.");
     }
+
+
 
     public Invoice getInvoiceById(Long invoiceId){
         Optional <Invoice> possibleInvoice = invoiceRepository.findById(invoiceId);
