@@ -31,7 +31,7 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
 
-    public ResponseEntity<?> createInvoice(Long inspectionNumber) {
+    public Invoice createInvoice(Long inspectionNumber) {
         Double Sum = 0.0;
         Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if (possibleInspection.isPresent()) {
@@ -46,15 +46,15 @@ public class InvoiceService {
                 aNewInvoice.setTotalFee(totalFee);
                 aNewInvoice.setTotalPreTax(totalPreTax);
                 invoiceRepository.save(aNewInvoice);
-                return ResponseEntity.ok().body(new MessageResponse("Invoice including repair total fee is created."));
+                return aNewInvoice;
             }
             Invoice differentInvoice = new Invoice();
             differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
             invoiceRepository.save(differentInvoice);
-            return ResponseEntity.ok().body(new MessageResponse("Invoice with only inspection fee is created."));
+            return differentInvoice;
 
         }
-        return ResponseEntity.badRequest().body("Error, please check the inspection number again.");
+        return null;
     }
 
 
@@ -68,7 +68,13 @@ public class InvoiceService {
         return ResponseEntity.badRequest().body("Error, inspection does not exsits.");*/
 
 
-
+    public ResponseEntity<?> getInvoiceByInspectionNumber(Long inspectionNumber){
+        Invoice aInvoice = createInvoice(inspectionNumber);
+        if(!(aInvoice.equals(null))){
+            return ResponseEntity.ok().body(new MessageResponse("it is ok."));
+        }
+        return ResponseEntity.badRequest().body("please check the inspection number.");
+    }
 
     public Invoice getInvoiceById(Long invoiceId){
         Optional <Invoice> possibleInvoice = invoiceRepository.findById(invoiceId);

@@ -35,7 +35,7 @@ public class InvoiceController {
     @GetMapping("/invoicescreate/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public ResponseEntity<?> generateInvoiceByInspectionNumber(@PathVariable("inspectionNumber") Long inspectionNumber){
-        return invoiceService.createInvoice(inspectionNumber);
+        return invoiceService.getInvoiceByInspectionNumber(inspectionNumber);
     }
     @GetMapping("/invoices/{invoiceId}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
