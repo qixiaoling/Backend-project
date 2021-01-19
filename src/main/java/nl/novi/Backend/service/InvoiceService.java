@@ -45,10 +45,12 @@ public class InvoiceService {
                 double totalFee = ((possibleInspection.get().getInvoice().getTaxRate() + 1) * totalPreTax);
                 aNewInvoice.setTotalFee(totalFee);
                 aNewInvoice.setTotalPreTax(totalPreTax);
+                invoiceRepository.save(aNewInvoice);
                 return aNewInvoice;
             }
             Invoice differentInvoice = new Invoice();
             differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
+            invoiceRepository.save(differentInvoice);
             return differentInvoice;
 
         }
@@ -56,25 +58,18 @@ public class InvoiceService {
     }
 
 
-    public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
+    /*public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
         invoice.setInspection(possibleInspection.get());
         invoiceRepository.save(invoice);
         return ResponseEntity.ok().body( new MessageResponse("The invoice is now added."));
         }
-        return ResponseEntity.badRequest().body("Error, inspection does not exsits.");
+        return ResponseEntity.badRequest().body("Error, inspection does not exsits.");*/
 
 
-        /*Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
-        if(possibleInspection.isPresent()){
-            invoice.setInspection(possibleInspection.get());
-            invoiceRepository.save(invoice);
-            return ResponseEntity.ok().body(new MessageResponse("Invoice is now added to this inspection."));
-        }
-        return ResponseEntity.badRequest().body(" The inspection cannot be found.");*/
 
-    }
+
     public Invoice getInvoiceById(Long invoiceId){
         Optional <Invoice> possibleInvoice = invoiceRepository.findById(invoiceId);
         if(possibleInvoice.isPresent()){
