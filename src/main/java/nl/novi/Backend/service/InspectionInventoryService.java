@@ -65,13 +65,13 @@ public class InspectionInventoryService {
     }
 
     public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){
-        Optional <Inspection> inspection = inspectionRepository.findById(inspectionNumber);
-        if (inspection.isPresent()){
-            for (Iterator <InspectionInventory> iterator = inspection.get().getInventoryNewList().iterator();
+        Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()){
+            for (Iterator <InspectionInventory> iterator = possibleInspection.get().getInventoryNewList().iterator();
                  iterator.hasNext();){
                 InspectionInventory inspectionInventory = iterator.next();
 
-                if(inspectionInventory.getInspection().equals(inspection.get()) &&
+                if(inspectionInventory.getInspection().equals(possibleInspection.get()) &&
                             inspectionInventory.getInventory().equals(inventory)){
                      iterator.remove();
                      inspectionInventory.getInventory().getInspectionNewList().remove(inspectionInventory);

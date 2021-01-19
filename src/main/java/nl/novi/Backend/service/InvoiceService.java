@@ -107,6 +107,7 @@ public class InvoiceService {
             if(!(aNewInvoice.getInvoiceSent()==null)){
                 possibleInvoice.get().setInvoiceSent(aNewInvoice.getInvoiceSent());
             }
+            invoiceRepository.save(possibleInvoice.get());
             return ResponseEntity.ok().body(new MessageResponse("The invoice is successfully updated."));
 
 
