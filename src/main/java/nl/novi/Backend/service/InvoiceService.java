@@ -44,8 +44,9 @@ public class InvoiceService {
                             * possibleInspection.get().getInventoryNewList().get(i).getInventoryQuantities();
                 }
                 double totalPreTax = Sum + possibleInspection.get().getInspectionFee();
-                double totalFee = ((possibleInspection.get().getInvoice().getTaxRate() + 1) * totalPreTax);
-                aNewInvoice.setTotalFee(totalFee);
+                //double totalFee = 0;
+                //totalFee = (possibleInspection.get().getInvoice().getTaxRate() * totalPreTax)+totalPreTax;
+                aNewInvoice.setTotalFee(totalPreTax*1.2);
                 aNewInvoice.setTotalPreTax(totalPreTax);
                 invoiceRepository.save(aNewInvoice);
                 return aNewInvoice;
@@ -58,7 +59,6 @@ public class InvoiceService {
         }
         return null;
     }
-
 
     /*public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
