@@ -70,8 +70,7 @@ public class CarService {
     public ResponseEntity<?> deleteCarById(String numberPlate) {
         Optional<Car> possibleCar = carRepository.findById(numberPlate);
         if (possibleCar.isPresent()) {
-            possibleCar.get().setCustomer(null);
-            carRepository.save(possibleCar.get());
+            carRepository.deleteById(numberPlate);
             return ResponseEntity.ok().body("The car is deleted successfully.");
         }
         return ResponseEntity.badRequest().body("Error, please check the number plate again.");

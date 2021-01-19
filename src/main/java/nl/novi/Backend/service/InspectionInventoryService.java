@@ -57,8 +57,10 @@ public class InspectionInventoryService {
                 inspectionInventoryRepository.findById(new InspectionInventoryId(inspectionNumber, itemId));
         if(possibleInspectionInventory.isPresent()){
             possibleInspectionInventory.get().setInventoryQuantities(inspectionInventory.getInventoryQuantities());
-            inspectionInventoryRepository.save(possibleInspectionInventory.get());
-            return possibleInspectionInventory.get();
+            InspectionInventory theOneToAdd = new InspectionInventory();
+            theOneToAdd = possibleInspectionInventory.get();
+            inspectionInventoryRepository.save(theOneToAdd);
+            return theOneToAdd;
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.JoinColumn;
 import javax.persistence.*;
@@ -30,22 +31,10 @@ public class Customer {
 
 
 
-    public Customer(){};
+    public Customer(){
 
-    public Customer(@JsonProperty("firstName") String firstName,
-                    @JsonProperty("lastName") String lastName,
-                    @JsonProperty("gender") Gender gender,
-                    @JsonProperty("Email") String EmaiL)
-                    {
+    };
 
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.gender=gender;
-        this.Email=Email;
-
-
-
-    }
 
     public Long getCustomerId() {
         return customerId;

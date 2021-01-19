@@ -32,9 +32,9 @@ public class InvoiceController {
 
         return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
     }*/
-    @GetMapping("/invoices/create/{inspectionNumber}")
+    @GetMapping("/invoicescreate/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public Invoice createInvoice(@PathVariable("inspectionNumber") Long inspectionNumber){
+    public ResponseEntity<?> generateInvoiceByInspectionNumber(@PathVariable("inspectionNumber") Long inspectionNumber){
         return invoiceService.createInvoice(inspectionNumber);
     }
     @GetMapping("/invoices/{invoiceId}")

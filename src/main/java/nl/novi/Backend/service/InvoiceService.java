@@ -31,7 +31,7 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
 
-    public Invoice createInvoice(Long inspectionNumber) {
+    public ResponseEntity<?> createInvoice(Long inspectionNumber) {
         Double Sum = 0.0;
         Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if (possibleInspection.isPresent()) {
@@ -46,15 +46,15 @@ public class InvoiceService {
                 aNewInvoice.setTotalFee(totalFee);
                 aNewInvoice.setTotalPreTax(totalPreTax);
                 invoiceRepository.save(aNewInvoice);
-                return aNewInvoice;
+                return ResponseEntity.ok().body(new MessageResponse("Invoice including repair total fee is created."));
             }
             Invoice differentInvoice = new Invoice();
             differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
             invoiceRepository.save(differentInvoice);
-            return differentInvoice;
+            return ResponseEntity.ok().body(new MessageResponse("Invoice with only inspection fee is created."));
 
         }
-        return null;
+        return ResponseEntity.badRequest().body("Error, please check the inspection number again.");
     }
 
 
