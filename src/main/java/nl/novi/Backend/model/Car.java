@@ -28,7 +28,7 @@ public class Car {
     public Car(){
 
     }
-
+    @JsonBackReference
     public Customer getCustomer() {
         return customer;
     }
@@ -68,6 +68,7 @@ public class Car {
         this.model = model;
     }
 
+    @JsonManagedReference
     public List<Inspection> getInspections() {
         return inspections;
     }

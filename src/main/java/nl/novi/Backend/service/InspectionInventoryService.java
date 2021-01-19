@@ -52,17 +52,16 @@ public class InspectionInventoryService {
         return ResponseEntity.badRequest().body("Error, please check inspection number again.");
     }
 
-    public InspectionInventory addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){
+    public ResponseEntity<?> addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){
         Optional <InspectionInventory> possibleInspectionInventory =
                 inspectionInventoryRepository.findById(new InspectionInventoryId(inspectionNumber, itemId));
         if(possibleInspectionInventory.isPresent()){
             possibleInspectionInventory.get().setInventoryQuantities(inspectionInventory.getInventoryQuantities());
-            InspectionInventory theOneToAdd = new InspectionInventory();
-            theOneToAdd = possibleInspectionInventory.get();
-            inspectionInventoryRepository.save(theOneToAdd);
-            return theOneToAdd;
+
+            inspectionInventoryRepository.save(possibleInspectionInventory.get());
+            return ResponseEntity.ok().body(new MessageResponse("Quantitiy has been added."));
         }
-        return null;
+        return ResponseEntity.badRequest().body("Please check the inspection number again.");
     }
 
     public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){

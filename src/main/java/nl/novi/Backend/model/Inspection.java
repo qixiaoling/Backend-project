@@ -1,6 +1,7 @@
 package nl.novi.Backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -122,6 +123,7 @@ public class Inspection {
         this.repairComplete = repairComplete;
     }
 
+    @JsonBackReference
     public Car getCar() {
         return car;
     }

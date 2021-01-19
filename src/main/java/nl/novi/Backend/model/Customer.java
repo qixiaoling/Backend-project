@@ -1,6 +1,7 @@
 package nl.novi.Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.JoinColumn;
 import javax.persistence.*;
@@ -76,7 +77,7 @@ public class Customer {
         Email = email;
     }
 
-
+    @JsonManagedReference
     public Car getCar() {
         return car;
     }
