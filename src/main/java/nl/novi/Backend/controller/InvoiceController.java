@@ -25,12 +25,17 @@ public class InvoiceController {
         return invoiceService.getAllInvoices();
     }
 
-    @PostMapping("/invoices/{inspectionNumber}")
+    /*@PostMapping("/invoices/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public ResponseEntity<?> addInvoicesToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
                                                      @RequestBody Invoice invoice){
 
         return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
+    }*/
+    @GetMapping("/invoices/generate/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    public ResponseEntity<?> generateInvoiceByInspectionNumber(@PathVariable("inspectionNumber") Long inspectionNumber){
+        return invoiceService.getInvoiceByInspectionNumber(inspectionNumber);
     }
     @GetMapping("/invoices/{invoiceId}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")

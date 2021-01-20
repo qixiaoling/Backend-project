@@ -52,30 +52,31 @@ public class InspectionInventoryService {
         return ResponseEntity.badRequest().body("Error, please check inspection number again.");
     }
 
-    public InspectionInventory addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){
+    public ResponseEntity<?> addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){
         Optional <InspectionInventory> possibleInspectionInventory =
                 inspectionInventoryRepository.findById(new InspectionInventoryId(inspectionNumber, itemId));
         if(possibleInspectionInventory.isPresent()){
             possibleInspectionInventory.get().setInventoryQuantities(inspectionInventory.getInventoryQuantities());
+
             inspectionInventoryRepository.save(possibleInspectionInventory.get());
-            return possibleInspectionInventory.get();
+            return ResponseEntity.ok().body(new MessageResponse("Quantitiy has been added."));
         }
-        return null;
+        return ResponseEntity.badRequest().body("Please check the inspection number again.");
     }
 
     public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){
-        Optional <Inspection> inspection = inspectionRepository.findById(inspectionNumber);
-        if (inspection.isPresent()){
-            for (Iterator <InspectionInventory> iterator = inspection.get().getInventoryNewList().iterator();
+        Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()){
+            for (Iterator <InspectionInventory> iterator = possibleInspection.get().getInventoryNewList().iterator();
                  iterator.hasNext();){
                 InspectionInventory inspectionInventory = iterator.next();
 
-                if(inspectionInventory.getInspection().equals(inspection.get()) &&
+                if(inspectionInventory.getInspection().equals(possibleInspection.get()) &&
                             inspectionInventory.getInventory().equals(inventory)){
                      iterator.remove();
                      inspectionInventory.getInventory().getInspectionNewList().remove(inspectionInventory);
                      inspectionInventory.setInspection(null);
-                     inspectionInventory.setInspection(null);
+                     inspectionInventory.setInventory(null);
                      return ResponseEntity.ok().body(new MessageResponse("This inventory is removed successfully."));
                     }
                 }

@@ -27,12 +27,12 @@ public class InspectionInventoryController {
     }
     @PutMapping("/addinginventories/{inspectionNumber}/{itemId}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public InspectionInventory addQuantity(@PathVariable("inspectionNumber") Long inspectionNumber,
+    public ResponseEntity addQuantity(@PathVariable("inspectionNumber") Long inspectionNumber,
                                            @PathVariable("itemId") Long itemId,
                                            @RequestBody InspectionInventory inspectionInventory){
         return inspectionInventoryService.addQuantity(inspectionNumber, itemId, inspectionInventory);
     }
-    @DeleteMapping("/addinginventories/{inspectionNumber}")
+    @PutMapping("/removeinventories/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
     public ResponseEntity<?> removeInventory(@PathVariable("inspectionNumber") Long inspectionNumber,
                                              @RequestBody Inventory inventory){

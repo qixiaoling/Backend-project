@@ -1,6 +1,7 @@
 package nl.novi.Backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Inspection {
     @Column
     private Boolean inspectionComplete;
     @Column
-    private Double inspectionFee;
+    private Double inspectionFee = 45.00;
     @Column
     private Boolean agreeToRepair;
     @Column
@@ -122,6 +123,7 @@ public class Inspection {
         this.repairComplete = repairComplete;
     }
 
+    @JsonBackReference
     public Car getCar() {
         return car;
     }

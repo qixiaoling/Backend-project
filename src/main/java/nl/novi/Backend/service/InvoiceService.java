@@ -1,5 +1,6 @@
 package nl.novi.Backend.service;
 
+import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.payload.response.MessageResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @Service
 public class InvoiceService {
-    @Autowired
+
     private InvoiceRepository invoiceRepository;
     @Autowired
     private InspectionRepository inspectionRepository;
@@ -30,25 +32,55 @@ public class InvoiceService {
 
         return invoiceRepository.findAll();
     }
-    public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
+
+    public Invoice createInvoice(Long inspectionNumber) {
+        Double Sum = 0.0;
+        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if (possibleInspection.isPresent()) {
+            if (possibleInspection.get().getAgreeToRepair().equals(Boolean.TRUE)) {
+                Invoice aNewInvoice = new Invoice();
+                for (int i = 0; i < possibleInspection.get().getInventoryNewList().size(); i++) {
+                    Sum = possibleInspection.get().getInventoryNewList().get(i).getInventory().getPricePerUnit()
+                            * possibleInspection.get().getInventoryNewList().get(i).getInventoryQuantities();
+                }
+                double totalPreTax = Sum + possibleInspection.get().getInspectionFee();
+                //double totalFee = 0;
+                //totalFee = (possibleInspection.get().getInvoice().getTaxRate() * totalPreTax)+totalPreTax;
+                aNewInvoice.setTotalFee(totalPreTax*1.2);
+                aNewInvoice.setTotalPreTax(totalPreTax);
+                invoiceRepository.save(aNewInvoice);
+                return aNewInvoice;
+
+            }
+            Invoice differentInvoice = new Invoice();
+            differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
+            invoiceRepository.save(differentInvoice);
+            return differentInvoice;
+
+        }
+        return null;
+    }
+
+    /*public ResponseEntity<?> addInvoicesToInspection(Long inspectionNumber, Invoice invoice){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
         invoice.setInspection(possibleInspection.get());
         invoiceRepository.save(invoice);
         return ResponseEntity.ok().body( new MessageResponse("The invoice is now added."));
         }
-        return ResponseEntity.badRequest().body("Error, inspection does not exsits.");
+        return ResponseEntity.badRequest().body("Error, inspection does not exsits.");*/
 
 
-        /*Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
-        if(possibleInspection.isPresent()){
-            invoice.setInspection(possibleInspection.get());
-            invoiceRepository.save(invoice);
-            return ResponseEntity.ok().body(new MessageResponse("Invoice is now added to this inspection."));
+    public ResponseEntity<?> getInvoiceByInspectionNumber(Long inspectionNumber){
+        Invoice aInvoice = createInvoice(inspectionNumber);
+        if(!(aInvoice.equals(null))){
+            return ResponseEntity.ok().body(new MessageResponse("Invoice is now created."));
         }
-        return ResponseEntity.badRequest().body(" The inspection cannot be found.");*/
-
+        return ResponseEntity.badRequest().body("please check the inspection number.");
     }
+
+
+
     public Invoice getInvoiceById(Long invoiceId){
         Optional <Invoice> possibleInvoice = invoiceRepository.findById(invoiceId);
         if(possibleInvoice.isPresent()){
@@ -75,6 +107,7 @@ public class InvoiceService {
             if(!(aNewInvoice.getInvoiceSent()==null)){
                 possibleInvoice.get().setInvoiceSent(aNewInvoice.getInvoiceSent());
             }
+            invoiceRepository.save(possibleInvoice.get());
             return ResponseEntity.ok().body(new MessageResponse("The invoice is successfully updated."));
 
 

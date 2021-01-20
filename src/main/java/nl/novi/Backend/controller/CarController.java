@@ -43,7 +43,7 @@ public class CarController {
     }
     @DeleteMapping("/cars/{numberPlate}")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
-    public ResponseEntity<?> deleteCarById(@PathVariable("numberPlate") String numberPlate){
+    public ResponseEntity<?> deleteCarFromCustomer(@PathVariable("numberPlate") String numberPlate){
         return carService.deleteCarById(numberPlate);
     }
 

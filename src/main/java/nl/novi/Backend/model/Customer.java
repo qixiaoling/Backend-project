@@ -1,8 +1,11 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.JoinColumn;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,6 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (columnDefinition = "serial")
     private Long customerId;
     @Column
     private String firstName;
@@ -21,6 +23,7 @@ public class Customer {
     @Column
     private Gender gender;
     @Column
+    @Email
     private String Email;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
@@ -31,22 +34,10 @@ public class Customer {
 
 
 
-    public Customer(){};
+    public Customer(){
 
-    public Customer(@JsonProperty("firstName") String firstName,
-                    @JsonProperty("lastName") String lastName,
-                    @JsonProperty("gender") Gender gender,
-                    @JsonProperty("Email") String EmaiL)
-                    {
+    };
 
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.gender=gender;
-        this.Email=Email;
-
-
-
-    }
 
     public Long getCustomerId() {
         return customerId;
@@ -88,7 +79,7 @@ public class Customer {
         Email = email;
     }
 
-
+    @JsonManagedReference
     public Car getCar() {
         return car;
     }

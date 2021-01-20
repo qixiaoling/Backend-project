@@ -60,7 +60,7 @@ public class InventoryService {
         }
         return ResponseEntity.badRequest().body("Error, please check again.");
     }
-    
+    //this method need to be deleted.
     public ResponseEntity<?> deleteInventoryById(Long itemId){
         Optional <Inventory> possibleInventory = inventoryRepository.findById(itemId);
         if(possibleInventory.isPresent()){

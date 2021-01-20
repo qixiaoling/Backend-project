@@ -1,5 +1,9 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,7 @@ public class Car {
     public Car(){
 
     }
-
+    @JsonBackReference
     public Customer getCustomer() {
         return customer;
     }
@@ -64,6 +68,7 @@ public class Car {
         this.model = model;
     }
 
+    @JsonManagedReference
     public List<Inspection> getInspections() {
         return inspections;
     }
