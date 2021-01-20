@@ -1,4 +1,4 @@
-package nl.novi.Backend.service;
+package nl.novi.Backend.controller;
 
 import nl.novi.Backend.model.Role;
 import nl.novi.Backend.service.RoleService;

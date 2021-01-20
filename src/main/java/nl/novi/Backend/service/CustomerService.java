@@ -49,6 +49,7 @@ public class CustomerService {
             possibleCustomer.get().setLastName(customer.getLastName());
             possibleCustomer.get().setGender(customer.getGender());
             possibleCustomer.get().setEmail(customer.getEmail());
+            customerRepository.save(possibleCustomer.get());
             return ResponseEntity.ok().body("The customer is successfully updated.");
 
         }
