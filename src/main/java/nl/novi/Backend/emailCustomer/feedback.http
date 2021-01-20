@@ -1,0 +1,11 @@
+POST http://localhost:8080/feedback
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJPbGFmIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IkFETUlOIn0seyJhdXRob3JpdHkiOiJVU0VSX0JBQyJ9LHsiYXV0aG9yaXR5IjoiVVNFUl9URUMifSx7ImF1dGhvcml0eSI6IlVTRVJfRlJPIn0seyJhdXRob3JpdHkiOiJVU0VSX1RSRSJ9XSwiaWF0IjoxNjExMTM3NTQzLCJleHAiOjE2MTIzMDY4MDB9.t1UcF9jKGkDM9A6WO8UG62hBU9Mp-26cb6kSVU9ENDBprI7zKnb-tza-xORI0fnhEml9uv2JQfRIt9LxhUHh7Q
+
+{
+"name": "Xiaoling",
+  "email": "x.qi@Novi-education.nl",
+  "feedback": "This app is awesome ;)"
+}
+
+###
