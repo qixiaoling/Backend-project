@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -18,9 +21,17 @@ public class AppUser {
     @Column (columnDefinition = "serial")
     private Long User_id;
     @Column
+    @NotNull
     private String userName;
     @Column
     private String password;
+    @NotNull
+    @Email
+    @Column
+    private String email;
+    @NotNull
+    @Min(10)
+    private String feedback;
 
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -33,10 +44,11 @@ public class AppUser {
 
     }
 
-    public AppUser(Long user_id, String userName, String password) {
+    public AppUser(Long user_id, String userName, String password, String email) {
         User_id = user_id;
         this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 
     public Long getUser_id() {
@@ -69,5 +81,21 @@ public class AppUser {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 }

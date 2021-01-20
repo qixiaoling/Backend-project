@@ -7,16 +7,16 @@ INSERT INTO role(role_id, role_name) VALUES (3, 'USER_TRE');
 INSERT INTO role(role_id, role_name) VALUES (4, 'USER_TEC');
 INSERT INTO role(role_id, role_name) VALUES (5, 'ADMIN');
 
-INSERT INTO app_user(user_id, password, user_name)
-VALUES(1, crypt('password', gen_salt('bf')), 'Elsa');
-INSERT INTO app_user(user_id, password, user_name)
-VALUES(2, crypt('password', gen_salt('bf')), 'Anna');
-INSERT INTO app_user(user_id, password, user_name)
-VALUES(3, crypt('password', gen_salt('bf')), 'Hans');
-INSERT INTO app_user(user_id, password, user_name)
-VALUES(4, crypt('password', gen_salt('bf')), 'Kristoff');
-INSERT INTO app_user(user_id, password, user_name)
-VALUES(5, crypt('password', gen_salt('bf')), 'Olaf');
+INSERT INTO app_user(user_id, password, user_name, email)
+VALUES(1, crypt('password', gen_salt('bf')), 'Elsa', 'elsa@egineright.com');
+INSERT INTO app_user(user_id, password, user_name, email)
+VALUES(2, crypt('password', gen_salt('bf')), 'Anna', 'anna@egineright.com');
+INSERT INTO app_user(user_id, password, user_name, email)
+VALUES(3, crypt('password', gen_salt('bf')), 'Hans','hans@egineright.com');
+INSERT INTO app_user(user_id, password, user_name, email)
+VALUES(4, crypt('password', gen_salt('bf')), 'Kristoff','kristoff@egineright.com');
+INSERT INTO app_user(user_id, password, user_name, email)
+VALUES(5, crypt('password', gen_salt('bf')), 'Olaf', 'olaf@egineright.com');
 
 
 
