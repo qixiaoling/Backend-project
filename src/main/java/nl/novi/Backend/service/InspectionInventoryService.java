@@ -77,6 +77,7 @@ public class InspectionInventoryService {
                      inspectionInventory.getInventory().getInspectionNewList().remove(inspectionInventory);
                      inspectionInventory.setInspection(null);
                      inspectionInventory.setInventory(null);
+                     inspectionInventoryRepository.save(inspectionInventory);
                      return ResponseEntity.ok().body(new MessageResponse("This inventory is removed successfully."));
                     }
                 }

@@ -38,6 +38,11 @@ public class Customer {
 
     };
 
+    public Customer(String firstName, String lastName, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+    }
 
     public Long getCustomerId() {
         return customerId;

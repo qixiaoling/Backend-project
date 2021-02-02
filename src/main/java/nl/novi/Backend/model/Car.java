@@ -28,6 +28,7 @@ public class Car {
     public Car(){
 
     }
+
     @JsonBackReference
     public Customer getCustomer() {
         return customer;

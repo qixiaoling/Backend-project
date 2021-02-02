@@ -64,6 +64,7 @@ public class AppUser_Role_Service {
         AppUser freshUser = new AppUser();
         freshUser.setUserName(appUser.getUserName());
         freshUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        freshUser.setEmail(appUser.getEmail());
 
         userRepository.save(freshUser);
         return ResponseEntity.ok().body("The new user is now added");

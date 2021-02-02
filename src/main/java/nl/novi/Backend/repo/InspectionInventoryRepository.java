@@ -10,7 +10,7 @@ public interface InspectionInventoryRepository extends JpaRepository<InspectionI
 
     //pseudo code
     //deleteByNAAMEERSTEIDAndNaamTweedeId(long id 1, long id 2)
-    boolean deleteByIdInspectionIdAndIdInventoryId(Long inspectionId, Long inventoryId);
+    //boolean deleteByIdInspectionIdAndIdInventoryId(Long inspectionId, Long inventoryId);
 
 
 
