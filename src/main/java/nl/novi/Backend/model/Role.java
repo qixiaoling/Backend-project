@@ -22,6 +22,11 @@ public class Role {
     public Role() {
     }
 
+    public Role(Long role_id, ApplicationUserRole roleName) {
+        this.role_id = role_id;
+        this.roleName = roleName;
+    }
+
     public long getRole_id() {
         return role_id;
     }

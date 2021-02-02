@@ -1,6 +1,7 @@
 package nl.novi.Backend.controller;
 
 import nl.novi.Backend.model.InspectionInventory;
+import nl.novi.Backend.model.InspectionInventoryId;
 import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.service.InspectionInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,13 @@ public class InspectionInventoryController {
                                            @RequestBody InspectionInventory inspectionInventory){
         return inspectionInventoryService.addQuantity(inspectionNumber, itemId, inspectionInventory);
     }
-    @PutMapping("/removeinventories/{inspectionNumber}")
+
+
+    @DeleteMapping("/removinginventory/{inspectionid}/{inventoryid}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
-    public ResponseEntity<?> removeInventory(@PathVariable("inspectionNumber") Long inspectionNumber,
-                                             @RequestBody Inventory inventory){
-        return inspectionInventoryService.removeInventory(inspectionNumber, inventory);
+    public void removeInventory(@PathVariable("inspectionid") Long inspectionid, @PathVariable ("inventoryid") Long inventoryid){
+        inspectionInventoryService.removeInventory(new InspectionInventoryId(inspectionid, inventoryid));
+
     }
 
 

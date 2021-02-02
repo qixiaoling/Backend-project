@@ -41,7 +41,7 @@ public class CustomerController {
     }
     @PutMapping("/customers/{customerid}")
     @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
-    public ResponseEntity<?> updateCustomerById(@PathVariable("customerid") Long customerId, Customer customer){
+    public ResponseEntity<?> updateCustomerById(@PathVariable("customerid") Long customerId, @RequestBody Customer customer){
         return customerService.updateCustomerById(customerId, customer);
     }
     @DeleteMapping("/customers/{customerid}")

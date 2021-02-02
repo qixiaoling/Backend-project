@@ -29,14 +29,14 @@ public class AppUser_Role_Service {
         this.roleRepository = roleRepository;
     }
 
-    public ResponseEntity<?> addAppUserWithRoles (AppUser appUser) {
+    public ResponseEntity<?> addAppUserWithRoles (Long User_id, Set<Role> givenRoles) {
 
 
-        Optional<AppUser> foundUser = userRepository.findById(appUser.getUser_id());
+        Optional<AppUser> foundUser = userRepository.findById(User_id);
 
         if (foundUser.isPresent()) {
             Set<Role> newRoles = new HashSet<>();
-            for (Role role : appUser.getRoles()) {
+            for (Role role : givenRoles) {
                 Role aRole = roleService.findRoleByRoleName(role.getRoleName());
                 newRoles.add(aRole);
             }
@@ -64,6 +64,7 @@ public class AppUser_Role_Service {
         AppUser freshUser = new AppUser();
         freshUser.setUserName(appUser.getUserName());
         freshUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        freshUser.setEmail(appUser.getEmail());
 
         userRepository.save(freshUser);
         return ResponseEntity.ok().body("The new user is now added");

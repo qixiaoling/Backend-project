@@ -19,11 +19,13 @@ import java.util.stream.Collectors;
     public class UserDetailsImpl implements UserDetails {
         private AppUser appUser;
        
-        public UserDetailsImpl(AppUser appUser) {
+       public UserDetailsImpl(AppUser appUser) {
             this.appUser = appUser;
         }
 
-        @Override
+
+
+        @Override //the person that has been found inside the database, what was the roles that he suppose to have?
         public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> authorities = appUser.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
@@ -40,10 +42,12 @@ import java.util.stream.Collectors;
             String result = encoder.encode(appUser.getPassword());
 
             return result;*/
+
+            //what was the password he registered to have inside the database.
             return appUser.getPassword();
         }
 
-        @Override
+        @Override//what was the username registered inside the database.
         public String getUsername() {
             return appUser.getUserName();
         }
