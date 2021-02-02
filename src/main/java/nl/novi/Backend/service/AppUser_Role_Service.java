@@ -50,7 +50,7 @@ public class AppUser_Role_Service {
 
 
 
-        public List<AppUser> getAllAppUsers(){
+    public List<AppUser> getAllAppUsers(){
             List<AppUser> appUsers = new ArrayList<>();
             userRepository.findAll().forEach(appUsers::add);
             return appUsers;
@@ -69,6 +69,32 @@ public class AppUser_Role_Service {
         userRepository.save(freshUser);
         return ResponseEntity.ok().body("The new user is now added");
     }
+
+    public ResponseEntity<?> updateAppUserById(Long User_id, AppUser appUser){
+        Optional<AppUser> possibleAppUser = userRepository.findById(User_id);
+        if(possibleAppUser.isPresent()){
+            possibleAppUser.get().setUserName(appUser.getUserName());
+            possibleAppUser.get().setPassword(appUser.getPassword());
+            possibleAppUser.get().setEmail(appUser.getEmail());
+            userRepository.save(possibleAppUser.get());
+            return ResponseEntity.ok().body("The user is successfully updated.");
+
+        }
+        return ResponseEntity.badRequest().body("Error, please check again.");
+    }
+
+    public ResponseEntity<?> deleteAppUserById(Long User_id){
+        Optional<AppUser> possibleAppUser = userRepository.findById(User_id);
+        if(possibleAppUser.isPresent()){
+            userRepository.deleteById(User_id);
+            return ResponseEntity.ok().body("The user is deleted successfully.");
+        }
+        return ResponseEntity.badRequest().body("Please check the user id again.");
+
+
+    }
+
+
 
 
 

@@ -1,5 +1,6 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import nl.novi.Backend.security_config.ApplicationUserRole;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole roleName;
-    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "roles")
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roles")
     private Set<AppUser> appUsers;
 
     public Role() {

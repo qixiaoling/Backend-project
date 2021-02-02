@@ -20,12 +20,12 @@ public class AppUser_Role_Controller {
     public AppUser_Role_Controller(AppUser_Role_Service appUser_role_service) {
         this.appUser_role_service = appUser_role_service;
     }
-    @PostMapping("/appuser/addroles/{userid}")
+    @PostMapping("/appusers/addroles/{userid}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> addAppUsersWithRoles(@PathVariable ("userid") Long User_id, @RequestBody Set<Role> givenRoles){
         return appUser_role_service.addAppUserWithRoles(User_id, givenRoles);
     }
-    @GetMapping("/appuser")
+    @GetMapping("/appusers")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<AppUser> getAllAppUsers(){
 
@@ -35,5 +35,15 @@ public class AppUser_Role_Controller {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> addAppUsers (@RequestBody AppUser appUser){
         return appUser_role_service.addAppUsers(appUser);
+    }
+    @PutMapping("/appusers/update/{userid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> updateAppUsers(@PathVariable("userid") Long User_id, @RequestBody AppUser appUser){
+        return appUser_role_service.updateAppUserById(User_id, appUser);
+    }
+    @DeleteMapping("/appusers/delete/{userid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> deleteAppUsers(@PathVariable("userid") Long User_id){
+        return appUser_role_service.deleteAppUserById(User_id);
     }
 }
