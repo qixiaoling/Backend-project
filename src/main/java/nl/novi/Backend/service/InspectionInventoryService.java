@@ -64,7 +64,14 @@ public class InspectionInventoryService {
         return ResponseEntity.badRequest().body("Please check the inspection number again.");
     }
 
-    public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){
+    public void removeInventory(InspectionInventoryId id){
+        inspectionInventoryRepository.deleteById(id);
+
+
+
+    }
+
+    /*public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if (possibleInspection.isPresent()){
             for (Iterator <InspectionInventory> iterator = possibleInspection.get().getInventoryNewList().iterator();
@@ -83,7 +90,9 @@ public class InspectionInventoryService {
                 }
             }
         return ResponseEntity.badRequest().body("Error, please check the inspection number again.");
-        }
+        }*/
+
+
 
 
 
