@@ -3,6 +3,7 @@ package nl.novi.Backend.controller;
 import nl.novi.Backend.model.Role;
 import nl.novi.Backend.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +19,12 @@ public class RoleController {
     }
 
     @GetMapping("/roles")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Role> getAllRoles(){
         return roleService.getAllRoles();
     }
     @PostMapping("/roles")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Role> addRoles(@RequestBody Role role){
         return roleService.addRole(role);
     }

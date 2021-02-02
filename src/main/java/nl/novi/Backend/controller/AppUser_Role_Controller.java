@@ -6,6 +6,7 @@ import nl.novi.Backend.service.AppUser_Role_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
@@ -20,15 +21,18 @@ public class AppUser_Role_Controller {
         this.appUser_role_service = appUser_role_service;
     }
     @PostMapping("/appuser/addroles/{userid}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> addAppUsersWithRoles(@PathVariable ("userid") Long User_id, @RequestBody Set<Role> givenRoles){
         return appUser_role_service.addAppUserWithRoles(User_id, givenRoles);
     }
     @GetMapping("/appuser")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<AppUser> getAllAppUsers(){
 
         return appUser_role_service.getAllAppUsers();
     }
     @PostMapping("/appusers")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> addAppUsers (@RequestBody AppUser appUser){
         return appUser_role_service.addAppUsers(appUser);
     }
