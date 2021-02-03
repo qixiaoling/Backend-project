@@ -16,7 +16,7 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole roleName;
-    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "roles")
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "roles")
     private Set<AppUser> appUsers;
 
     public Role() {
