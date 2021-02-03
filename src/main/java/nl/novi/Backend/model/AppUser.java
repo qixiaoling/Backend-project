@@ -35,7 +35,7 @@ public class AppUser {
     @Min(10)
     private String feedback;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(
             joinColumns = { @JoinColumn },
             inverseJoinColumns = {@JoinColumn}
