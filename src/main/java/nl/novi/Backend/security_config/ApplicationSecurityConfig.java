@@ -21,27 +21,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-   //@Autowired
-   //private PasswordConfig passwordConfig;
+    //@Autowired
+    //private PasswordConfig passwordConfig;
 
-   @Bean
-   public PasswordEncoder passwordEncoder(){
-       return new BCryptPasswordEncoder();
-   }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
-   @Bean
-   public UserDetailsService userDetailsService(){
+    @Bean
+    public UserDetailsService userDetailsService(){
 
-       return new ApplicationUserService();
-   }
+        return new ApplicationUserService();
+    }
 
 
-   @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
                 .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
@@ -49,8 +49,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/securityManagement/**").permitAll()
                 .anyRequest()
                 .authenticated();
-                //.and()
-               // .httpBasic();
+        //.and()
+        // .httpBasic();
 
 
     }
@@ -68,5 +68,5 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService());
         return provider;
-   }
+    }
 }

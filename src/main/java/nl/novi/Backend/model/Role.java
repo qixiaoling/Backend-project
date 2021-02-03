@@ -1,5 +1,6 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import nl.novi.Backend.security_config.ApplicationUserRole;
 
 import javax.persistence.*;

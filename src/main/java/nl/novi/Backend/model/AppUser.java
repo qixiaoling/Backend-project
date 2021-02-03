@@ -1,6 +1,8 @@
 package nl.novi.Backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,7 @@ public class AppUser {
     @Min(10)
     private String feedback;
 
-    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinTable(
             joinColumns = { @JoinColumn },
             inverseJoinColumns = {@JoinColumn}
