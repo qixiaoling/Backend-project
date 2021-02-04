@@ -125,6 +125,18 @@ public class InspectionService {
 
 
     }
+
+    public void checkInspectionRepairStatus(Long inspectionNumber){
+        Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
+        if(possibleInspection.isPresent()){
+            switch (possibleInspection.get().getInspectionComplete()){
+
+
+            }
+        }
+
+
+    }
 }
 
 
