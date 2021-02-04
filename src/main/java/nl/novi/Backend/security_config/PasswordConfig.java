@@ -1,10 +1,10 @@
 package nl.novi.Backend.security_config;
 
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import sun.security.util.Password;
+
 
 @Configuration
 public class PasswordConfig {
