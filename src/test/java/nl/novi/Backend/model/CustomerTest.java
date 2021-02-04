@@ -1,27 +1,21 @@
 package nl.novi.Backend.model;
 
 
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-@ExtendWith(SpringExtension.class)
-class CustomerTest {
+public class CustomerTest {
 
     private Customer customer;
-    @BeforeEach
-    void setUp(){
-
+    @Before
+    public void setUp(){
         this.customer = new Customer("Mickey", "Mouse", Gender.MALE);
     }
 
     @Test
-    void testGetFirstName(){
+    public void testGetFirstName(){
         String expectedFirstName = "Mickey";
         String actualFirstName = this.customer.getFirstName();
         assertThat(actualFirstName).isEqualTo(expectedFirstName);

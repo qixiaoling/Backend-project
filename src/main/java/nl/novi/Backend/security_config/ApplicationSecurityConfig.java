@@ -46,8 +46,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
                 .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/resetpassword/**" +
-                        "").permitAll()
+                .antMatchers("/securityManagement/**").permitAll()
                 .anyRequest()
                 .authenticated();
         //.and()
