@@ -57,6 +57,13 @@ public class InspectionController {
         return inspectionService.deleteInspectionById(inspectionNumber);
     }
 
+    @GetMapping("/inspections/checkstatus/{inspectionNumber}")
+    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    public ResponseEntity<?> checkInspectionRepairStatus(@PathVariable ("inspectionNumber") Long inspectionNumber){
+        return inspectionService.checkInspectionRepairStatus(inspectionNumber);
+
+    }
+
 
 
 
