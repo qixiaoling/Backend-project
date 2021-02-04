@@ -2,33 +2,32 @@ package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.repo.CarRepository;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
+
 public class CarServiceTest {
 
-    @Autowired
-    private CarService carService;
-
-    @MockBean
-    private CarRepository carRepository;
+    @InjectMocks
+    CarService carService;
 
     @Mock
-    List<Car> cars = new ArrayList<>();
+    CarRepository carRepository;
 
+    private List<Car> cars = new ArrayList<>();
+    //Arrange
     @BeforeEach
     public void setup() {
+        MockitoAnnotations.openMocks(this);
         cars = new ArrayList<>();
         cars.add(new Car("89-JKP-38", "Benz", "Cabrio"));
         cars.add(new Car("89-JKP-30", "Benz", "Cabrio"));
@@ -36,10 +35,10 @@ public class CarServiceTest {
 
     @Test
     public void getAllCarTest(){
-
+        //Arrange
         Mockito.when(carRepository.findAll()).thenReturn(cars);
+        //Act & Assert
         assertThat(carService.getAllCar().size()).isEqualTo(2);
-
 
     }
 
