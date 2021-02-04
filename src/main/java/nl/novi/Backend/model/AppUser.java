@@ -2,6 +2,7 @@ package nl.novi.Backend.model;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import javax.persistence.*;
 import javax.persistence.Column;
@@ -51,6 +52,10 @@ public class AppUser {
         this.userName = userName;
         this.password = password;
         this.email = email;
+    }
+
+    public AppUser(String password) {
+        this.password = password;
     }
 
     public Long getUser_id() {
