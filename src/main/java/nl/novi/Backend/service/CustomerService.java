@@ -1,6 +1,7 @@
 package nl.novi.Backend.service;
 
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,15 @@ public class CustomerService {
          return customers;
     }
 
-    public List<Customer> addCustomers(Customer customer){
-        List<Customer> customers = new ArrayList<>();
-        customerRepository.save(customer);
-        return customers;
+    public ResponseEntity<?> addCustomers(Customer customer) {
+        if (!(customer.getEmail() == null)) {
+            if(customerRepository.existsByEmail(customer.getEmail()).equals(Boolean.FALSE)){
+                customerRepository.save(customer);
+                return ResponseEntity.ok().body("The customer is now added");
+            }else{
+                return ResponseEntity.badRequest().body(" Error, this customer already exists.");
+            }}
+        return ResponseEntity.badRequest().body("Please fill in the email address from the customer.");
     }
 
     public Customer getCustomerById(Long customerId){

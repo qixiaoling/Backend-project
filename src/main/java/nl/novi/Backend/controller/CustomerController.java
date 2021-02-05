@@ -31,7 +31,7 @@ public class CustomerController {
     }
     @PostMapping("/customers")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
-    public List<Customer> addCustomers(@RequestBody Customer customer){
+    public ResponseEntity<?> addCustomers(@RequestBody Customer customer){
         return customerService.addCustomers(customer);
     }
     @GetMapping("/customers/{customerid}")
