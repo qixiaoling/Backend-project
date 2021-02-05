@@ -4,7 +4,6 @@ import nl.novi.Backend.model.AppUser;
 import nl.novi.Backend.model.Role;
 import nl.novi.Backend.service.AppUser_Role_Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
