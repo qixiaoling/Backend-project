@@ -24,7 +24,7 @@ public class Customer {
     private Gender gender;
     @Column
     @Email
-    private String Email;
+    private String email;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private Car car;
@@ -38,10 +38,11 @@ public class Customer {
 
     };
 
-    public Customer(String firstName, String lastName, Gender gender) {
+    public Customer(String firstName, String lastName, Gender gender, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
+        this.email = email;
     }
 
     public Long getCustomerId() {
@@ -77,11 +78,11 @@ public class Customer {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     @JsonManagedReference

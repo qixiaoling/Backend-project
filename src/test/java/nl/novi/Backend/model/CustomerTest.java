@@ -11,7 +11,7 @@ public class CustomerTest {
     private Customer customer;
     @BeforeEach
     public void setUp(){
-        this.customer = new Customer("Mickey", "Mouse", Gender.MALE);
+        this.customer = new Customer("Mickey", "Mouse", Gender.MALE, "mickeymouse@gmail");
     }
 
     @Test
