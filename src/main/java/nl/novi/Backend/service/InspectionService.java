@@ -110,9 +110,9 @@ public class InspectionService {
             possibleInspection.get().setInvoice(aNewInspection.getInvoice());
             possibleInspection.get().setRepairDate(aNewInspection.getRepairDate());
             inspectionRepository.save(possibleInspection.get());
-            return ResponseEntity.ok().body("The customer is updated successfully.");
+            return ResponseEntity.ok().body("The inspection is updated successfully.");
         }
-        return ResponseEntity.badRequest().body("Please check the customer id again.");
+        return ResponseEntity.badRequest().body("Please check the inspection id again.");
     }
 
     public ResponseEntity<?> deleteInspectionById(Long inspectionNumber) {
