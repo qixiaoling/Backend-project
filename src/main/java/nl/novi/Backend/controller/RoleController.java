@@ -23,10 +23,5 @@ public class RoleController {
     public List<Role> getAllRoles(){
         return roleService.getAllRoles();
     }
-    
-    @PostMapping("/roles")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public List<Role> addRoles(@RequestBody Role role){
-        return roleService.addRole(role);
-    }
+
 }

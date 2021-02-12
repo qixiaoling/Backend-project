@@ -22,17 +22,4 @@ public class RoleService {
         roleRepository.findAll().forEach(roles::add);
         return roles;
     }
-
-    public Role findRoleByRoleName(ApplicationUserRole roleName){
-
-        return roleRepository.findByRoleName(roleName);
-    }
-
-    public List<Role> addRole(Role role) {
-        List<Role> roles = new ArrayList<>();
-        roleRepository.save(role);
-        return roles;
-    }
-
-
 }
