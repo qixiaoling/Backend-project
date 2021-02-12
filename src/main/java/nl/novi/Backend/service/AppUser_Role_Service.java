@@ -83,16 +83,7 @@ public class AppUser_Role_Service {
         return ResponseEntity.badRequest().body("Error, please check again.");
     }
 
-    public ResponseEntity<?> deleteAppUserById(Long User_id){
-        Optional<AppUser> possibleAppUser = userRepository.findById(User_id);
-        if(possibleAppUser.isPresent()){
-            userRepository.deleteById(User_id);
-            return ResponseEntity.ok().body("The user is deleted successfully.");
-        }
-        return ResponseEntity.badRequest().body("Please check the user id again.");
 
-
-    }
 
 
 

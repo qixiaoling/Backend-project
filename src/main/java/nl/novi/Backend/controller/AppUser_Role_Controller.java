@@ -40,9 +40,6 @@ public class AppUser_Role_Controller {
     public ResponseEntity<?> updateAppUsers(@PathVariable("userid") Long User_id, @RequestBody AppUser appUser){
         return appUser_role_service.updateAppUserById(User_id, appUser);
     }
-    @DeleteMapping("/appusers/delete/{userid}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> deleteAppUsers(@PathVariable("userid") Long User_id){
-        return appUser_role_service.deleteAppUserById(User_id);
-    }
+
+
 }
