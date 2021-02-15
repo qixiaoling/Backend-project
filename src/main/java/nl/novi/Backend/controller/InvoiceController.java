@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -21,17 +20,10 @@ public class InvoiceController {
 
     @GetMapping("/invoices")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public List<Invoice> getAllInvoices(){
+    public ResponseEntity<?> getAllInvoices(){
         return invoiceService.getAllInvoices();
     }
 
-    /*@PostMapping("/invoices/{inspectionNumber}")
-    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
-    public ResponseEntity<?> addInvoicesToInspection(@PathVariable ("inspectionNumber") Long inspectionNumber,
-                                                     @RequestBody Invoice invoice){
-
-        return invoiceService.addInvoicesToInspection(inspectionNumber, invoice);
-    }*/
     @GetMapping("/invoices/generate/{inspectionNumber}")
     @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
     public ResponseEntity<?> generateInvoiceByInspectionNumber(@PathVariable("inspectionNumber") Long inspectionNumber){

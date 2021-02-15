@@ -1,14 +1,11 @@
 package nl.novi.Backend.service;
 
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import nl.novi.Backend.model.Customer;
 import nl.novi.Backend.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +20,10 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getAllCustomers(){
+    public ResponseEntity<?> getAllCustomers(){
         List<Customer> customers = new ArrayList<>();
          customerRepository.findAll().forEach(customers::add);
-         return customers;
+         return ResponseEntity.ok().body("Request is carried out successfully");
     }
 
     public ResponseEntity<?> addCustomers(Customer customer) {

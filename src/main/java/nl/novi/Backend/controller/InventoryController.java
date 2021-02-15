@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -26,7 +25,7 @@ public class InventoryController {
 
     @GetMapping("/inventories")
     @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
-    public List<Inventory> getAllInventories(){
+    public ResponseEntity<?> getAllInventories(){
         return inventoryService.getAllInventories();
     }
 

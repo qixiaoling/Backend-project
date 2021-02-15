@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -25,7 +24,7 @@ public class CustomerController {
     @GetMapping("/customers")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
     //@PreAuthorize("hasAnyRole('ROLE_USER_FRO', 'ROLE_ADMIN')")
-    public List<Customer> getAllCustomers(){
+    public ResponseEntity<?> getAllCustomers(){
 
         return customerService.getAllCustomers();
     }

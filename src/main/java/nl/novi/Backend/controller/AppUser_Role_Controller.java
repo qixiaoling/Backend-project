@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -26,7 +25,7 @@ public class AppUser_Role_Controller {
     }
     @GetMapping("/appusers")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<AppUser> getAllAppUsers(){
+    public ResponseEntity<?> getAllAppUsers(){
 
         return appUser_role_service.getAllAppUsers();
     }
@@ -40,9 +39,6 @@ public class AppUser_Role_Controller {
     public ResponseEntity<?> updateAppUsers(@PathVariable("userid") Long User_id, @RequestBody AppUser appUser){
         return appUser_role_service.updateAppUserById(User_id, appUser);
     }
-    @DeleteMapping("/appusers/delete/{userid}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> deleteAppUsers(@PathVariable("userid") Long User_id){
-        return appUser_role_service.deleteAppUserById(User_id);
-    }
+
+
 }

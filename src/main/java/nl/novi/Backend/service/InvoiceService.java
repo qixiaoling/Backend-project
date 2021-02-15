@@ -1,6 +1,6 @@
 package nl.novi.Backend.service;
 
-import nl.novi.Backend.model.Car;
+
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.payload.response.MessageResponse;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.ok;
+
 
 
 @Service
@@ -28,9 +28,10 @@ public class InvoiceService {
         this.invoiceRepository=invoiceRepository;
     }
 
-    public List<Invoice> getAllInvoices(){
-
-        return invoiceRepository.findAll();
+    public ResponseEntity<?> getAllInvoices(){
+        List<Invoice> invoices = new ArrayList<>();
+        invoiceRepository.findAll().forEach(invoices::add);
+        return ResponseEntity.ok().body("Request is carried out successfully");
     }
 
     public Invoice createInvoice(Long inspectionNumber) {
