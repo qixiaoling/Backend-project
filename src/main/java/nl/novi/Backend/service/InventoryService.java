@@ -1,14 +1,13 @@
 package nl.novi.Backend.service;
 
 
-import nl.novi.Backend.model.Inspection;
+
 import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.repo.InspectionRepository;
 import nl.novi.Backend.repo.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +25,10 @@ public class InventoryService {
     }
 
 
-    public List<Inventory> getAllInventories(){
-
-        return inventoryRepository.findAll();
+    public ResponseEntity<?> getAllInventories(){
+        List<Inventory> inventories = new ArrayList<>();
+        inventoryRepository.findAll().forEach(inventories::add);
+        return ResponseEntity.ok().body("Request is carried out successfully");
     }
 
 

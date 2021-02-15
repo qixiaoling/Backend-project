@@ -28,10 +28,10 @@ public class CarService {
         this.customerService = customerService;
     }
 
-    public List<Car> getAllCar() {
+    public ResponseEntity<?> getAllCar() {
         List<Car> cars = new ArrayList<>();
         carRepository.findAll().forEach(cars::add);
-        return cars;
+        return ResponseEntity.ok().body("Request is carried out successfully");
     }
 
     public ResponseEntity<?> addCarToCustomer(Long customerId, Car car) {

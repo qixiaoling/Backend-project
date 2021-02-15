@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -26,7 +25,7 @@ public class AppUser_Role_Controller {
     }
     @GetMapping("/appusers")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<AppUser> getAllAppUsers(){
+    public ResponseEntity<?> getAllAppUsers(){
 
         return appUser_role_service.getAllAppUsers();
     }

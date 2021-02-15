@@ -2,19 +2,14 @@ package nl.novi.Backend.service;
 
 import nl.novi.Backend.model.Car;
 import nl.novi.Backend.model.Inspection;
-import nl.novi.Backend.model.Inventory;
 import nl.novi.Backend.payload.response.MessageResponse;
 import nl.novi.Backend.repo.CarRepository;
 import nl.novi.Backend.repo.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Optional;
-
-
 import java.util.List;
 
 
@@ -39,8 +34,10 @@ public class InspectionService {
     }
 
 
-    public List<Inspection> getAllInspection() {
-        return inspectionRepository.findAll();
+    public ResponseEntity<?> getAllInspection() {
+        List<Inspection> inspections = new ArrayList<>();
+        inspectionRepository.findAll().forEach(inspections::add);
+        return ResponseEntity.ok().body("Request is carried out successfully");
 
     }
 

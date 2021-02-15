@@ -1,6 +1,6 @@
 package nl.novi.Backend.service;
 
-import nl.novi.Backend.model.Car;
+
 import nl.novi.Backend.model.Inspection;
 import nl.novi.Backend.model.Invoice;
 import nl.novi.Backend.payload.response.MessageResponse;
@@ -9,12 +9,10 @@ import nl.novi.Backend.repo.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.ok;
+
 
 
 @Service

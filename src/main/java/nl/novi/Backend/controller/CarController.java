@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -21,7 +20,7 @@ public class CarController {
 
     @GetMapping("/cars")
     @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
-    public List<Car> getAllCar(){
+    public ResponseEntity<?> getAllCar(){
         return carService.getAllCar();
     }
 

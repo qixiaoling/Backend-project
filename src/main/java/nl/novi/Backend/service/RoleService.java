@@ -4,6 +4,7 @@ import nl.novi.Backend.model.Role;
 import nl.novi.Backend.security_config.ApplicationUserRole;
 import nl.novi.Backend.repo.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public List<Role> getAllRoles(){
+    public ResponseEntity<?> getAllRoles(){
         List<Role> roles = new ArrayList<>();
         roleRepository.findAll().forEach(roles::add);
-        return roles;
+        return ResponseEntity.ok().body("Request is carried out successfully");
     }
     public Role findRoleByRoleName(ApplicationUserRole roleName){
 
