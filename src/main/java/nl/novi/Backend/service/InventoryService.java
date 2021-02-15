@@ -32,7 +32,6 @@ public class InventoryService {
     }
 
 
-
     public List<Inventory> addInventory(Inventory inventory){
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.save(inventory);

@@ -9,6 +9,8 @@ import nl.novi.Backend.repo.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +28,10 @@ public class InvoiceService {
         this.invoiceRepository=invoiceRepository;
     }
 
-    public List<Invoice> getAllInvoices(){
-
-        return invoiceRepository.findAll();
+    public ResponseEntity<?> getAllInvoices(){
+        List<Invoice> invoices = new ArrayList<>();
+        invoiceRepository.findAll().forEach(invoices::add);
+        return ResponseEntity.ok().body("Request is carried out successfully");
     }
 
     public Invoice createInvoice(Long inspectionNumber) {
