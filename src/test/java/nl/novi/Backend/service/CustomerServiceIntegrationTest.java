@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class CustomerServiceIntegrationTest {
@@ -52,7 +54,7 @@ public class CustomerServiceIntegrationTest {
     }
     @Test
     public void whenFindById_thenReturnCustomer(){
-        Mockito.when(customerRepository.findById((long) 1))
+        when(customerRepository.findById((long) 1))
                 .thenReturn(Optional.of(customer));
 
         customerService.getCustomerById((long) 1);
@@ -71,10 +73,26 @@ public class CustomerServiceIntegrationTest {
     }
     @Test
     public void whenAddCustomer_thenReturnCustomer(){
-        Mockito.when(customerRepository.save(customer))
+        when(customerRepository.save(customer))
                 .thenReturn(customer);
         assertThat(customerService.addCustomers(customer).equals(customer));
     }
+    @Test
+    public void deleteCusotmer_thenVerified(){
+        Customer customer = new Customer();
+        customer.setCustomerId(1L);
+        //Give instruction, findbyid, please just return a possible customer back.
+        when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
+        customerService.deleteCustomerById((long)1);
+        verify(customerRepository, times(1)).deleteById((long)1);
+    }
 
+    @Test
+    public void deleteCusotmer_thenVerifiedNotPresent(){
+        //Give instruction, let it skip the step of "find the possible customer", directly go to in CustomerService
+        // let it skip the main part and say it is not present.
+        customerService.deleteCustomerById((long)1);
+        verify(customerRepository, times(1)).findById((long)1);
+    }
 
 }
