@@ -81,7 +81,7 @@ public class CustomerServiceIntegrationTest {
     public void deleteCusotmer_thenVerified(){
         Customer customer = new Customer();
         customer.setCustomerId(1L);
-        //Give instruction, findbyid, please just return a possible customer back.
+        //Instruction, return a possible customer back.
         when(customerRepository.findById(anyLong())).thenReturn(Optional.of(customer));
         customerService.deleteCustomerById((long)1);
         verify(customerRepository, times(1)).deleteById((long)1);
@@ -89,8 +89,7 @@ public class CustomerServiceIntegrationTest {
 
     @Test
     public void deleteCusotmer_thenVerifiedNotPresent(){
-        //Give instruction, let it skip the step of "find the possible customer", directly go to in CustomerService
-        // let it skip the main part and say it is not present.
+        //No customer is initialed, therefore Not present.
         customerService.deleteCustomerById((long)1);
         verify(customerRepository, times(1)).findById((long)1);
     }

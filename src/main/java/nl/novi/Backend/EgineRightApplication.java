@@ -12,65 +12,6 @@ public class EgineRightApplication{
 		SpringApplication.run(EgineRightApplication.class, args);
 	}
 
-	/*@Autowired
-	private CustomerRepository customerRepository;
-	@Autowired
-	private CarRepository carRepository;
-	@Autowired
-	private InspectionRepository inspectionRepository;*/
 
-
-
-
-
-		/*Customer customer = new Customer();
-		customer.setFirstName("Xiaoling");
-		customer.setLastName("Qi");
-		customer.setEmail("x.qi@novi-education.nl");
-		customer.setGender(FEMALE);
-
-		Car car = new Car();
-		car.setNumberPlate("64-PF-PT");
-		car.setMake("bmw");
-		car.setModel("1serie");
-
-		customer.setCar(car);
-		car.setCustomer(customer);
-
-		customerRepository.save(customer);
-		carRepository.save(car);
-
-
-		SimpleDateFormat dt = new SimpleDateFormat("dd/mm/yyyy");
-		Inspection inspection1 = new Inspection(dt.parse("30/10/2018"), "64-PF-PT", false, true, 45.00);
-		Inspection inspection2 = new Inspection(dt.parse("6/11/2019"),"64-PF-PT", true, true, 45.00);
-		Inspection inspection3 = new Inspection(dt.parse("08/12/2020"),"64-PF-PT", false, true, 45.00);
-		inspectionRepository.save(inspection1);
-		inspectionRepository.save(inspection2);
-		inspectionRepository.save(inspection3);
-
-		/*car.getInspections().add(inspection1);
-		car.getInspections().add(inspection2);
-		car.getInspections().add(inspection3);
-		carRepository.save(car);*/
-/*@Autowired
-	private InspectionRepository inspectionRepository;
-@Autowired
-	private InventoryRepository inventoryRepository;
-
-	public void run(String... args) throws Exception{
-		Inspection inspection = new Inspection(true, false);
-		Inventory inventory1 = new Inventory("Headlamp");
-		Inventory inventory2 = new Inventory("break");
-
-		inspection.getInventoryList().add(inventory1);
-		inspection.getInventoryList().add(inventory2);
-
-		inventory1.getInspectionList().add(inspection);
-		inventory2.getInspectionList().add(inspection);
-
-		this.inspectionRepository.save(inspection);
-}
-*/
 
 }
