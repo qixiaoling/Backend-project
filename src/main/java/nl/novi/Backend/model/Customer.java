@@ -25,7 +25,7 @@ public class Customer {
     @Column
     @Email
     private String email;
-
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private Car car;
     //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")

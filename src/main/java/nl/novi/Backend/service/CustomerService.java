@@ -23,7 +23,7 @@ public class CustomerService {
     public ResponseEntity<?> getAllCustomers(){
         List<Customer> customers = new ArrayList<>();
          customerRepository.findAll().forEach(customers::add);
-         return ResponseEntity.ok().body("Request is carried out successfully");
+         return ResponseEntity.ok().body(customers);
     }
 
     public ResponseEntity<?> addCustomers(Customer customer) {

@@ -31,7 +31,7 @@ public class InvoiceService {
     public ResponseEntity<?> getAllInvoices(){
         List<Invoice> invoices = new ArrayList<>();
         invoiceRepository.findAll().forEach(invoices::add);
-        return ResponseEntity.ok().body("Request is carried out successfully");
+        return ResponseEntity.ok().body(invoices);
     }
 
     public Invoice createInvoice(Long inspectionNumber) {

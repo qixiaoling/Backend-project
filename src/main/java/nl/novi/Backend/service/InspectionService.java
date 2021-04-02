@@ -37,7 +37,7 @@ public class InspectionService {
     public ResponseEntity<?> getAllInspection() {
         List<Inspection> inspections = new ArrayList<>();
         inspectionRepository.findAll().forEach(inspections::add);
-        return ResponseEntity.ok().body("Request is carried out successfully");
+        return ResponseEntity.ok().body(inspections);
 
     }
 
