@@ -22,7 +22,7 @@ public class Car {
     private Customer customer;
 
 
-
+    @JsonIgnore
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "car")
     private List<Inspection> inspections;
 
@@ -69,7 +69,7 @@ public class Car {
         this.model = model;
     }
 
-    //@JsonManagedReference
+
     public List<Inspection> getInspections() {
         return inspections;
     }
