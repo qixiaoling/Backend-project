@@ -1,5 +1,6 @@
 package nl.novi.Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -32,6 +33,7 @@ public class Inventory {
     @Column
     private int availableUnit;
 
+    @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "inventory", orphanRemoval = true)
     private List<InspectionInventory> inspectionNewList = new ArrayList<>();
 
