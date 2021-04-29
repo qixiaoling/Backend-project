@@ -2,6 +2,8 @@ package nl.novi.Backend.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -34,6 +36,7 @@ public class Inspection {
 
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Car car;
+
 
     @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "inspection")
     private List<InspectionInventory> inventoryNewList = new ArrayList<>();
