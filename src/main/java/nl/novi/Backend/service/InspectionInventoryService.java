@@ -37,17 +37,20 @@ public class InspectionInventoryService {
         this.inspectionInventoryRepository = inspectionInventoryRepository;
     }
 
-    public ResponseEntity<?> addingInventory(Long inspectionNumber, Inventory inventory){
-        Optional <Inspection> inspection = inspectionRepository.findById(inspectionNumber);
-        if(inspection.isPresent()){
-        InspectionInventory inspectionInventory = new InspectionInventory(inspection.get(), inventory);
-        inspection.get().getInventoryNewList().add(inspectionInventory);
-        inventory.getInspectionNewList().add(inspectionInventory);
-        inspectionRepository.save(inspection.get());
-        inventoryRepository.save(inventory);
-        return ResponseEntity.ok().body("This inventory is now added into this inspection.");
-    }
-        return ResponseEntity.badRequest().body("Error, please check inspection number again.");
+    public ResponseEntity<?> addingInventory(Long inspectionNumber, Inventory inventory) {
+        Optional<Inspection> inspection = inspectionRepository.findById(inspectionNumber);
+        if (inspection.isPresent()) {
+            Inspection inspectionFound = inspection.get();
+            InspectionInventory inspectionInventory = new InspectionInventory(inspectionFound, inventory);
+            inspectionFound.getInventoryNewList().add(inspectionInventory);
+            inventory.getInspectionNewList().add(inspectionInventory);
+            inspectionRepository.save(inspectionFound);
+            inventoryRepository.save(inventory);
+            inspectionInventoryRepository.save(inspectionInventory);
+            return ResponseEntity.ok().body("This inventory is now added into this inspection.");
+        } else {
+            return ResponseEntity.badRequest().body("Error, please check inspection number again.");
+        }
     }
 
     public ResponseEntity<?> addQuantity(Long inspectionNumber, Long itemId, InspectionInventory inspectionInventory){

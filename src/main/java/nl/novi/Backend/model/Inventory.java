@@ -34,7 +34,7 @@ public class Inventory {
     private int availableUnit;
 
     @JsonIgnore
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "inventory", orphanRemoval = true)
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "inventory")
     private List<InspectionInventory> inspectionNewList = new ArrayList<>();
 
     public Inventory(){

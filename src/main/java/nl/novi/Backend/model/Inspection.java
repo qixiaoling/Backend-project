@@ -38,7 +38,7 @@ public class Inspection {
     private Car car;
 
     @JsonIgnore
-    @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "inspection")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "inspection")
     private List<InspectionInventory> inventoryNewList = new ArrayList<>();
 
     @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "inspection")
