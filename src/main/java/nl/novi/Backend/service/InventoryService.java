@@ -28,7 +28,7 @@ public class InventoryService {
     public ResponseEntity<?> getAllInventories(){
         List<Inventory> inventories = new ArrayList<>();
         inventoryRepository.findAll().forEach(inventories::add);
-        return ResponseEntity.ok().body("Request is carried out successfully");
+        return ResponseEntity.ok().body(inventories);
     }
 
 

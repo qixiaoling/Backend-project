@@ -3,6 +3,7 @@ package nl.novi.Backend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Car {
     private Customer customer;
 
 
-
+    @JsonIgnore
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "car")
     private List<Inspection> inspections;
 
@@ -42,7 +43,6 @@ public class Car {
         this.numberPlate = numberPlate;
         this.make = make;
         this.model = model;
-
     }
 
     public String getNumberPlate() {
@@ -69,7 +69,7 @@ public class Car {
         this.model = model;
     }
 
-    @JsonManagedReference
+
     public List<Inspection> getInspections() {
         return inspections;
     }

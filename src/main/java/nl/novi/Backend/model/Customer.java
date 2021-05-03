@@ -8,9 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
 
 @Entity
 @Table
+
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -84,6 +87,7 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @JsonManagedReference
     public Car getCar() {

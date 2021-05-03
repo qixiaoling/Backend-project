@@ -31,7 +31,7 @@ public class CarService {
     public ResponseEntity<?> getAllCar() {
         List<Car> cars = new ArrayList<>();
         carRepository.findAll().forEach(cars::add);
-        return ResponseEntity.ok().body("Request is carried out successfully");
+        return ResponseEntity.ok().body(cars);
     }
 
     public ResponseEntity<?> addCarToCustomer(Long customerId, Car car) {

@@ -52,7 +52,7 @@ public class AppUser_Role_Service {
     public ResponseEntity<?> getAllAppUsers(){
             List<AppUser> appUsers = new ArrayList<>();
             userRepository.findAll().forEach(appUsers::add);
-            return ResponseEntity.ok().body("Request is carried out successfully");
+            return ResponseEntity.ok().body(appUsers);
         }
 
     public ResponseEntity<?> addAppUsers(AppUser appUser) {

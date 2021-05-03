@@ -21,7 +21,7 @@ public class RoleService {
     public ResponseEntity<?> getAllRoles(){
         List<Role> roles = new ArrayList<>();
         roleRepository.findAll().forEach(roles::add);
-        return ResponseEntity.ok().body("Request is carried out successfully");
+        return ResponseEntity.ok().body(roles);
     }
     public Role findRoleByRoleName(ApplicationUserRole roleName){
 

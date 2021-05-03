@@ -10,9 +10,9 @@ import java.io.Serializable;
 @Embeddable
 @EqualsAndHashCode
 public class InspectionInventoryId implements Serializable {
-    @Column(name = "inspection_id")
+    @Column
     private Long inspectionid;
-    @Column(name = "inventory_id")
+    @Column
     private Long inventoryid;
 
     public InspectionInventoryId() {
