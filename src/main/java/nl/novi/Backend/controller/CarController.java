@@ -19,7 +19,7 @@ public class CarController {
     }
 
     @GetMapping("/cars")
-    @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public ResponseEntity<?> getAllCar(){
         return carService.getAllCar();
     }
@@ -31,7 +31,7 @@ public class CarController {
         return carService.addCarToCustomer(customerId,car);
     }
     @GetMapping("/cars/{numberPlate}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public Car getCarById(@PathVariable("numberPlate") String numberPlate){
         return carService.getCarById(numberPlate);
     }
