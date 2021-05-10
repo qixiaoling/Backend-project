@@ -24,14 +24,14 @@ public class InventoryController {
     }
 
     @GetMapping("/inventories")
-    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public ResponseEntity<?> getAllInventories(){
         return inventoryService.getAllInventories();
     }
 
 
     @GetMapping("/inventories/{itemId}")
-    @PreAuthorize("hasAnyAuthority('USER_BAC','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public Inventory findInventoryById(@PathVariable("itemId") Long itemId){
 
         return inventoryService.findInventoryById(itemId);

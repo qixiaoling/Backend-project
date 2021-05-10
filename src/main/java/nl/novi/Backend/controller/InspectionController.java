@@ -19,13 +19,13 @@ public class InspectionController {
         this.inspectionService=inspectionService;
     }
     @GetMapping("/inspections")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public ResponseEntity<?> getAllInspection(){
         return inspectionService.getAllInspection();
     }
 
     @GetMapping("/inspections/{inspectionNumber}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','USER_TEC','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public Inspection getInspectionById(@PathVariable ("inspectionNumber") Long inspectionNumber){
         return inspectionService.getInspectionById(inspectionNumber);
     }

@@ -22,7 +22,7 @@ public class CustomerController {
 //hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
 
     @GetMapping("/customers")
-    @PreAuthorize("hasAnyAuthority('USER_FRO', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     //@PreAuthorize("hasAnyRole('ROLE_USER_FRO', 'ROLE_ADMIN')")
     public ResponseEntity<?> getAllCustomers(){
 
@@ -34,7 +34,7 @@ public class CustomerController {
         return customerService.addCustomers(customer);
     }
     @GetMapping("/customers/{customerid}")
-    @PreAuthorize("hasAnyAuthority('USER_FRO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public Customer getCustomerById(@PathVariable("customerid") Long customerId){
         return customerService.getCustomerById(customerId);
     }

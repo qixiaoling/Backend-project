@@ -19,7 +19,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/invoices")
-    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public ResponseEntity<?> getAllInvoices(){
         return invoiceService.getAllInvoices();
     }
@@ -30,7 +30,7 @@ public class InvoiceController {
         return invoiceService.getInvoiceByInspectionNumber(inspectionNumber);
     }
     @GetMapping("/invoices/{invoiceId}")
-    @PreAuthorize("hasAnyAuthority('USER_TRE','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public Invoice getInvoiceById( @PathVariable ("invoiceId") Long invoiceId){
 
         return invoiceService.getInvoiceById(invoiceId);
