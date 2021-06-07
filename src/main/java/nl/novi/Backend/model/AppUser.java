@@ -77,6 +77,7 @@ public class AppUser {
         this.password = password;
     }
 
+    @JsonManagedReference
     public Set<Role> getRoles() {
         return roles;
     }

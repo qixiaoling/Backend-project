@@ -44,6 +44,7 @@ public class Role {
         this.roleName = roleName;
     }
 
+    @JsonBackReference
     public Set<AppUser> getAppUsers() {
         return appUsers;
     }
