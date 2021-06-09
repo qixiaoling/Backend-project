@@ -24,7 +24,7 @@ public class AppUser_Role_Controller {
         return appUser_role_service.addAppUserWithRoles(User_id, givenRoles);
     }
     @GetMapping("/appusers")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
     public ResponseEntity<?> getAllAppUsers(){
 
         return appUser_role_service.getAllAppUsers();
