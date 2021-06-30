@@ -99,7 +99,7 @@ public class InspectionService {
                             "please inform customer to collect the vehicle");
                 }else {
                     if (possibleInspection.get().getRepairComplete() == true) {
-                        return ResponseEntity.ok().body("Inspection and repair are done, please inform" +
+                        return ResponseEntity.ok().body("Inspection and repair are done, please inform " +
                                 "customer to collect the vehicle.");
                     }else{
                         return ResponseEntity.ok().body("Inspection is done, repair is in process.");
