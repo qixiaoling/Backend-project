@@ -47,7 +47,7 @@ public class InvoiceService {
                 double totalPreTax = Sum + possibleInspection.get().getInspectionFee();
                 //double totalFee = 0;
                 //totalFee = (possibleInspection.get().getInvoice().getTaxRate() * totalPreTax)+totalPreTax;
-                aNewInvoice.setTotalFee(totalPreTax*1.2);
+                aNewInvoice.setTotalFee(totalPreTax*1.21);
                 aNewInvoice.setTotalPreTax(totalPreTax);
                 invoiceRepository.save(aNewInvoice);
                 return aNewInvoice;
