@@ -52,7 +52,7 @@ public class InventoryService {
         if(possibleInventory.isPresent()){
             possibleInventory.get().setItemDescription(inventory.getItemDescription());
             possibleInventory.get().setAvailableUnit(inventory.getAvailableUnit());
-            possibleInventory.get().setManufactor(inventory.getManufactor());
+            possibleInventory.get().setManufacturer(inventory.getManufacturer());
             possibleInventory.get().setPricePerUnit(inventory.getPricePerUnit());
             inventoryRepository.save(possibleInventory.get());
             return ResponseEntity.ok().body("The inventory is successfully updated.");

@@ -2,16 +2,13 @@ package nl.novi.Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table
@@ -29,7 +26,7 @@ public class Inventory {
     @Column
     private Double pricePerUnit;
     @Column
-    private String manufactor;
+    private String manufacturer;
     @Column
     private int availableUnit;
 
@@ -41,11 +38,11 @@ public class Inventory {
 
     }
 
-    public Inventory(String itemDescription, Double pricePerUnit, String manufactor, int availableUnit,
+    public Inventory(String itemDescription, Double pricePerUnit, String manufacturer, int availableUnit,
                      List<InspectionInventory> inspectionNewList) {
         this.itemDescription = itemDescription;
         this.pricePerUnit = pricePerUnit;
-        this.manufactor = manufactor;
+        this.manufacturer = manufacturer;
         this.availableUnit = availableUnit;
         this.inspectionNewList = inspectionNewList;
     }
@@ -74,12 +71,12 @@ public class Inventory {
         this.pricePerUnit = pricePerUnit;
     }
 
-    public String getManufactor() {
-        return manufactor;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufactor(String manufactor) {
-        this.manufactor = manufactor;
+    public void setManufacturer(String manufactor) {
+        this.manufacturer = manufactor;
     }
 
     public int getAvailableUnit() {
