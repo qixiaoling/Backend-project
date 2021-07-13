@@ -1,6 +1,7 @@
 package nl.novi.Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table
 @EqualsAndHashCode
+
 public class InspectionInventory {
     @EmbeddedId
     private InspectionInventoryId id;
