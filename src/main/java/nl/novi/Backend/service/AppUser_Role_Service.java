@@ -7,6 +7,7 @@ import nl.novi.Backend.repo.RoleRepository;
 import nl.novi.Backend.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -73,7 +74,7 @@ public class AppUser_Role_Service {
         Optional<AppUser> possibleAppUser = userRepository.findById(User_id);
         if(possibleAppUser.isPresent()){
             possibleAppUser.get().setUserName(appUser.getUserName());
-            possibleAppUser.get().setPassword(appUser.getPassword());
+            possibleAppUser.get().setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
             possibleAppUser.get().setEmail(appUser.getEmail());
             userRepository.save(possibleAppUser.get());
             return ResponseEntity.ok().body("The user is successfully updated.");
