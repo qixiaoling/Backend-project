@@ -75,6 +75,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userDetailsService());
         return provider;
     }
+//
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -84,13 +85,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:3000");
+                        .allowedOrigins("http://localhost:3000")
+                        .exposedHeaders("Authorization");
             }
 
 
         };
     }
-
 }
 
 

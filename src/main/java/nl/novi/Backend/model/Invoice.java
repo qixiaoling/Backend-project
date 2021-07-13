@@ -11,7 +11,7 @@ public class Invoice {
     @Column
     private Double totalPreTax;
     @Column
-    private Double taxRate = 0.2;
+    private Double taxRate = 0.21;
     @Column
     private Double totalFee;
     @Column

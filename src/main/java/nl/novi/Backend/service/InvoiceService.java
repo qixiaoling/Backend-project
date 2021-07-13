@@ -47,14 +47,18 @@ public class InvoiceService {
                 double totalPreTax = Sum + possibleInspection.get().getInspectionFee();
                 //double totalFee = 0;
                 //totalFee = (possibleInspection.get().getInvoice().getTaxRate() * totalPreTax)+totalPreTax;
-                aNewInvoice.setTotalFee(totalPreTax*1.2);
+                aNewInvoice.setTotalFee(totalPreTax*1.21);
                 aNewInvoice.setTotalPreTax(totalPreTax);
+                aNewInvoice.setInvoiceSent(false);
+                aNewInvoice.setInvoicePaid(false);
                 invoiceRepository.save(aNewInvoice);
                 return aNewInvoice;
 
             }
             Invoice differentInvoice = new Invoice();
             differentInvoice.setTotalPreTax(possibleInspection.get().getInspectionFee());
+            differentInvoice.setInvoiceSent(false);
+            differentInvoice.setInvoicePaid(false);
             invoiceRepository.save(differentInvoice);
             return differentInvoice;
 
