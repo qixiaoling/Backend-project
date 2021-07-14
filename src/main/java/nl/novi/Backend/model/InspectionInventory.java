@@ -15,10 +15,10 @@ public class InspectionInventory {
     private InspectionInventoryId id;
     @Column
     private Integer inventoryQuantities;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("inspectionid")
     private Inspection inspection;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("inventoryid")
     private Inventory inventory;
 
