@@ -41,6 +41,12 @@ public class InspectionInventoryController {
         inspectionInventoryService.removeInventory(new InspectionInventoryId(inspectionid, inventoryid));
 
     }
+    @GetMapping("/links/getall")
+    @PreAuthorize("hasAnyAuthority('USER_FRO', 'USER_BAC', 'USER_TRE', 'USER_TEC', 'ADMIN')")
+    public ResponseEntity<?> getAllInspectionInventory (){
+        return inspectionInventoryService.getAllInspectionInventory();
+    }
+
 
 
 }

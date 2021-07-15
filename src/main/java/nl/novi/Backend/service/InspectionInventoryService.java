@@ -11,6 +11,9 @@ import nl.novi.Backend.repo.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,6 +74,13 @@ public class InspectionInventoryService {
 
 
     }
+    public ResponseEntity<?> getAllInspectionInventory(){
+        List<InspectionInventory> inspectionInventoryList = new ArrayList<>();
+        inspectionInventoryRepository.findAll().forEach(inspectionInventoryList::add);
+        return ResponseEntity.ok().body(inspectionInventoryList);
+    }
+
+
 
     /*public ResponseEntity<?> removeInventory(Long inspectionNumber, Inventory inventory){
         Optional <Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
