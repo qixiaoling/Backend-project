@@ -93,19 +93,21 @@ public class InspectionService {
     public ResponseEntity<?> checkInspectionRepairStatus(Long inspectionNumber){
         Optional<Inspection> possibleInspection = inspectionRepository.findById(inspectionNumber);
         if(possibleInspection.isPresent()){
-            if (possibleInspection.get().getInspectionComplete()==true){
+            if (possibleInspection.get().getInspectionComplete().equals(Boolean.TRUE)){
                 if(possibleInspection.get().getAgreeToRepair().equals(Boolean.FALSE)){
                     return ResponseEntity.ok().body("Inspection is done, no repair needed, " +
                             "please inform customer to collect the vehicle");
                 }else {
-                    if (possibleInspection.get().getRepairComplete() == true) {
+                    if (possibleInspection.get().getRepairComplete().equals(Boolean.TRUE)) {
                         return ResponseEntity.ok().body("Inspection and repair are done, please inform " +
                                 "customer to collect the vehicle.");
                     }else{
                         return ResponseEntity.ok().body("Inspection is done, repair is in process.");
                     }
                 }
-            }else ResponseEntity.ok().body("Inspection is in process.");
+            }else {
+                return ResponseEntity.ok().body("Inspection is in process.");
+            }
         }
         return ResponseEntity.badRequest().body("Error, cannot find the inspection, please check the inspection number.");
 
